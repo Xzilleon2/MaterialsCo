@@ -8,8 +8,8 @@
     <div id="BodyDiv" class="w-full h-full  bg-blue-200 flex">
 
             <!--Image panel-->
-            <div class="w-full h-full">
-
+            <div class="w-full h-full flex justify-center items-center">
+                <img src="./Assets/Images/Banner2.png" alt="Banner Image">
             </div>
 
             <!--SignIn and SignUp panel-->
