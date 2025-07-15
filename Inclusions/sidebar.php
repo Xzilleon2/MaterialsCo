@@ -1,7 +1,7 @@
 <!--Side Bar for better navigation-->
 <div class="w-1/7 h-screen px-5 py-2 shadow-md flex flex-col fixed overflow-y-auto">
     <div class="my-5 grid grid-rows-1 hover:cursor-pointer">
-            <div class="flex gap-3 hover:bg-gray-300 rounded-md"><img src="./Assets/Icons/aboutUs.png" alt="PartsIcon">
+            <div class="flex gap-3 hover:bg-gray-300 rounded-md"><img src="./Assets/Icons/dashboard.png" alt="PartsIcon">
             <a href="./homepage.php"><h1>Dashboard</h1></a></div>
     </div>
     <div class="my-5">
