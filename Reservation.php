@@ -63,13 +63,14 @@
                     <thead>
                         <tr class="text-xl">
                             <th class="w-md ">Material Code</th>
-                            <th class="w-md ">Name</th>
+                            <th class="w-md ">Material Name</th>
                             <th class="w-md ">Quantity</th>
-                            <th class="w-lg ">Item Price</th>
                             <th class="w-lg ">Total Price</th>
-                            <th class="w-lg ">Brand</th>
-                            <th class="w-md ">Shop</th>
-                            <th class="w-md ">Date Added</th>
+                            <th class="w-lg ">Requestor</th>
+                            <th class="w-lg ">Remarks</th>
+                            <th class="w-md ">Date Reserved</th>
+                            <th class="w-md ">Claiming Date</th>
+                            <th class="w-md ">Status</th>
                             <th class="w-md ">Action</th>
                         </tr>
                     </thead>
@@ -79,10 +80,11 @@
                             <td>Davis Elastic Paint Yellow</td>
                             <td class="text-end">20</td>
                             <td class="text-end">420</td>
-                            <td class="text-end">1420</td>
-                            <td>Davis</td>
-                            <td>City Hardware, Bajada</td>
-                            <td>June 15, 2005</td>
+                            <td >Jane Mayham</td>
+                            <td >To be used for the construction of dog house.</td>
+                            <td>June 1, 2025</td>
+                            <td>June 29, 2025</td>
+                            <td>Pending</td>
                             <td>
                                 <div class="flex gap-5">
                                     <div><img src="./Assets/Icons/update.png" alt="update"></div>
