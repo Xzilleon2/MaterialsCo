@@ -29,7 +29,7 @@
                 <!--Distribution Status-->
                 <div class="w-1/4 h-30 bg-blue-200 rounded-sm shadow-sm flex">
                     <div class="w-70 flex justify-center items-center">
-                        <p class="text-2xl">Pending <br> Status</p>
+                        <p class="text-2xl">Pending <br> Requests</p>
                     </div>
                     <div class="flex justify-center items-center w-1/2">
                         <p class="text-4xl font-bold">1</p>
@@ -39,7 +39,7 @@
                 <!--Distribution Status-->
                 <div class="w-1/4 h-30 bg-blue-200 rounded-sm shadow-sm flex">
                     <div class="w-70 flex justify-center items-center">
-                        <p class="text-2xl">Duplicate <br> Distribution</p>
+                        <p class="text-2xl">Duplicate <br> Requests</p>
                     </div>
                     <div class="flex justify-center items-center w-1/2">
                         <p class="text-4xl font-bold">1</p>
