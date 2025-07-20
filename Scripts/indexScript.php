@@ -6,12 +6,12 @@
     const SignInForm = document.getElementById('SignInForm');
     const SignUpForm = document.getElementById('SignUpForm');
 
-    showSignUp?.addEventListener('click', () => {
+    showSignUp.addEventListener('click', () => {
         SignInForm.classList.add('hidden');
         SignUpForm.classList.remove('hidden');
     });
 
-    showSignIn?.addEventListener('click', () => {
+    showSignIn.addEventListener('click', () => {
         SignUpForm.classList.add('hidden');
         SignInForm.classList.remove('hidden');
     });
