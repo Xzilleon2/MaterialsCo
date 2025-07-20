@@ -39,7 +39,7 @@
                 <!--Distribution Status-->
                 <div class="w-1/4 h-30 bg-blue-200 rounded-sm shadow-sm flex">
                     <div class="w-70 flex justify-center items-center">
-                        <p class="text-2xl">Duplicate <br> Distribution</p>
+                        <p class="text-2xl">Duplicated <br> Distribution</p>
                     </div>
                     <div class="flex justify-center items-center w-1/2">
                         <p class="text-4xl font-bold">1</p>
@@ -66,7 +66,9 @@
                             <th class="w-md ">Name</th>
                             <th class="w-md ">Quantity</th>
                             <th class="w-lg ">Location</th>
-                            <th class="w-md ">Distribution Date</th>
+                            <th class="w-md ">Date Released</th>
+                            <th class="w-md ">Remarks</th>
+                            <th class="w-md ">Approved By</th>
                             <th class="w-md ">Status</th>
                             <th class="w-md ">Action</th>
                         </tr>
@@ -78,19 +80,7 @@
                             <td class="text-end">15</td>
                             <td>St. Ana SASA Davao City</td>
                             <td>May 5, 2005</td>
-                            <td>Distributed</td>
-                            <td>
-                                <div class="flex gap-5">
-                                    <div><img src="./Assets/Icons/update.png" alt="update"></div>
-                                    <div><img src="./Assets/Icons/delete.png" alt="delete"></div>
-                                </div>
-                            </td>
-                        </tr>
-                            <tr class="odd:bg-blue-100 even:bg-blue-200 h-10">
-                            <td>MAT0012223</td>
-                            <td>Neon Steel Kat</td>
-                            <td class="text-end">15</td>
-                            <td>St. Ana SASA Davao City</td>
+                            <td>May 5, 2005</td>
                             <td>May 5, 2005</td>
                             <td>Distributed</td>
                             <td>
@@ -99,7 +89,6 @@
                                     <div><img src="./Assets/Icons/delete.png" alt="delete"></div>
                                 </div>
                             </td>
-                        </tr>
                     </tbody>
                 </table>
 
@@ -112,8 +101,8 @@
     <!--Script import for functionalities-->
     <script>
     document.addEventListener('DOMContentLoaded', function () {
-        const dtable = document.querySelector("#distributionTable");
-        new simpleDatatables.DataTable(dtable);
+        const dTable = document.querySelector("#distributionTable");
+        new simpleDatatables.DataTable(dTable);
     });
     </script>
 
