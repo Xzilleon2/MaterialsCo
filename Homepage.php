@@ -8,7 +8,7 @@
     <!--Main Body for Homepage Page, 2 Columns-->
     <div id="BodyDiv" class="w-full h-full flex">
 
-        <div class="w-1/7">
+        <div class="w-1/6">
             <!--Sidebar from import-->
             <?php
                 include "./Inclusions/sidebar.php";
@@ -102,8 +102,8 @@
     </div>
 
     <!--Script import for functionalities-->
-    <?php
-
+    <?php 
+        include './Scripts/mainScript.php';
     ?>
 
 </body>

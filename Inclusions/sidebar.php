@@ -1,31 +1,54 @@
-<!--Side Bar for better navigation-->
-<div class="w-1/7 h-screen px-5 py-2 shadow-md flex flex-col fixed overflow-y-auto">
-    <div class="my-5 grid grid-rows-1 hover:cursor-pointer">
-            <div class="flex gap-3 hover:bg-gray-300 rounded-md"><img src="./Assets/Icons/dashboard.png" alt="PartsIcon">
-            <a href="./homepage.php"><h1>Dashboard</h1></a></div>
-    </div>
+<!-- Sidebar Container -->
+<div class="w-1/6 h-screen px-5 py-2 shadow-md flex flex-col fixed overflow-y-auto bg-white">
+
+    <!-- Dashboard -->
     <div class="my-5">
-        <h1 class="my-5"><b>Inventory Management</b></h1>
-        <div class="w-full my-3 grid grid-rows-4 gap-8 hover:cursor-pointer">
-            <div class="flex gap-3 hover:bg-gray-300 rounded-md"><img src="./Assets/Icons/orderIcon.png" alt="PartsIcon">
-            <a href="./Distribution.php"><h1>Materials Distibution</h1></a></div>
-            <div class="flex gap-3 hover:bg-gray-300 rounded-md"><img src="./Assets/Icons/partsIcon.png" alt="PartsIcon">
-            <a href="./Inventory.php"><h1>Material Inventory</h1></a></div>
-            <div class="h-sm flex gap-3 hover:bg-gray-300 rounded-md"><img src="./Assets/Icons/reserveIcon.png" alt="PartsIcon">
-            <a href="./Reservation.php"><h1>Material Reservation</h1></a></div>
-            <div class="h-sm flex gap-3 hover:bg-gray-300 rounded-md"><img src="./Assets/Icons/stocksIcon.png" alt="PartsIcon">
-            <a href="./Stocks.php"><h1>Stocks Log</h1></a></div>
+        <div class="flex items-center gap-3 p-2 rounded-md hover:bg-gray-200 transition-all duration-200 cursor-pointer">
+            <img src="./Assets/Icons/dashboard.png" alt="Dashboard Icon" class="w-6 h-6">
+            <a href="./homepage.php" class="text-gray-800 font-medium">Dashboard</a>
         </div>
     </div>
+
+    <!-- Inventory Management -->
     <div class="my-5">
-        <h1 class="my-5"><b>Other Services</b></h1>
-        <div class="w-full my-3 grid grid-rows-3 gap-8 hover:cursor-pointer">
-            <div class="h-sm flex gap-3 hover:bg-gray-300 rounded-md"><img src="./Assets/Icons/settingsIcon.png" alt="PartsIcon">
-            <h1>Settings</h1></div>
-            <div class="h-sm flex gap-3 hover:bg-gray-300 rounded-md"><img src="./Assets/Icons/customerService.png" alt="PartsIcon">
-            <h1>Customer Service</h1></div>
-            <div class="h-sm flex gap-3 hover:bg-gray-300 rounded-md"><img src="./Assets/Icons/logout.png" alt="PartsIcon">
-            <h1>Logout</h1></div>
+        <h1 class="my-5 font-bold text-gray-700">Inventory Management</h1>
+        <div class="grid gap-2">
+            <a href="./Distribution.php" class="flex items-center gap-3 p-2 rounded-md hover:bg-blue-100 hover:text-blue-700 transition-all duration-200">
+                <img src="./Assets/Icons/orderIcon.png" alt="Distribution Icon" class="w-5 h-5">
+                <span>Materials Distribution</span>
+            </a>
+            <a href="./Inventory.php" class="flex items-center gap-3 p-2 rounded-md hover:bg-blue-100 hover:text-blue-700 transition-all duration-200">
+                <img src="./Assets/Icons/partsIcon.png" alt="Inventory Icon" class="w-5 h-5">
+                <span>Material Inventory</span>
+            </a>
+            <a href="./Reservation.php" class="flex items-center gap-3 p-2 rounded-md hover:bg-blue-100 hover:text-blue-700 transition-all duration-200">
+                <img src="./Assets/Icons/reserveIcon.png" alt="Reservation Icon" class="w-5 h-5">
+                <span>Material Reservation</span>
+            </a>
+            <a href="./Stocks.php" class="flex items-center gap-3 p-2 rounded-md hover:bg-blue-100 hover:text-blue-700 transition-all duration-200">
+                <img src="./Assets/Icons/stocksIcon.png" alt="Stocks Icon" class="w-5 h-5">
+                <span>Stocks Log</span>
+            </a>
         </div>
     </div>
+
+    <!-- Other Services -->
+    <div class="my-5">
+        <h1 class="my-5 font-bold text-gray-700">Other Services</h1>
+        <div class="grid gap-2">
+            <div class="flex items-center gap-3 p-2 rounded-md hover:bg-gray-200 transition-all duration-200 cursor-pointer">
+                <img src="./Assets/Icons/settingsIcon.png" alt="Settings Icon" class="w-5 h-5">
+                <span>Settings</span>
+            </div>
+            <div class="flex items-center gap-3 p-2 rounded-md hover:bg-gray-200 transition-all duration-200 cursor-pointer">
+                <img src="./Assets/Icons/customerService.png" alt="Customer Icon" class="w-5 h-5">
+                <span>Customer Service</span>
+            </div>
+            <div class="flex items-center gap-3 p-2 rounded-md hover:bg-red-100 hover:text-red-600 transition-all duration-200 cursor-pointer">
+                <img src="./Assets/Icons/logout.png" alt="Logout Icon" class="w-5 h-5">
+                <span>Logout</span>
+            </div>
+        </div>
+    </div>
+
 </div>

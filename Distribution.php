@@ -8,7 +8,7 @@
     <!--Main Body for Distribution Page, 2 Columns-->
     <div id="BodyDiv" class="w-full h-full flex">
 
-        <div class="w-1/7">
+        <div class="w-1/6">
             <!--Sidebar from import-->
             <?php
                 include "./Inclusions/sidebar.php";
@@ -142,7 +142,7 @@
 
     <!--Script import for functionalities-->
     <?php 
-        include './Scripts/distributionScript.php';
+        include './Scripts/mainScript.php';
     ?>
 
 </body>
