@@ -47,12 +47,39 @@
                 </div>
 
                 <!--Distribution Status-->
-                <div class="w-1/5 h-20 my-5 bg-blue-200 rounded-sm shadow-sm flex">
+                <div id="showDistributionEntryModal" class="w-1/5 h-20 my-5 bg-blue-200 rounded-sm shadow-sm flex">
                     <div class="w-70 flex justify-center items-center gap-3 hover:cursor-pointer">
                         <img src="./Assets/Icons/note.png" alt="noteIcon">
                         <p class="text-xl">Note an entry</p>
                     </div>
                 </div>
+
+                <!--Entry Modal-->
+                <dialog id="distributionEntryModal" class="fixed w-sm h-xl p-5 top-1/3 left-1/2 rounded-md border border-gray-100 shadow-md">
+                    <form class="grid grid-rows-1" method="POST" action="">
+
+                        <!--Update Form Information-->
+                        <h1 class="font-bold text-2xl mb-5">Manage Information</h1>
+                        <div class="flex flex-col gap-3 mb-5">
+                            <!--Material & Quantity-->
+                            <div class="flex flex-col gap-2 items-center">
+                                <Label class="font-semibold text-xl">Neon Steel Kat</Label>
+                                <input class="text-xl rounded-md p-3 h-10 w-1/4 ml-10 focus:outline-none" type="number" value="10">
+                            </div>
+                            <!--Location & Remarks-->
+                            <Label>Location</Label>
+                            <input class="border rounded-md p-3 h-13" type="text">
+                            <Label>Remarks</Label>
+                            <input class="border rounded-md p-3 h-20" type="text">
+                        </div>
+                        <div class="flex justify-end gap-2">
+                            <button type="submit" name="updateBtn" class="bg-blue-200 px-4 py-2 rounded font-bold cursor-pointer">Save</button>
+                            <button type="button" onclick="document.getElementById('distributionEntryModal').close()" 
+                            class="px-4 py-2 bg-gray-300 rounded cursor-pointer">Cancel</button>
+                        </div>
+
+                    </form>
+                </dialog>
 
             </div>
 
