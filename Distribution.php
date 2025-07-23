@@ -3,6 +3,7 @@
     <?php
         include "./Inclusions/Head.php";
         include "./Inclusions/navbar.php";
+        include "./Inclusions/Connection.php";
     ?>
 
     <!--Main Body for Distribution Page, 2 Columns-->
@@ -47,39 +48,52 @@
                 </div>
 
                 <!--Distribution Status-->
-                <div id="showDistributionEntryModal" class="w-1/5 h-20 my-5 bg-blue-200 rounded-sm shadow-sm flex">
+                <div id="showDistribution" class="w-1/5 h-20 my-5 bg-blue-200 rounded-sm shadow-sm flex">
                     <div class="w-70 flex justify-center items-center gap-3 hover:cursor-pointer">
                         <img src="./Assets/Icons/note.png" alt="noteIcon">
                         <p class="text-xl">Note an entry</p>
                     </div>
                 </div>
 
-                <!--Entry Modal-->
-                <dialog id="distributionEntryModal" class="fixed w-sm h-xl p-5 top-1/3 left-1/2 rounded-md border border-gray-100 shadow-md">
-                    <form class="grid grid-rows-1" method="POST" action="">
+                <!-- Entry Modal -->
+                <dialog id="distributionEntry" class="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[32rem] max-w-full rounded-xl border border-gray-300 shadow-xl backdrop:bg-black/50 p-6 open:animate-fadeIn">
+                    <form method="POST" action="" class="space-y-6">
 
-                        <!--Update Form Information-->
-                        <h1 class="font-bold text-2xl mb-5">Manage Information</h1>
-                        <div class="flex flex-col gap-3 mb-5">
-                            <!--Material & Quantity-->
-                            <div class="flex flex-col gap-2 items-center">
-                                <Label class="font-semibold text-xl">Neon Steel Kat</Label>
-                                <input class="text-xl rounded-md p-3 h-10 w-1/4 ml-10 focus:outline-none" type="number" value="10">
-                            </div>
-                            <!--Location & Remarks-->
-                            <Label>Location</Label>
-                            <input class="border rounded-md p-3 h-13" type="text">
-                            <Label>Remarks</Label>
-                            <input class="border rounded-md p-3 h-20" type="text">
+                        <!-- Title -->
+                        <h1 class="text-2xl font-bold text-gray-800">📦 Record Material Distribution</h1>
+
+                        <!-- Material & Quantity -->
+                        <div class="space-y-2">
+                        <label class="block text-lg font-semibold text-gray-700">Material</label>
+                        <input type="text" value="Neon Steel Kat" readonly class="w-full p-3 text-lg bg-gray-100 rounded-md border border-gray-300 cursor-not-allowed" />
                         </div>
-                        <div class="flex justify-end gap-2">
-                            <button type="submit" name="updateBtn" class="bg-blue-200 px-4 py-2 rounded font-bold cursor-pointer">Save</button>
-                            <button type="button" onclick="document.getElementById('distributionEntryModal').close()" 
-                            class="px-4 py-2 bg-gray-300 rounded cursor-pointer">Cancel</button>
+
+                        <div class="space-y-2">
+                        <label class="block text-lg font-semibold text-gray-700">Quantity</label>
+                        <input type="number" value="10" name="quantity" class="w-full p-3 text-lg border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400" />
+                        </div>
+
+                        <!-- Location -->
+                        <div class="space-y-2">
+                        <label class="block text-lg font-semibold text-gray-700">Location</label>
+                        <input type="text" name="location" class="w-full p-3 text-lg border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400" />
+                        </div>
+
+                        <!-- Remarks -->
+                        <div class="space-y-2">
+                        <label class="block text-lg font-semibold text-gray-700">Remarks</label>
+                        <textarea name="remarks" rows="3" class="w-full p-3 text-lg border border-gray-300 rounded-md resize-none focus:outline-none focus:ring-2 focus:ring-blue-400"></textarea>
+                        </div>
+
+                        <!-- Buttons -->
+                        <div class="flex justify-end gap-3 pt-4 border-t border-gray-200">
+                        <button type="button" onclick="document.getElementById('distributionEntry').close()" class="px-4 py-2 bg-gray-200 text-gray-700 font-semibold rounded hover:bg-gray-300">Cancel</button>
+                        <button type="submit" name="updateBtn" class="px-4 py-2 bg-blue-500 text-white font-semibold rounded hover:bg-blue-600">Save</button>
                         </div>
 
                     </form>
                 </dialog>
+
 
             </div>
 

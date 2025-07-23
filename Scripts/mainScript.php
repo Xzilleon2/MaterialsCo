@@ -24,8 +24,12 @@
         const deleteModal = document.getElementById('deleteModal');
 
         //Entry Modals
-        const showEntry = document.getElementById('showDistributionEntryModal');
-        const distributionModal = document.getElementById('distributionEntryModal');
+        const showEntry = document.getElementById('showDistribution');
+        const distributionModal = document.getElementById('distributionEntry');
+        const showInventory = document.getElementById('showInventory');
+        const inventoryModal = document.getElementById('inventoryEntry');
+        const showReservation = document.getElementById('showReservation');
+        const reservationModal = document.getElementById('reservationEntry');
 
         //update & Delete Functions
         showUpdate.addEventListener('click', ()=> {
@@ -37,9 +41,23 @@
         } );
 
         //Entry Modals Functions
-        showEntry.addEventListener('click', ()=> {
-            distributionModal.showModal();
-        } );
+        if (showEntry && distributionModal) {
+            showEntry.addEventListener('click', () => {
+                distributionModal.showModal();
+            });
+        }
+
+        if (showInventory && inventoryModal) {
+            showInventory.addEventListener('click', () => {
+                inventoryModal.showModal();
+            });
+        }
+        
+        if (showReservation && reservationModal) {
+            showReservation.addEventListener('click', () => {
+                reservationModal.showModal();
+            });
+        }
 
     });
 

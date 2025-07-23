@@ -3,6 +3,7 @@
     <?php
         include "./Inclusions/Head.php";
         include "./Inclusions/navbar.php";
+        include "./Inclusions/Connection.php";
     ?>
 
     <!--Main Body for Homepage Page, 2 Columns-->

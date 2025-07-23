@@ -3,6 +3,7 @@
     <?php
         include "./Inclusions/Head.php";
         include "./Inclusions/navbar.php";
+        include "./Inclusions/Connection.php";
     ?>
 
     <!--Main Body for Inventory Page, 2 Columns-->
@@ -47,12 +48,64 @@
                 </div>
 
                 <!--Inventory Status-->
-                <div class="w-1/5 h-20 my-5 bg-blue-200 rounded-sm shadow-sm flex">
+                <div id="showInventory" class="w-1/5 h-20 my-5 bg-blue-200 rounded-sm shadow-sm flex">
                     <div class="w-70 flex justify-center items-center gap-3 hover:cursor-pointer">
                         <img src="./Assets/Icons/note.png" alt="noteIcon">
                         <p class="text-xl">Record an Item</p>
                     </div>
                 </div>
+
+                <!-- Inventory Entry Modal -->
+                <dialog id="inventoryEntry" class="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[36rem] max-w-full p-6 rounded-lg shadow-xl border border-gray-300 backdrop:bg-black/40 open:animate-fadeIn">
+                    <form method="POST" action="" class="space-y-6">
+
+                        <!-- Modal Title -->
+                        <h1 class="text-2xl font-bold text-gray-800">🛠 Manage Inventory Information</h1>
+
+                        <!-- Material Name -->
+                        <div class="space-y-2">
+                        <label class="block text-lg font-medium text-gray-700">Material</label>
+                        <input type="text" class="w-full p-3 text-lg bg-gray-100 border border-gray-300 rounded-md" />
+                        </div>
+
+                        <!-- Quantity -->
+                        <div class="space-y-2">
+                        <label class="block text-lg font-medium text-gray-700">Quantity</label>
+                        <input type="number" value="1" name="quantity" class="w-full p-3 text-lg border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400" />
+                        </div>
+
+                        <!-- Price -->
+                        <div class="space-y-2">
+                        <label class="block text-lg font-medium text-gray-700">Price</label>
+                        <input type="number" value="100" name="price" class="w-full p-3 text-lg border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400" />
+                        </div>
+
+                        <!-- Size/Weight -->
+                        <div class="space-y-2">
+                        <label class="block text-lg font-medium text-gray-700">Size/Weight</label>
+                        <input type="text" value="1m" name="size" class="w-full p-3 text-lg border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400" />
+                        </div>
+
+                        <!-- Brand -->
+                        <div class="space-y-2">
+                        <label class="block text-lg font-medium text-gray-700">Brand</label>
+                        <input type="text" name="brand" class="w-full p-3 text-lg border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400" />
+                        </div>
+
+                        <!-- Type -->
+                        <div class="space-y-2">
+                        <label class="block text-lg font-medium text-gray-700">Type</label>
+                        <input type="text" name="type" class="w-full p-3 text-lg border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400" />
+                        </div>
+
+                        <!-- Action Buttons -->
+                        <div class="flex justify-end gap-3 pt-4 border-t border-gray-200">
+                        <button type="button" onclick="document.getElementById('inventoryEntry').close()" class="px-4 py-2 bg-gray-200 text-gray-700 font-semibold rounded hover:bg-gray-300">Cancel</button>
+                        <button type="submit" name="updateBtn" class="px-4 py-2 bg-blue-500 text-white font-semibold rounded hover:bg-blue-600">Save</button>
+                        </div>
+                        
+                    </form>
+                </dialog>
 
             </div>
 
@@ -66,7 +119,7 @@
                             <th class="w-md ">Name</th>
                             <th class="w-md ">Quantity</th>
                             <th class="w-lg ">Item Price</th>
-                            <th class="w-lg ">Size</th>
+                            <th class="w-lg ">Size/Weight</th>
                             <th class="w-lg ">Brand</th>
                             <th class="w-md ">Type</th>
                             <th class="w-md ">Date Added</th>

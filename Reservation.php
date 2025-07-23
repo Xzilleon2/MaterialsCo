@@ -3,6 +3,7 @@
     <?php
         include "./Inclusions/Head.php";
         include "./Inclusions/navbar.php";
+        include "./Inclusions/Connection.php";
     ?>
 
     <!--Main Body for Reservation Page, 2 Columns-->
@@ -47,12 +48,65 @@
                 </div>
 
                 <!--Reservation Status-->
-                <div class="w-1/5 h-20 my-5 bg-blue-200 rounded-sm shadow-sm flex">
+                <div id="showReservation" class="w-1/5 h-20 my-5 bg-blue-200 rounded-sm shadow-sm flex">
                     <div class="w-70 flex justify-center items-center gap-3 hover:cursor-pointer">
                         <img src="./Assets/Icons/note.png" alt="noteIcon">
                         <p class="text-xl">Make a Reservation</p>
                     </div>
                 </div>
+
+                <!-- Reservation Entry Modal -->
+                <dialog id="reservationEntry" class="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[36rem] max-w-full p-6 rounded-lg shadow-xl border border-gray-300 backdrop:bg-black/40 open:animate-fadeIn">
+                    <form method="POST" action="" class="space-y-6">
+
+                        <!-- Modal Title -->
+                        <h1 class="text-2xl font-bold text-gray-800">🛠 Manage Inventory Information</h1>
+
+                        <!-- Material Name -->
+                        <div class="space-y-2">
+                        <label class="block text-lg font-medium text-gray-700">Material</label>
+                        <input type="text" class="w-full p-3 text-lg bg-gray-100 border border-gray-300 rounded-md" />
+                        </div>
+
+                        <!-- Quantity -->
+                        <div class="space-y-2">
+                        <label class="block text-lg font-medium text-gray-700">Quantity</label>
+                        <input type="number" value="1" name="quantity" class="w-full p-3 text-lg border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400" />
+                        </div>
+
+                        <!-- Size/Weight -->
+                        <div class="space-y-2">
+                        <label class="block text-lg font-medium text-gray-700">Size/Weight</label>
+                        <input type="text" value="1m" name="size" class="w-full p-3 text-lg border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400" />
+                        </div>
+
+                        <!-- Claim Date -->
+                        <div class="space-y-2">
+                        <label class="block text-lg font-medium text-gray-700">Date to Claim</label>
+                        <input type="date" name="claimDate" class="w-full p-3 text-lg border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400" />
+                        </div>
+
+                        <!-- Requestor -->
+                        <div class="space-y-2">
+                        <label class="block text-lg font-semibold text-gray-700">Requestor</label>
+                        <input type="text" name="requestor" class="w-full p-3 text-lg border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400" />
+                        </div>
+
+                        <!-- Remarks -->
+                        <div class="space-y-2">
+                        <label class="block text-lg font-semibold text-gray-700">Remarks</label>
+                        <textarea name="remarks" rows="3" class="w-full p-3 text-lg border border-gray-300 rounded-md resize-none focus:outline-none focus:ring-2 focus:ring-blue-400"></textarea>
+                        </div>
+
+
+                        <!-- Action Buttons -->
+                        <div class="flex justify-end gap-3 pt-4 border-t border-gray-200">
+                        <button type="button" onclick="document.getElementById('reservationEntry').close()" class="px-4 py-2 bg-gray-200 text-gray-700 font-semibold rounded hover:bg-gray-300">Cancel</button>
+                        <button type="submit" name="updateBtn" class="px-4 py-2 bg-blue-500 text-white font-semibold rounded hover:bg-blue-600">Save</button>
+                        </div>
+                        
+                    </form>
+                </dialog>
 
             </div>
 
