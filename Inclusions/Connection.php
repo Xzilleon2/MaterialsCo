@@ -1,14 +1,12 @@
-<?php 
+<?php
+    $servername = "localhost";
+    $username = "root";
+    $password = "";
+    $databasename = "materialcodb";
 
-    $servername = 'localhost';
-    $username = 'root';
-    $password = '';
-    $dbname = 'materialcodb';
+    $conn = new mysqli($servername, $username, $password, $databasename);
 
-    $conn = new mysqli($servername,$username,$password,$dbname);
-
-    if($conn -> connect_error){
-        die("Connection to DB Failed! " . $conn->connect_error);
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
     }
-
 ?>

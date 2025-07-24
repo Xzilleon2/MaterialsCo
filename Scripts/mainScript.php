@@ -32,13 +32,17 @@
         const reservationModal = document.getElementById('reservationEntry');
 
         //update & Delete Functions
-        showUpdate.addEventListener('click', ()=> {
-            updateModal.showModal();
-        } );
+        if (showUpdate && updateModal) {
+            showUpdate.addEventListener('click', ()=> {
+                updateModal.showModal();
+            });
+        }
 
-        showDelete.addEventListener('click', ()=> {
-            deleteModal.showModal();
-        } );
+        if (showDelete && deleteModal) {
+            showDelete.addEventListener('click', ()=> {
+                deleteModal.showModal();
+            });
+        }
 
         //Entry Modals Functions
         if (showEntry && distributionModal) {
@@ -52,14 +56,29 @@
                 inventoryModal.showModal();
             });
         }
-        
+
         if (showReservation && reservationModal) {
             showReservation.addEventListener('click', () => {
                 reservationModal.showModal();
             });
         }
 
+
     });
+
+    //Message Timer
+    setTimeout(function() {
+    const header = document.getElementById('inventoryMessage');
+        if (header) {
+            header.style.transition = "opacity 0.5s ease";
+            header.style.opacity = 0;
+
+            // Optionally remove from layout after fade out
+            setTimeout(() => {
+                header.style.display = "none";
+            }, 500);
+        }
+    }, 3000); // 3000ms = 3 seconds
 
 
 

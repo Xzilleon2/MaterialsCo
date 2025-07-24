@@ -14,4 +14,25 @@
             unset($_SESSION[$Key]);
         }
     }
+
+    //Method for Messages in Home Frames
+    function renderFlashBox() {
+        if (isset($_SESSION['InventoryMessage']) || isset($_SESSION['InventoryMessageSuccess'])) {
+            echo '<div id="flashMessageBox" class="w-lg h-35 bg-blue-200 rounded-md shadow-md my-5 text-xl font-bold flex justify-center items-center place-self-center">';
+            flashError('InventoryMessage');
+            flashSuccess('InventoryMessageSuccess');
+            echo '</div>
+            <script>
+                setTimeout(function() {
+                    const msg = document.getElementById("flashMessageBox");
+                    if (msg) {
+                        msg.style.transition = "opacity 0.5s ease";
+                        msg.style.opacity = 0;
+                        setTimeout(() => msg.style.display = "none", 500);
+                    }
+                }, 3000);
+            </script>';
+        }
+    }
+
 ?>
