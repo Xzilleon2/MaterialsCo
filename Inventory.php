@@ -131,7 +131,7 @@
                     <tbody>
                         <?php while ($row = $getMaterials->fetch_assoc()): ?>
                             <tr class="odd:bg-blue-100 even:bg-blue-200 h-10">
-                                <td><?= htmlspecialchars($row['MATERIAL_ID']) ?></td>
+                                <td class="text-end"><?= htmlspecialchars($row['MATERIAL_ID']) ?></td>
                                 <td><?= htmlspecialchars($row['MATERIAL_NAME']) ?></td>
                                 <td class="text-end"><?= htmlspecialchars($row['QUANTITY']) ?></td>
                                 <td><?= htmlspecialchars($row['PRICE']) ?></td>
@@ -150,47 +150,107 @@
                                 </td>
                             </tr>
                             
-                            <!--Delete Modal-->
-                            <dialog id="deleteModal<?= $row['MATERIAL_ID'] ?>" class="fixed w-sm h-xl p-5 top-1/3 left-1/2 rounded-md border border-gray-100 shadow-md">
-                                    <form class="grid grid-rows-2" method="POST" action="">
+                            <!-- Delete Modal -->
+                            <dialog id="deleteModal<?= $row['MATERIAL_ID'] ?>" 
+                                class="fixed w-sm h-xl p-5 top-1/3 left-1/2 transform -translate-x-1/2 -translate-y-1/2 rounded-md border border-gray-100 shadow-md bg-white backdrop:bg-black/40 open:animate-fadeIn">
 
-                                        <!--Delete Modal Information-->
-                                        <div class="text-xl mb-3 p-5 text-red-500">
-                                            <h1>Are you sure you want to delete this reservation?</h1>
-                                        </div>
-                                        <div class="flex justify-end gap-2">
-                                            <button type="submit" name="deleteBtn" class="bg-blue-200 px-4 py-2 rounded font-bold">Confirm</button>
-                                            <button type="button" onclick="document.getElementById('deleteModal<?= $row['MATERIAL_ID'] ?>').close()" class="px-4 py-2 bg-gray-300 rounded">Cancel</button>
-                                        </div>
-                                        
-                                    </form>
+                                <form method="POST" action="./Process/InventoryProcess/deleteItem.php" class="space-y-6">
+
+                                    <!-- Modal Title -->
+                                    <div class="text-xl text-red-600 font-semibold mb-5">
+                                        🗑 Delete Inventory Item
+                                    </div>
+
+                                    <!-- Confirmation Text -->
+                                    <p class="text-gray-800 mb-5">
+                                        Are you sure you want to delete <strong><?= htmlspecialchars($row['MATERIAL_NAME']) ?></strong> from inventory?
+                                        This action cannot be undone.
+                                    </p>
+
+                                    <!-- Hidden Material ID -->
+                                    <input type="hidden" name="materialId" value="<?= $row['MATERIAL_ID'] ?>">
+
+                                    <!-- Action Buttons -->
+                                    <div class="flex justify-end gap-3 pt-4 border-t border-gray-200">
+                                        <button type="button" 
+                                                onclick="document.getElementById('deleteModal<?= $row['MATERIAL_ID'] ?>').close()" 
+                                                class="px-4 py-2 bg-gray-300 text-gray-800 font-semibold rounded hover:bg-gray-400">
+                                            Cancel
+                                        </button>
+                                        <button type="submit" name="deleteBtn" 
+                                                class="px-4 py-2 bg-red-500 text-white font-semibold rounded hover:bg-red-600">
+                                            Confirm
+                                        </button>
+                                    </div>
+
+                                </form>
                             </dialog>
 
-                            <!--Update Modal-->
-                            <dialog id="updateModal<?= $row['MATERIAL_ID'] ?>" class="fixed w-sm h-xl p-5 top-1/3 left-1/2 rounded-md border border-gray-100 shadow-md">
-                                    <form class="grid grid-rows-2" method="POST" action="">
 
-                                        <!--Update Form Information-->
-                                        <h1 class="font-bold text-2xl mb-5">Manage Information</h1>
-                                        <div class="flex flex-col gap-3 mb-5">
-                                            <!--Material & Quantity-->
-                                            <div class="flex flex-col gap-2 items-center">
-                                                <Label class="font-semibold text-xl">Neon Steel Kat</Label>
-                                                <input class="text-xl rounded-md p-3 h-10 w-1/4 ml-10 focus:outline-none" type="number" value="10">
-                                            </div>
-                                            <!--Location & Remarks-->
-                                            <Label>Location</Label>
-                                            <input class="border rounded-md p-3 h-13" type="text">
-                                            <Label>Remarks</Label>
-                                            <input class="border rounded-md p-3 h-20" type="text">
-                                        </div>
-                                        <div class="flex justify-end gap-2">
-                                            <button type="submit" name="updateBtn" class="bg-blue-200 px-4 py-2 rounded font-bold">Save</button>
-                                            <button type="button" onclick="document.getElementById('updateModal<?= $row['MATERIAL_ID'] ?>').close()" class="px-4 py-2 bg-gray-300 rounded">Cancel</button>
-                                        </div>
+                            <!-- Update Modal -->
+                            <dialog id="updateModal<?= $row['MATERIAL_ID'] ?>" 
+                                class="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[36rem] max-w-full p-6 rounded-lg shadow-xl border border-gray-300 backdrop:bg-black/40 open:animate-fadeIn">
 
-                                    </form>
+                                <form method="POST" action="./Process/InventoryProcess/updateItem.php" class="space-y-6">
+                                    
+                                    <!-- Modal Title -->
+                                    <h1 class="text-2xl font-bold text-gray-800">✏️ Update Inventory Information</h1>
+
+                                    <!-- Material Name -->
+                                    <div class="space-y-2">
+                                        <label class="block text-lg font-medium text-gray-700">Material</label>
+                                        <input type="text" name="materialName" value="<?= htmlspecialchars($row['MATERIAL_NAME']) ?>" 
+                                            class="w-full p-3 text-lg bg-gray-100 border border-gray-300 rounded-md" />
+                                    </div>
+
+                                    <!-- Quantity -->
+                                    <div class="space-y-2">
+                                        <label class="block text-lg font-medium text-gray-700">Quantity</label>
+                                        <input type="number" name="materialQuantity" value="<?= $row['QUANTITY'] ?>" 
+                                            class="w-full p-3 text-lg border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400" required />
+                                    </div>
+
+                                    <!-- Price -->
+                                    <div class="space-y-2">
+                                        <label class="block text-lg font-medium text-gray-700">Price</label>
+                                        <input type="number" name="materialPrice" value="<?= $row['PRICE'] ?>" 
+                                            class="w-full p-3 text-lg border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400" />
+                                    </div>
+
+                                    <!-- Size/Weight -->
+                                    <div class="space-y-2">
+                                        <label class="block text-lg font-medium text-gray-700">Size/Weight</label>
+                                        <input type="text" name="materialSizeWeight" value="<?= htmlspecialchars($row['SIZE']) ?>" 
+                                        class="w-full p-3 text-lg border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400" />
+                                    </div>
+
+                                    <!-- Model -->
+                                    <div class="space-y-2">
+                                        <label class="block text-lg font-medium text-gray-700">Model</label>
+                                        <input type="text" name="materialModel" value="<?= htmlspecialchars($row['MODEL']) ?>" 
+                                            class="w-full p-3 text-lg border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400" />
+                                    </div>
+
+                                    <!-- Hidden Material ID -->
+                                    <input type="hidden" name="materialId" value="<?= $row['MATERIAL_ID'] ?>">
+
+                                    <!-- Action Buttons -->
+                                    <div class="flex justify-end gap-3 pt-4 border-t border-gray-200">
+                                        <button type="button" 
+                                            onclick="document.getElementById('updateModal<?= $row['MATERIAL_ID'] ?>').close()" 
+                                            class="px-4 py-2 bg-gray-200 text-gray-700 font-semibold rounded hover:bg-gray-300">
+                                            Cancel
+                                        </button>
+                                        <button type="submit" name="updateBtn" 
+                                            class="px-4 py-2 bg-blue-500 text-white font-semibold rounded hover:bg-blue-600">
+                                            Save
+                                        </button>
+                                    </div>
+
+                                </form>
                             </dialog>
+
+
                         <?php endwhile; ?>
                     </tbody>
                 </table>
