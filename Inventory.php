@@ -134,7 +134,7 @@
                                 <td class="text-end"><?= htmlspecialchars($row['MATERIAL_ID']) ?></td>
                                 <td><?= htmlspecialchars($row['MATERIAL_NAME']) ?></td>
                                 <td class="text-end"><?= htmlspecialchars($row['QUANTITY']) ?></td>
-                                <td><?= htmlspecialchars($row['PRICE']) ?></td>
+                                <td class="text-end">P<?= htmlspecialchars($row['PRICE']) ?></td>
                                 <td><?= htmlspecialchars($row['SIZE']) ?></td>
                                 <td><?= htmlspecialchars($row['MODEL']) ?></td>
                                 <td><?= htmlspecialchars(date('F j, Y', strtotime($row['DATE_ADDED']))) ?></td>

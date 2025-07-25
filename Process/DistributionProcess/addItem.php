@@ -34,14 +34,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['addBtn'])) {
         $stmt->bind_param("iiiss", $materialId, $userId, $quantity, $location, $remarks);
         $stmt->execute();
 
+        
+        //Get the last inserted distribution ID
+        $distributionId = $stmt->insert_id;
+
         // Insert into Stocks Log
-        $logQuery = 'INSERT INTO STOCKS_LOG (MATERIAL_ID, USER_ID, QUANTITY, TRANSACTION_TYPE, TIME_AND_DATE) VALUES (?, ?, ?, ?, NOW())';
+        $logQuery = 'INSERT INTO STOCKS_LOG (MATERIAL_ID, DISTRIBUTION_ID, USER_ID, QUANTITY, TRANSACTION_TYPE, TIME_AND_DATE) VALUES (?, ?, ?, ?, ?, NOW())';
         $logStmt = $conn->prepare($logQuery);
         if (!$logStmt) throw new Exception("Prepare failed for STOCKS_LOG: " . $conn->error);
         
         $userId = $_SESSION['USER_ID'];
         $transactionType = 'OUT';
-        $logStmt->bind_param('iiis', $materialId, $userId, $quantity, $transactionType);
+        $logStmt->bind_param('iiiis', $materialId, $distributionId, $userId, $quantity, $transactionType);
         $logStmt->execute();
 
         $conn->commit();

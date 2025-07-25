@@ -79,16 +79,7 @@
                                     <td class="px-4 py-2 text-end"><?= number_format($row['QUANTITY']) ?></td>
 
                                     <!-- TOTAL PRICE -->
-                                    <td class="px-4 py-2 text-end">
-                                        <?php
-                                            if (isset($row['PRICE'])) {
-                                                $total = $row['QUANTITY'] * $row['PRICE'];
-                                                echo number_format($total, 2);
-                                            } else {
-                                                echo '—';
-                                            }
-                                        ?>
-                                    </td>
+                                    <td class="px-4 py-2 text-end">P<?= htmlspecialchars($row['TOTAL_PRICE']) ?></td>
 
                                     <!-- TRANSACTION TYPE -->
                                     <td class="px-4 py-2"><?= htmlspecialchars($row['TRANSACTION_TYPE']) ?></td>
