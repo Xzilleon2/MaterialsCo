@@ -28,10 +28,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['addBtn'])) {
         $conn->begin_transaction();
 
         // Insert into Distribution table
-        $addDistribution = 'INSERT INTO distribution (MATERIAL_ID, USER_ID, QUANTITY, LOCATION, REMARKS, DATE_RELEASED) VALUES (?, ?, ?, ?, ?, NOW())';
+        $reservationId = isset($_POST['reservationId']) ? (int)$_POST['reservationId'] : null;
+
+        $addDistribution = 'INSERT INTO distribution (MATERIAL_ID, USER_ID, QUANTITY, LOCATION, REMARKS, DATE_RELEASED, RESERVATION_ID) 
+                            VALUES (?, ?, ?, ?, ?, NOW(), ?)';
         $stmt = $conn->prepare($addDistribution);
-        if (!$stmt) throw new Exception("Prepare failed for Distribution: " . $conn->error);
-        $stmt->bind_param("iiiss", $materialId, $userId, $quantity, $location, $remarks);
+        $stmt->bind_param("iiissi", $materialId, $userId, $quantity, $location, $remarks, $reservationId);
         $stmt->execute();
 
         

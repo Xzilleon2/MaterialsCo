@@ -39,7 +39,7 @@
                         <p class="text-2xl">Pending <br> Status</p>
                     </div>
                     <div class="flex justify-center items-center w-1/2">
-                        <p class="text-4xl font-bold">1</p>
+                        <p class="text-4xl font-bold">0</p>
                     </div>
                 </div>
 
@@ -49,7 +49,7 @@
                         <p class="text-2xl">Duplicated <br> Distribution</p>
                     </div>
                     <div class="flex justify-center items-center w-1/2">
-                        <p class="text-4xl font-bold">1</p>
+                        <p class="text-4xl font-bold">0</p>
                     </div>
                 </div>
 
@@ -97,6 +97,9 @@
                         <label class="block text-lg font-semibold text-gray-700">Remarks</label>
                         <textarea name="remarks" rows="3" class="w-full p-3 text-lg border border-gray-300 rounded-md resize-none focus:outline-none focus:ring-2 focus:ring-blue-400"></textarea>
                         </div>
+                        
+                        <!-- Hidden Reservation ID if have one -->
+                        <input type="hidden" name="reservationId" value="<?= isset($reservationId) ? $reservationId : '' ?>">
 
                         <!-- Buttons -->
                         <div class="flex justify-end gap-3 pt-4 border-t border-gray-200">
@@ -183,7 +186,7 @@
 
                                     <div class="space-y-2">
                                         <label class="block text-lg font-medium text-gray-700">Location</label>
-                                        <input type="text" name="location" value="<?= htmlspecialchars($row['LOCATION']) ?>" class="w-full p-3 text-lg border border-gray-300 rounded-md" readonly />
+                                        <input type="text" name="location" value="<?= htmlspecialchars($row['LOCATION']) ?>" class="w-full p-3 text-lg border border-gray-300 rounded-md" />
                                     </div>
 
                                     <div class="space-y-2">

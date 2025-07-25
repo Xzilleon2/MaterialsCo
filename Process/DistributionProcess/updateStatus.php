@@ -7,6 +7,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['action'])) {
     // Sanitize and Fetch Inputs
     $distributionId = (int)$_POST['distributionId'];
     $approvedBy = filter_var(trim($_POST['approvedBy']), FILTER_SANITIZE_SPECIAL_CHARS);
+    $location = filter_var(trim($_POST['location']), FILTER_SANITIZE_SPECIAL_CHARS); // new
     $status = ($_POST['action'] === 'approve') ? 'Approved' : 'Denied';
     $dateReleased = date("Y-m-d");
 
@@ -26,11 +27,15 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['action'])) {
         $conn->begin_transaction();
 
         // Update Distribution Table
-        $updateQuery = 'UPDATE distribution SET STATUS = ?, APPROVED_BY = ?, DATE_RELEASED = ? WHERE DISTRIBUTION_ID = ?';
+        $updateQuery = '
+            UPDATE distribution 
+            SET STATUS = ?, APPROVED_BY = ?, LOCATION = ?, DATE_RELEASED = ? 
+            WHERE DISTRIBUTION_ID = ?
+        ';
         $stmt = $conn->prepare($updateQuery);
         if (!$stmt) throw new Exception("Prepare failed: " . $conn->error);
 
-        $stmt->bind_param('sssi', $status, $approvedBy, $dateReleased, $distributionId);
+        $stmt->bind_param('ssssi', $status, $approvedBy, $location, $dateReleased, $distributionId);
         $stmt->execute();
 
         // Commit transaction

@@ -17,10 +17,18 @@
 
     //Method for Messages in Home Frames
     function renderFlashBox() {
-        if (isset($_SESSION['InventoryMessage']) || isset($_SESSION['InventoryMessageSuccess'])) {
+        if (
+            isset($_SESSION['InventoryMessage']) || isset($_SESSION['InventoryMessageSuccess']) ||
+            isset($_SESSION['ReservationMessage']) || isset($_SESSION['ReservationMessageSuccess']) ||
+            isset($_SESSION['DistributionMessage']) || isset($_SESSION['DistributionMessageSuccess'])
+        ) {
             echo '<div id="flashMessageBox" class="w-lg h-35 bg-blue-200 rounded-md shadow-md my-5 text-xl font-bold flex justify-center items-center place-self-center">';
             flashError('InventoryMessage');
             flashSuccess('InventoryMessageSuccess');
+            flashError('ReservationMessage');
+            flashSuccess('ReservationMessageSuccess');
+            flashError('DistributionMessage');
+            flashSuccess('DistributionMessageSuccess');
             echo '</div>
             <script>
                 setTimeout(function() {
@@ -34,5 +42,6 @@
             </script>';
         }
     }
+
 
 ?>

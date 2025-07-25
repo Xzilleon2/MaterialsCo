@@ -38,7 +38,7 @@
                         <p class="text-2xl">High Price <br> Products</p>
                     </div>
                     <div class="flex justify-center items-center w-1/2">
-                        <p class="text-4xl font-bold">1</p>
+                        <p class="text-4xl font-bold">0</p>
                     </div>
                 </div>
 
@@ -48,7 +48,7 @@
                         <p class="text-2xl">Duplicated <br> Products</p>
                     </div>
                     <div class="flex justify-center items-center w-1/2">
-                        <p class="text-4xl font-bold">1</p>
+                        <p class="text-4xl font-bold">0</p>
                     </div>
                 </div>
 

@@ -4,6 +4,9 @@
         include "./Inclusions/Head.php";
         include "./Inclusions/navbar.php";
         include "./Inclusions/Connection.php";
+        include "./Inclusions/Methods.php";
+        include "./Process/InventoryProcess/getItems.php";
+        include "./Process/ReservationProcess/getItems.php";
     ?>
 
     <!--Main Body for Reservation Page, 2 Columns-->
@@ -19,6 +22,9 @@
         <!--Parts Reservation-->
         <div class="w-full py-10 px-18 flex flex-col gap-5">
 
+            <!--Message Panel-->
+            <?php renderFlashBox(); ?>
+
             <div class="w-full h-20 my-5 text-5xl font-bold flex justify-center items-center">
                 <h1>Material Reservation</h1>
             </div>
@@ -33,7 +39,7 @@
                         <p class="text-2xl">Pending <br> Reservations</p>
                     </div>
                     <div class="flex justify-center items-center w-1/2">
-                        <p class="text-4xl font-bold">1</p>
+                        <p class="text-4xl font-bold">0</p>
                     </div>
                 </div>
 
@@ -43,7 +49,7 @@
                         <p class="text-2xl">Duplicate <br> Requests</p>
                     </div>
                     <div class="flex justify-center items-center w-1/2">
-                        <p class="text-4xl font-bold">1</p>
+                        <p class="text-4xl font-bold">0</p>
                     </div>
                 </div>
 
@@ -57,16 +63,24 @@
 
                 <!-- Reservation Entry Modal -->
                 <dialog id="reservationEntry" class="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[36rem] max-w-full p-6 rounded-lg shadow-xl border border-gray-300 backdrop:bg-black/40 open:animate-fadeIn">
-                    <form method="POST" action="" class="space-y-6">
+                    <form method="POST" action="./Process/ReservationProcess/addItem.php" class="space-y-6">
 
                         <!-- Modal Title -->
                         <h1 class="text-2xl font-bold text-gray-800">🛠 Manage Inventory Information</h1>
 
-                        <!-- Material Name -->
+                        <!-- Material Dropdown -->
                         <div class="space-y-2">
-                        <label class="block text-lg font-medium text-gray-700">Material</label>
-                        <input type="text" class="w-full p-3 text-lg bg-gray-100 border border-gray-300 rounded-md" />
+                            <label class="block text-lg font-medium text-gray-700">Material</label>
+                            <select name="material_id" class="w-full p-3 text-lg bg-gray-100 border border-gray-300 rounded-md">
+                                <option disabled selected>Select a Material</option>
+                                <?php while($row = $getMaterials->fetch_assoc()): ?>
+                                    <option value="<?= $row['MATERIAL_ID'] ?>">
+                                        <?= $row['MATERIAL_NAME'] ?>
+                                    </option>
+                                <?php endwhile; ?>
+                            </select>
                         </div>
+
 
                         <!-- Quantity -->
                         <div class="space-y-2">
@@ -92,7 +106,7 @@
                         <input type="text" name="requestor" class="w-full p-3 text-lg border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400" />
                         </div>
 
-                        <!-- Remarks -->
+                        <!-- Purpose -->
                         <div class="space-y-2">
                         <label class="block text-lg font-semibold text-gray-700">Remarks</label>
                         <textarea name="remarks" rows="3" class="w-full p-3 text-lg border border-gray-300 rounded-md resize-none focus:outline-none focus:ring-2 focus:ring-blue-400"></textarea>
@@ -129,66 +143,108 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr class="odd:bg-blue-100 even:bg-blue-200 h-10">
-                            <td>MAT1002</td>
-                            <td>Davis Elastic Paint Yellow</td>
-                            <td class="text-end">20</td>
-                            <td class="text-end">420</td>
-                            <td >Jane Mayham</td>
-                            <td >To be used for the construction of dog house.</td>
-                            <td>June 1, 2025</td>
-                            <td>June 1, 2025</td>
-                            <td>Pending</td>
-                            <td>
-                                <div class="flex gap-5">
-                                    <div id="showUpdateModal" class="cursor-pointer"><img src="./Assets/Icons/update.png" alt="update"></div>
-                                    <div id="showDeleteModal" class="cursor-pointer"><img src="./Assets/Icons/delete.png" alt="delete"></div>
-                                </div>
-                            </td>
-                        </tr>
-                    </tbody>
-                    
-                    <!--Delete Modal-->
-                    <dialog id="deleteModal" class="fixed w-sm h-xl p-5 top-1/3 left-1/2 rounded-md border border-gray-100 shadow-md">
-                            <form class="grid grid-rows-2" method="POST" action="">
-
-                                <!--Delete Modal Information-->
-                                <div class="text-xl mb-3 p-5 text-red-500">
-                                    <h1>Are you sure you want to delete this reservation?</h1>
-                                </div>
-                                <div class="flex justify-end gap-2">
-                                    <button type="submit" name="deleteBtn" class="bg-blue-200 px-4 py-2 rounded font-bold">Confirm</button>
-                                    <button type="button" onclick="document.getElementById('deleteModal').close()" class="px-4 py-2 bg-gray-300 rounded">Cancel</button>
-                                </div>
-                                
-                            </form>
-                    </dialog>
-
-                    <!--Update Modal-->
-                    <dialog id="updateModal" class="fixed w-sm h-xl p-5 top-1/3 left-1/2 rounded-md border border-gray-100 shadow-md">
-                            <form class="grid grid-rows-2" method="POST" action="">
-
-                                <!--Update Form Information-->
-                                <h1 class="font-bold text-2xl mb-5">Manage Information</h1>
-                                <div class="flex flex-col gap-3 mb-5">
-                                    <!--Material & Quantity-->
-                                    <div class="flex flex-col gap-2 items-center">
-                                        <Label class="font-semibold text-xl">Neon Steel Kat</Label>
-                                        <input class="text-xl rounded-md p-3 h-10 w-1/4 ml-10 focus:outline-none" type="number" value="10">
+                        <?php while ($row = $getReservation->fetch_assoc()): ?>
+                            <tr class="odd:bg-blue-100 even:bg-blue-200 h-10">
+                                <td class="text-end"><?= htmlspecialchars($row['MATERIAL_ID']) ?></td>
+                                <td><?= htmlspecialchars($row['MATERIAL_NAME']) ?></td>
+                                <td class="text-end"><?= htmlspecialchars($row['QUANTITY']) ?></td>
+                                <td><?= htmlspecialchars($row['SIZE']) ?></td>
+                                <td><?= htmlspecialchars($row['REQUESTOR']) ?></td>
+                                <td><?= htmlspecialchars($row['PURPOSE']) ?></td>
+                                <td><?= htmlspecialchars($row['RESERVATION_DATE']) ?></td>
+                                <td><?= htmlspecialchars($row['CLAIMING_DATE']) ?></td>
+                                <td><?= htmlspecialchars($row['STATUS']) ?></td>
+                                <td>
+                                    <div class="flex gap-5">
+                                        <div class="cursor-pointer" onclick="document.getElementById('updateModal<?= $row['RESERVATION_ID'] ?>').showModal()">
+                                            <img src="./Assets/Icons/update.png" alt="update">
+                                        </div>
+                                        <div class="cursor-pointer" onclick="document.getElementById('deleteModal<?= $row['RESERVATION_ID'] ?>').showModal()">
+                                            <img src="./Assets/Icons/delete.png" alt="delete">
+                                        </div>
                                     </div>
-                                    <!--Location & Remarks-->
-                                    <Label>Location</Label>
-                                    <input class="border rounded-md p-3 h-13" type="text">
-                                    <Label>Remarks</Label>
-                                    <input class="border rounded-md p-3 h-20" type="text">
-                                </div>
-                                <div class="flex justify-end gap-2">
-                                    <button type="submit" name="updateBtn" class="bg-blue-200 px-4 py-2 rounded font-bold">Save</button>
-                                    <button type="button" onclick="document.getElementById('updateModal').close()" class="px-4 py-2 bg-gray-300 rounded">Cancel</button>
-                                </div>
+                                </td>
+                            </tr>
 
-                            </form>
-                    </dialog>
+                            <!-- Delete Modal -->
+                            <dialog id="deleteModal<?= $row['RESERVATION_ID'] ?>" class="fixed w-sm h-xl p-5 top-1/3 left-1/2 transform -translate-x-1/2 -translate-y-1/2 rounded-md border border-gray-100 shadow-md bg-white backdrop:bg-black/40 open:animate-fadeIn">
+                                <form method="POST" action="./Process/ReservationProcess/deleteItem.php" class="space-y-6">
+                                    <div class="text-xl text-red-600 font-semibold mb-5">🗑 Delete Reservation Record</div>
+                                    <p class="text-gray-800 mb-5">
+                                        Are you sure you want to delete <strong><?= htmlspecialchars($row['MATERIAL_NAME']) ?></strong> from reservation records? This action cannot be undone.
+                                    </p>
+                                    <input type="hidden" name="reservationId" value="<?= $row['RESERVATION_ID'] ?>">
+                                    <div class="flex justify-end gap-3 pt-4 border-t border-gray-200">
+                                        <button type="button" onclick="document.getElementById('deleteModal<?= $row['RESERVATION_ID'] ?>').close()" class="px-4 py-2 bg-gray-300 text-gray-800 font-semibold rounded hover:bg-gray-400">Cancel</button>
+                                        <button type="submit" name="deleteBtn" class="px-4 py-2 bg-red-500 text-white font-semibold rounded hover:bg-red-600">Confirm</button>
+                                    </div>
+                                </form>
+                            </dialog>
+
+                            <!-- Update Modal -->
+                            <dialog id="updateModal<?= $row['RESERVATION_ID'] ?>" class="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[36rem] max-w-full p-6 rounded-lg shadow-xl border border-gray-300 backdrop:bg-black/40 open:animate-fadeIn">
+                                <form method="POST" action="./Process/ReservationProcess/updateStatus.php" class="space-y-6">
+                                    <h1 class="text-2xl font-bold text-gray-800">🔁 Update Reservation Status</h1>
+
+                                    <!-- Material Name -->
+                                    <div class="space-y-2">
+                                        <label class="block text-lg font-medium text-gray-700">Material Name</label>
+                                        <input type="text" value="<?= htmlspecialchars($row['MATERIAL_NAME']) ?>" class="w-full p-3 bg-gray-100 border border-gray-300 rounded-md" readonly>
+                                    </div>
+
+                                    <!-- Quantity -->
+                                    <div class="space-y-2">
+                                        <label class="block text-lg font-medium text-gray-700">Quantity</label>
+                                        <input type="number" name="quantity" value="<?= $row['QUANTITY'] ?>" class="w-full p-3 border border-gray-300 rounded-md" readonly>
+                                    </div>
+
+                                    <!-- Size -->
+                                    <div class="space-y-2">
+                                        <label class="block text-lg font-medium text-gray-700">Size/Weight</label>
+                                        <input type="text" name="size" value="<?= htmlspecialchars($row['SIZE']) ?>" class="w-full p-3 border border-gray-300 rounded-md" readonly>
+                                    </div>
+
+                                    <!-- Purpose -->
+                                    <div class="space-y-2">
+                                        <label class="block text-lg font-medium text-gray-700">Purpose</label>
+                                        <input type="text" name="purpose" value="<?= htmlspecialchars($row['PURPOSE']) ?>" class="w-full p-3 border border-gray-300 rounded-md" readonly>
+                                    </div>
+
+                                    <!-- Claiming Date -->
+                                    <div class="space-y-2">
+                                        <label class="block text-lg font-medium text-gray-700">Claiming Date</label>
+                                        <input type="date" name="claimDate" value="<?= $row['CLAIMING_DATE'] ?>" class="w-full p-3 border border-gray-300 rounded-md" readonly>
+                                    </div>
+
+                                    <!-- Requestor -->
+                                    <div class="space-y-2">
+                                        <label class="block text-lg font-medium text-gray-700">Requestor</label>
+                                        <input type="text" name="requestor" value="<?= htmlspecialchars($row['REQUESTOR']) ?>" class="w-full p-3 border border-gray-300 rounded-md" readonly>
+                                    </div>
+
+                                    <!-- Remarks -->
+                                    <div class="space-y-2">
+                                        <label class="block text-lg font-medium text-gray-700">Remarks</label>
+                                        <textarea name="remarks" rows="3" class="w-full p-3 border border-gray-300 rounded-md resize-none" readonly><?= htmlspecialchars($row['REMARKS']) ?></textarea>
+                                    </div>
+
+                                    <!-- Hidden fields -->
+                                    <input type="hidden" name="reservationId" value="<?= $row['RESERVATION_ID'] ?>">
+                                    <input type="hidden" name="materialId" value="<?= $row['MATERIAL_ID'] ?>">
+
+                                    <!-- Actions -->
+                                    <div class="flex justify-end gap-3 pt-4 border-t border-gray-200">
+                                        <button type="button" onclick="document.getElementById('updateModal<?= $row['RESERVATION_ID'] ?>').close()" class="px-4 py-2 bg-gray-300 text-gray-800 font-semibold rounded hover:bg-gray-400">Cancel</button>
+                                        <button type="submit" name="action" value="deny" class="px-4 py-2 bg-red-500 text-white font-semibold rounded hover:bg-red-600">Deny</button>
+                                        <button type="submit" name="action" value="approve" class="px-4 py-2 bg-green-500 text-white font-semibold rounded hover:bg-green-600">Approve</button>
+                                    </div>
+                                </form>
+                            </dialog>
+
+
+                        <?php endwhile; ?>
+                    </tbody>
+
                 </table>
 
             </div>
