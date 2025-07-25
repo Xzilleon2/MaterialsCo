@@ -1,3 +1,11 @@
+<?php
+    session_start(); 
+
+    if(!isset($_SESSION['USER_ID'])){
+        header('Location: ./index.php');
+        exit();
+    }   
+?>
 <body>
     <!--Important import files-->
     <?php

@@ -1,3 +1,11 @@
+<?php
+    session_start();
+
+    if(!isset($_SESSION['USER_ID'])){
+        header('Location: ./index.php');
+        exit();
+    }
+?>
 <body>
     <!--Important import files-->
     <?php
@@ -225,7 +233,7 @@
                                     <!-- Remarks -->
                                     <div class="space-y-2">
                                         <label class="block text-lg font-medium text-gray-700">Remarks</label>
-                                        <textarea name="remarks" rows="3" class="w-full p-3 border border-gray-300 rounded-md resize-none" readonly><?= htmlspecialchars($row['REMARKS']) ?></textarea>
+                                        <textarea name="remarks" rows="3" class="w-full p-3 border border-gray-300 rounded-md resize-none" readonly><?= htmlspecialchars($row['PURPOSE']) ?></textarea>
                                     </div>
 
                                     <!-- Hidden fields -->
