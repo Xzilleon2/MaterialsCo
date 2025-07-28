@@ -24,7 +24,7 @@
                 <div id="SignInForm" class="w-md h-120 rounded-md shadow-md bg-white flex flex-col items-center text-center p-10 gap-3 ">
                     <h1 class="text-2xl mb-7"><b>MaterialsCO</b></h1>
                     <?php
-                         flashError('Logmessage');                        
+                         flashError('Logmessage');                      
                     ?>
                     <form class="text-start w-full" action="./Process/Authentecation.php" method="POST">
                         <label class="my-2" for=""><b>Email</b></label> <br>
