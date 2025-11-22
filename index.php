@@ -4,9 +4,8 @@
 <body>
     <!--Important import files-->
     <?php
-        include "./Inclusions/Head.php";
-        include "./Inclusions/Methods.php";
-        include "./Inclusions/Connection.php";
+        include __DIR__ ."/Inclusions/Head.php";
+        include __DIR__ ."/Inclusions/Methods.php";
     ?>
 
     <!--Main Body for Sign in Page, 2 Columns-->
@@ -65,7 +64,7 @@
 
     <!--Script import for functionalities-->
     <?php
-        include "./Scripts/indexScript.php";
+        include __DIR__ ."/Scripts/indexScript.php";
     ?>
 
 </body>

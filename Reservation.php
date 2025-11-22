@@ -9,12 +9,12 @@
 <body>
     <!--Important import files-->
     <?php
-        include "./Inclusions/Head.php";
-        include "./Inclusions/navbar.php";
-        include "./Inclusions/Connection.php";
-        include "./Inclusions/Methods.php";
-        include "./Process/InventoryProcess/getItems.php";
-        include "./Process/ReservationProcess/getItems.php";
+        include __DIR__ . "/Inclusions/Head.php";
+        include __DIR__ . "/Inclusions/navbar.php";
+        include __DIR__ . "/Inclusions/Connection.php";
+        include __DIR__ . "/Inclusions/Methods.php";
+        include __DIR__ . "/Process/InventoryProcess/getItems.php";
+        include __DIR__ . "/Process/ReservationProcess/getItems.php";
     ?>
 
     <!--Main Body for Reservation Page, 2 Columns-->

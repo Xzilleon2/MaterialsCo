@@ -9,10 +9,10 @@
 <body>
     <!--Important import files-->
     <?php
-        include "./Inclusions/Head.php";
-        include "./Inclusions/navbar.php";
-        include "./Inclusions/Connection.php";
-        include "./Process/StockProcess/getItems.php";
+        include __DIR__ . "/Inclusions/Head.php";
+        include __DIR__ . "/Inclusions/navbar.php";
+        include __DIR__ . "/Inclusions/Connection.php";
+        include __DIR__ . "/Process/StockProcess/getItems.php";
     ?>
 
     <!--Main Body for Sales Page, 2 Columns-->

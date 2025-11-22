@@ -1,118 +1,90 @@
 <?php
-    session_start(); 
+session_start(); 
 
-    if(!isset($_SESSION['USER_ID'])){
-        header('Location: ./index.php');
-        exit();
-    }   
+if(!isset($_SESSION['USER_ID'])){
+    header('Location: ./index.php');
+    exit();
+}   
 ?>
 <body>
     <!--Important import files-->
     <?php
-        include "./Inclusions/Head.php";
-        include "./Inclusions/navbar.php";
-        include "./Inclusions/Connection.php";
+        include __DIR__ . "/Inclusions/Head.php";
+        include __DIR__ . "/Inclusions/navbar.php";
     ?>
 
-    <!--Main Body for Homepage Page, 2 Columns-->
-    <div id="BodyDiv" class="w-full h-full flex">
+    <!--Main Body for Homepage Page-->
+    <div id="BodyDiv" class="w-full min-h-screen flex bg-gray-50">
 
-        <div class="w-1/6">
-            <!--Sidebar from import-->
-            <?php
-                include "./Inclusions/sidebar.php";
-            ?>
+        <!--Sidebar-->
+        <div class="w-1/6 border-r bg-white shadow-sm">
+            <?php include "./Inclusions/sidebar.php"; ?>
         </div>
 
-        <!--Home Page Contents-->
-        <div class="w-full py-35 px-18 grid grid-row-2 gap-5">
+        <!--Home Content-->
+        <div class="flex-1 p-10">
 
-            <!--Request Status-->
-            <div class="w-full flex flex-col gap-15">
+            <!--User Header-->
+            <div class="w-full flex flex-col items-center mb-10">
+                <h1 class="text-5xl font-bold tracking-wide text-gray-800">
+                    <?php echo $_SESSION['NAME']; ?>
+                </h1>
+                <p class="text-lg text-gray-600 mt-2">
+                    Welcome back! Here’s today’s activity summary.
+                </p>
+            </div>
 
-                <!--owner Info-->
-                <div class="w-full px-30 flex flex-col justify-center items-center gap-10">
-                    <h1 class="text-5xl font-bold"><?php echo $_SESSION['NAME'] ?></h1>
-                </div>
-                
-                <!--Stocks Status-->
-                <div class="flex justify-center w-full h-45 gap-5">
+            <!--Status Cards Grid-->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
 
-                    <!--Request Status-->
-                    <div class="w-1/4 h-40 bg-blue-200 rounded-sm shadow-sm flex">
-                        <div class="w-70 flex justify-center items-center">
-                            <p class="text-3xl">Pending <br> Requests</p>
-                        </div>
-                        <div class="flex justify-center items-center w-1/2">
-                            <p class="text-4xl font-bold">0</p>
-                        </div>
-                    </div>
-
-                    <!--Request Status-->
-                    <div class="w-1/4 h-40 bg-blue-200 rounded-sm shadow-sm flex">
-                        <div class="w-70 flex justify-center items-center">
-                            <p class="text-3xl">Denied <br> Requests</p>
-                        </div>
-                        <div class="flex justify-center items-center w-1/2">
-                            <p class="text-4xl font-bold">0</p>
-                        </div>
-                    </div>
-
-                    <!--Request Status-->
-                    <div class="w-1/4 h-40 bg-blue-200 rounded-sm shadow-sm flex">
-                        <div class="w-70 flex justify-center items-center">
-                            <p class="text-3xl">Completed <br> Requests</p>
-                        </div>
-                        <div class="flex justify-center items-center w-1/2">
-                            <p class="text-4xl font-bold">0</p>
-                        </div>
-                    </div>
+                <!--Pending-->
+                <div class="bg-blue-200 rounded-md shadow-md p-6 flex flex-col justify-between">
+                    <p class="text-2xl font-semibold">Pending Requests</p>
+                    <p class="text-5xl font-bold mt-4 text-center">0</p>
                 </div>
 
-                <!--Payment Status-->
-                <div class="flex justify-center w-full gap-5">
+                <!--Denied-->
+                <div class="bg-blue-200 rounded-md shadow-md p-6 flex flex-col justify-between">
+                    <p class="text-2xl font-semibold">Denied Requests</p>
+                    <p class="text-5xl font-bold mt-4 text-center">0</p>
+                </div>
 
-                    <!--Payment Status-->
-                    <div class="w-1/4 h-40 bg-blue-200 rounded-sm shadow-sm flex">
-                        <div class="w-70 flex justify-center items-center">
-                            <p class="text-3xl">Duplicated <br> Requests</p>
-                        </div>
-                        <div class="flex justify-center items-center w-1/2">
-                            <p class="text-4xl font-bold">0</p>
-                        </div>
-                    </div> 
-
-                    <!--Payment Status-->
-                    <div class="w-1/4 h-40 bg-blue-200 rounded-sm shadow-sm flex">
-                        <div class="w-70 flex justify-center items-center">
-                            <p class="text-3xl">Out of <br> Stocks</p>
-                        </div>
-                        <div class="flex justify-center items-center w-1/2">
-                            <p class="text-4xl font-bold">0</p>
-                        </div>
-                    </div>
-
-                    <!--Payment Status-->
-                    <div class="w-1/4 h-40 bg-blue-200 rounded-sm shadow-sm flex">
-                        <div class="w-70 flex justify-center items-center">
-                            <p class="text-3xl">Product Price <br> Increase</p>
-                        </div>
-                        <div class="flex justify-center items-center w-1/2">
-                            <p class="text-4xl font-bold">0</p>
-                        </div>
-                    </div>
-
+                <!--Completed-->
+                <div class="bg-blue-200 rounded-md shadow-md p-6 flex flex-col justify-between">
+                    <p class="text-2xl font-semibold">Completed Requests</p>
+                    <p class="text-5xl font-bold mt-4 text-center">0</p>
                 </div>
 
             </div>
+
+            <!--Second Row of Cards-->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+                <!--Duplicated-->
+                <div class="bg-blue-200 rounded-md shadow-md p-6 flex flex-col justify-between">
+                    <p class="text-2xl font-semibold">Duplicated Requests</p>
+                    <p class="text-5xl font-bold mt-4 text-center">0</p>
+                </div>
+
+                <!--Out of Stock-->
+                <div class="bg-blue-200 rounded-md shadow-md p-6 flex flex-col justify-between">
+                    <p class="text-2xl font-semibold">Out of Stocks</p>
+                    <p class="text-5xl font-bold mt-4 text-center">0</p>
+                </div>
+
+                <!--Price Increase-->
+                <div class="bg-blue-200 rounded-md shadow-md p-6 flex flex-col justify-between">
+                    <p class="text-2xl font-semibold">Product Price Increase</p>
+                    <p class="text-5xl font-bold mt-4 text-center">0</p>
+                </div>
+
+            </div>
+
         </div>
-
-
     </div>
 
-    <!--Script import for functionalities-->
+    <!--Scripts-->
     <?php 
         include './Scripts/mainScript.php';
     ?>
-
 </body>

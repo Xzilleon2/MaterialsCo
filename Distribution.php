@@ -9,12 +9,11 @@
 <body>
     <!--Important import files-->
     <?php
-        include "./Inclusions/Head.php";
-        include "./Inclusions/navbar.php";
-        include "./Inclusions/Connection.php";
-        include "./Inclusions/Methods.php";
-        include "./Process/DistributionProcess/getItems.php";
-        include "./Process/InventoryProcess/getItems.php";
+        include __DIR__ . "/Inclusions/Head.php";
+        include __DIR__ . "/Inclusions/navbar.php";
+        include __DIR__ . "/Inclusions/Methods.php";
+        include __DIR__ . "/Process/DistributionProcess/getItems.php";
+        include __DIR__ . "/Process/InventoryProcess/getItems.php";
     ?>
 
     <!--Main Body for Distribution Page, 2 Columns-->
