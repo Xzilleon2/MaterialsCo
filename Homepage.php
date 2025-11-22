@@ -85,6 +85,6 @@ if(!isset($_SESSION['USER_ID'])){
 
     <!--Scripts-->
     <?php 
-        include './Scripts/mainScript.php';
+        include __DIR__ . '/Scripts/mainScript.php';
     ?>
 </body>

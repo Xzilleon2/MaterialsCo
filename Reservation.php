@@ -263,7 +263,7 @@
 
     <!--Script import for functionalities-->
     <?php 
-        include './Scripts/mainScript.php';
+        include __DIR__ . '/Scripts/mainScript.php';
     ?>
 
 </body>
