@@ -3,6 +3,7 @@ include_once __DIR__ . "/Users.Class.php";
 
 class UsersCntrl extends Users {
 
+    // Attributes
     private $name;
     private $email;
     private $age;
