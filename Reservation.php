@@ -11,10 +11,7 @@
     <?php
         include __DIR__ . "/Inclusions/Head.php";
         include __DIR__ . "/Inclusions/navbar.php";
-        include __DIR__ . "/Inclusions/Connection.php";
         include __DIR__ . "/Inclusions/Methods.php";
-        include __DIR__ . "/Process/InventoryProcess/getItems.php";
-        include __DIR__ . "/Process/ReservationProcess/getItems.php";
     ?>
 
     <!--Main Body for Reservation Page, 2 Columns-->
@@ -23,7 +20,7 @@
         <div class="w-1/6">
             <!--Sidebar from import-->
             <?php
-                include "./Inclusions/sidebar.php";
+                include __DIR__ . "/Inclusions/sidebar.php";
             ?>
         </div>
 

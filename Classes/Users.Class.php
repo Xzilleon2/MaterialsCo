@@ -1,5 +1,5 @@
 <?php
-include_once __DIR__ . "/Dbh.class.php";
+include_once __DIR__ . "/Dbh.Class.php";
 
 class Users extends Dbh {
 
