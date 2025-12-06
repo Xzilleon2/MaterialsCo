@@ -5,6 +5,7 @@
         header('Location: ./index.php');
         exit();
     }   
+
 ?>
 <body>
     <!--Important import files-->
@@ -12,6 +13,11 @@
         include __DIR__ . "/Inclusions/Head.php";
         include __DIR__ . "/Inclusions/navbar.php";
         include __DIR__ . "/Inclusions/Methods.php";
+        include __DIR__ . "/Classes/Dbh.Class.php";
+        include __DIR__ . "/Classes/ItemsView.Class.php";
+
+        $itemsView = new ItemsView();
+        $materials = $itemsView->viewInventory();
     ?>
 
     <!--Main Body for Inventory Page, 2 Columns-->
@@ -76,20 +82,20 @@
                         <!-- Material Name -->
                         <div class="space-y-2">
                         <label class="block text-lg font-medium text-gray-700">Material</label>
-                        <input type="text" class="w-full p-3 text-lg bg-gray-100 border border-gray-300 rounded-md" name="materialName"/>
+                        <input required type="text" class="w-full p-3 text-lg bg-gray-100 border border-gray-300 rounded-md" name="materialName"/>
                         </div>
 
                         <!-- Quantity -->
                         <div class="space-y-2">
                         <label class="block text-lg font-medium text-gray-700">Quantity</label>
-                        <input type="number" value="1" class="w-full p-3 text-lg border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400" 
+                        <input required type="number" value="1" min="1" class="w-full p-3 text-lg border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400" 
                          name="materialQuantity"/>
                         </div>
 
                         <!-- Price -->
                         <div class="space-y-2">
                         <label class="block text-lg font-medium text-gray-700">Price</label>
-                        <input type="number" value="100" class="w-full p-3 text-lg border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+                        <input required type="number" value="100" class="w-full p-3 text-lg border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
                          name="materialPrice" />
                         </div>
 
@@ -103,7 +109,7 @@
                         <!-- Model -->
                         <div class="space-y-2">
                         <label class="block text-lg font-medium text-gray-700">Model</label>
-                        <input type="text" class="w-full p-3 text-lg border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400" 
+                        <input required type="text" class="w-full p-3 text-lg border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400" 
                          name="materialModel"/>
                         </div>
 
@@ -135,7 +141,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <?php while ($row = $getMaterials->fetch_assoc()): ?>
+                        <?php foreach ($materials as $row): ?>
                             <tr class="odd:bg-blue-100 even:bg-blue-200 h-10">
                                 <td class="text-end"><?= htmlspecialchars($row['MATERIAL_ID']) ?></td>
                                 <td><?= htmlspecialchars($row['MATERIAL_NAME']) ?></td>
@@ -205,7 +211,7 @@
                                     <!-- Material Name -->
                                     <div class="space-y-2">
                                         <label class="block text-lg font-medium text-gray-700">Material</label>
-                                        <input type="text" name="materialName" value="<?= htmlspecialchars($row['MATERIAL_NAME']) ?>" 
+                                        <input type="text" name="materialName" value="<?= htmlspecialchars($row['MATERIAL_NAME'])?>" 
                                             class="w-full p-3 text-lg bg-gray-100 border border-gray-300 rounded-md" />
                                     </div>
 
@@ -256,8 +262,7 @@
                                 </form>
                             </dialog>
 
-
-                        <?php endwhile; ?>
+                        <?php endforeach; ?>
                     </tbody>
                 </table>
 
