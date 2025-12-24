@@ -22,7 +22,7 @@
             isset($_SESSION['ReservationMessage']) || isset($_SESSION['ReservationMessageSuccess']) ||
             isset($_SESSION['DistributionMessage']) || isset($_SESSION['DistributionMessageSuccess'])
         ) {
-            echo '<div id="flashMessageBox" class="w-lg h-35 bg-blue-200 rounded-md shadow-md my-5 text-xl font-bold flex justify-center items-center place-self-center">';
+            echo '<div id="flashMessageBox" class="w-md p-5 text-lg bg-blue-200 rounded-md shadow-md font-bold flex justify-center items-center place-self-center text-center">';
             flashError('InventoryMessage');
             flashSuccess('InventoryMessageSuccess');
             flashError('ReservationMessage');
@@ -42,6 +42,5 @@
             </script>';
         }
     }
-
 
 ?>

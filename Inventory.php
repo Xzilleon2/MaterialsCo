@@ -108,8 +108,8 @@
 
                         <!-- Model -->
                         <div class="space-y-2">
-                        <label class="block text-lg font-medium text-gray-700">Model</label>
-                        <input required type="text" class="w-full p-3 text-lg border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400" 
+                        <label class="block text-lg font-medium text-gray-700">Model (Optional)</label>
+                        <input required type="text" value="N/A" class="w-full p-3 text-lg border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400" 
                          name="materialModel"/>
                         </div>
 
@@ -180,7 +180,7 @@
                                     </p>
 
                                     <!-- Hidden Material ID -->
-                                    <input type="hidden" name="materialId" value="<?= $row['MATERIAL_ID'] ?>">
+                                    <input type="hidden" name="materialId" value="<?= htmlspecialchars($row['MATERIAL_ID'])?>">
 
                                     <!-- Action Buttons -->
                                     <div class="flex justify-end gap-3 pt-4 border-t border-gray-200">
@@ -244,7 +244,7 @@
                                     </div>
 
                                     <!-- Hidden Material ID -->
-                                    <input type="hidden" name="materialId" value="<?= $row['MATERIAL_ID'] ?>">
+                                    <input type="hidden" name="materialId" value="<?= htmlspecialchars($row['MATERIAL_ID'])?>">
 
                                     <!-- Action Buttons -->
                                     <div class="flex justify-end gap-3 pt-4 border-t border-gray-200">

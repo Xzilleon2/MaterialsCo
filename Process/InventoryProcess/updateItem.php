@@ -3,7 +3,7 @@ session_start();
 
 include __DIR__ . "/../../Classes/ItemsCntrl.Class.php";
 
-if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['addBtn'])) {
+if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['updateBtn'])) {
 
     // Sanitize input
     $name = filter_var(trim($_POST['materialName']), FILTER_SANITIZE_SPECIAL_CHARS);
@@ -11,20 +11,20 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['addBtn'])) {
     $price = filter_var(trim($_POST['materialPrice']), FILTER_SANITIZE_NUMBER_INT);
     $size = trim($_POST['materialSizeWeight']);
     $model = trim($_POST['materialModel']);
+    $ID = filter_var(trim($_POST['materialId']), FILTER_SANITIZE_NUMBER_INT);
 
     // Controller
-    $items = new ItemsCntrl($name, $quantity, $price, $size, $model);
+    $items = new ItemsCntrl($name, $quantity, $price, $size, $model, $ID);
 
     // Execute registration
-    if(!$items->addItem()){
-        $_SESSION['InventoryMessage'] = "ERROR INSERTING MATERIALS!";
+    if(!$items->updateItem()){
+        $_SESSION['InventoryMessage'] = "ERROR UPDATING MATERIALS!";
     }
     else{
-        $_SESSION['InventoryMessageSuccess'] = "INSERT SUCCESSFUL!";
+         $_SESSION['InventoryMessageSuccess'] = "UPDATE SUCCESSFUL!";
     }
 
-    // Redict after processing
-    header("Location: ../../Inventory.php");
+   header("Location: ../../Inventory.php");
     exit();
 
 } else {
