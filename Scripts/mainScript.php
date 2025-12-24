@@ -29,7 +29,7 @@
         const showInventory = document.getElementById('showInventory');
         const inventoryModal = document.getElementById('inventoryEntry');
         const showReservation = document.getElementById('showReservation');
-        const reservationModal = document.getElementById('reservationEntry');
+        const reservationModal = document.getElementById('reservationModal');
 
         //update & Delete Functions
         if (showUpdate && updateModal) {
@@ -62,7 +62,6 @@
                 reservationModal.showModal();
             });
         }
-
 
     });
 

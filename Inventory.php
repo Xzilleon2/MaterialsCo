@@ -130,14 +130,14 @@
                 <table id="inventoryTable" class="table-auto border-separate border h-fit max-h-full">
                     <thead>
                         <tr class="text-xl">
-                            <th class="w-md ">Material Code</th>
-                            <th class="w-md ">Name</th>
-                            <th class="w-md ">Quantity</th>
-                            <th class="w-lg ">Item Price</th>
-                            <th class="w-lg ">Size/Weight</th>
-                            <th class="w-md ">Model</th>
-                            <th class="w-md ">Date Added</th>
-                            <th class="w-md ">Action</th>
+                            <th class="w-md ">MATERIAL CODE</th>
+                            <th class="w-md ">NAME</th>
+                            <th class="w-md ">QUANTITY</th>
+                            <th class="w-lg ">ITEM PRICE</th>
+                            <th class="w-lg ">SIZE/WEIGHT</th>
+                            <th class="w-md ">MODEL</th>
+                            <th class="w-md ">DATE ADDED</th>
+                            <th class="w-md ">ACTION</th>
                         </tr>
                     </thead>
                     <tbody>

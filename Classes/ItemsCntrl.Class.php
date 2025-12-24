@@ -35,6 +35,24 @@ class ItemsCntrl extends Items {
         );
     }
 
+    // Add Reservation
+    public function addReservation($materialID, $userID, $quantity, $requestor, $claimDate, $remarks) {
+
+        if ($this->checkEmptyFields($materialID, $quantity, $requestor, $claimDate, $remarks)) {
+            return false;
+        }
+
+        // Implementation for adding reservation
+        return $this->insertReservation(
+            $materialID,
+            $userID,
+            $quantity,
+            $requestor,
+            $claimDate,
+            $remarks
+        );
+    }
+
     // Update Item
     public function updateItem() {
 
@@ -52,13 +70,34 @@ class ItemsCntrl extends Items {
         );
     }
 
+    // Update Reservation
+    public function updateReservation($reservationID, $quantity, $requestor, $purpose, $claimingDate) {
+
+        return $this->updateReservationDB(
+            $reservationID,
+            $quantity,
+            $requestor,
+            $purpose,
+            $claimingDate
+        );
+    }
+
     // Delete Item
     public function deleteItem() {
 
         return $this->deleteItemDB(
             $this->id
         );
-        
+
+    }
+
+    // Delete Reservation
+    public function deleteReservation($ID) {
+
+        return $this->deleteReservationDB(
+            $ID
+        );
+
     }
 
     private function checkEmptyFields($name, $quantity, $price, $size, $model) {

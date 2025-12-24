@@ -17,7 +17,7 @@ class Items extends Dbh {
 
     // Get all items from reservation table
     protected function getReservations() {
-        $query = "SELECT * FROM reservations";
+        $query = "SELECT * FROM reservation";
         $stmt = $this->connection()->prepare($query);
 
         if (!$stmt->execute()) {
@@ -44,6 +44,23 @@ class Items extends Dbh {
         return true;
     }
 
+    // Insert new reservation
+    protected function insertReservation($materialID, $userID, $quantity, $requestor, $remarks, $claimDate) {
+
+        $query = "
+            INSERT INTO reservation (MATERIAL_ID, USER_ID, QUANTITY, REQUESTOR, PURPOSE, CLAIMING_DATE)
+            VALUES (?, ?, ?, ?, ?, ?)
+        ";
+
+        $stmt = $this->connection()->prepare($query);
+
+        if (!$stmt->execute([$materialID, $userID, $quantity, $requestor, $remarks, $claimDate])) {
+            return false;
+        }
+
+        return true;
+    }
+
     // Update existing item in inventory
     protected function updateItemDB($materialName, $quantity, $price, $size, $model, $ID) {
 
@@ -62,12 +79,47 @@ class Items extends Dbh {
         return true;
     }
 
+    // Update existing reservation
+    protected function updateReservationDB($reservationID, $quantity, $requestor, $purpose, $claimingDate) {
+
+        $query = "
+            UPDATE reservation
+            SET QUANTITY = ?, REQUESTOR = ?, PURPOSE = ?, CLAIMING_DATE = ?
+            WHERE RESERVATION_ID = ?
+        ";
+
+        $stmt = $this->connection()->prepare($query);
+
+        if (!$stmt->execute([$quantity, $requestor, $purpose, $claimingDate, $reservationID])) {
+            return false;
+        }
+
+        return true;
+    }
+
     // Delete existing item in inventory
     protected function deleteItemDB($ID) {
 
         $query = "
             DELETE FROM inventory
             WHERE MATERIAL_ID = ?
+        ";
+
+        $stmt = $this->connection()->prepare($query);
+
+        if (!$stmt->execute([$ID])) {
+            return false;
+        }
+
+        return true;
+    }
+
+    // Delete existing reservation in inventory
+    protected function deleteReservationDB($ID) {
+
+        $query = "
+            DELETE FROM reservation
+            WHERE RESERVATION_ID = ?
         ";
 
         $stmt = $this->connection()->prepare($query);

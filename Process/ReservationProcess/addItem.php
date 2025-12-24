@@ -1,45 +1,35 @@
 <?php
 session_start();
-include(__DIR__ . '/../../Inclusions/Connection.php');
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    try {
-        // Get & sanitize input
-        $materialId = (int) $_POST['material_id'];
-        $userId = $_SESSION['USER_ID'] ?? null;
-        $quantity = (int) $_POST['quantity'];
-        $claimingDate = $_POST['claimDate'] ?? null;
-        $purpose = trim($_POST['remarks'] ?? '');
-        $requestor = trim($_POST['requestor'] ?? '');
-        $reservationDate = date('Y-m-d');
-        $status = 'PENDING';
-        $isActive = 1;
+include __DIR__ . "/../../Classes/ItemsCntrl.Class.php";
 
-        // Validate
-        if (!$materialId || !$userId || !$quantity || !$claimingDate || !$requestor) {
-            throw new Exception("Missing required fields.");
-        }
+if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['reserveBtn'])) {
 
-        // Insert reservation
-        $query = "INSERT INTO reservation 
-            (MATERIAL_ID, USER_ID, QUANTITY, REQUESTOR, PURPOSE, RESERVATION_DATE, CLAIMING_DATE, STATUS, IS_ACTIVE)
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    // Sanitize input
+    $materialID = filter_var(trim($_POST['material_id']), FILTER_SANITIZE_NUMBER_INT);
+    $userID = $_SESSION['USER_ID'];
+    $quantity = filter_var(trim($_POST['quantity']), FILTER_SANITIZE_NUMBER_INT);
+    $claimDate = $_POST['claimDate'];
+    $requestor = filter_var(trim($_POST['requestor']), FILTER_SANITIZE_SPECIAL_CHARS);
+    $remarks = filter_var(trim($_POST['remarks']), FILTER_SANITIZE_SPECIAL_CHARS);
 
-        $stmt = $conn->prepare($query);
-        $stmt->bind_param("iiisssssi", 
-            $materialId, $userId, $quantity, $requestor, $purpose, $reservationDate, $claimingDate, $status, $isActive
-        );
-        $stmt->execute();
+    // Controller
+    $items = new ItemsCntrl();
 
-        $_SESSION['InventoryMessageSuccess'] = 'Reservation successfully added.';
-        header('Location: ../../Reservation.php');
-        exit();
-
-    } catch (Exception $e) {
-        $_SESSION['InventoryMessage'] = "❌ Failed to add reservation: " . $e->getMessage();
-        header('Location: ../../Reservation.php');
-        exit();
+    // Execute registration
+    if(!$items->addReservation($materialID, $userID, $quantity, $requestor, $remarks, $claimDate)){
+        $_SESSION['ReservationMessage'] = "ERROR RESERVING MATERIALS!";
     }
+    else{
+        $_SESSION['ReservationMessageSuccess'] = "RESERVATION SUCCESSFUL!";
+    }
+
+    // Redict after processing
+    //header("Location: ../../Reservation.php");
+    header("Location: ../../Reservation.php?materialID=$materialID&userID=$userID&quantity=$quantity&size=$size&claimDate=$claimDate&requestor=$requestor&remarks=$remarks");
+    exit();
+
 } else {
-    echo "Invalid request.";
+    header("Location: ../Reservation.php?error=FailedtoAddItem");
+    exit();
 }

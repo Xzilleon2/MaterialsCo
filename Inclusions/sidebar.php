@@ -12,12 +12,7 @@
     <!-- Inventory Management -->
     <div class="my-3">
         <h1 class="my-3 font-bold text-gray-700">Inventory Management</h1>
-        <div class="grid gap-2">
-
-            <a href="./Distribution.php" class="flex items-center gap-3 p-2 rounded-md hover:bg-blue-100 hover:text-blue-700 transition-all duration-200">
-                <img src="./Assets/Icons/orderIcon.png" alt="Distribution Icon" class="w-5 h-5">
-                <span>Materials Distribution</span>
-            </a>
+        <div class="grid gap-1">
 
             <a href="./Inventory.php" class="flex items-center gap-3 p-2 rounded-md hover:bg-blue-100 hover:text-blue-700 transition-all duration-200">
                 <img src="./Assets/Icons/partsIcon.png" alt="Inventory Icon" class="w-5 h-5">

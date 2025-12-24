@@ -1,39 +1,28 @@
-<?php 
+<?php
 session_start();
-include(__DIR__ . '/../../Inclusions/Connection.php');
+
+include __DIR__ . "/../../Classes/ItemsCntrl.Class.php";
 
 if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['deleteBtn'])) {
 
-    // Get the Reservation ID
-    $reservationId = (int)$_POST['reservationId'];
+    // Sanitize input
+    $ID = filter_var(trim($_POST['reservationId']), FILTER_SANITIZE_NUMBER_INT);
 
-    try {
-        // Begin transaction
-        $conn->begin_transaction();
+    // Controller
+    $items = new ItemsCntrl();
 
-        // Soft delete the reservation (set IS_ACTIVE = 0)
-        $deleteReservation = 'UPDATE reservation SET IS_ACTIVE = 0 WHERE RESERVATION_ID = ?';
-        $stmt = $conn->prepare($deleteReservation);
-        if (!$stmt) throw new Exception("Prepare failed for Reservation: " . $conn->error);
-
-        $stmt->bind_param('i', $reservationId);
-        $stmt->execute();
-
-        // Commit transaction
-        $conn->commit();
-
-        $_SESSION['ReservationMessageSuccess'] = 'Reservation record successfully deleted.';
-        header('Location: ../../Reservation.php');
-        exit();
-
-    } catch (Exception $e) {
-        $conn->rollback();
-        die("❌ Error occurred: " . $e->getMessage());
+    // Execute registration
+    if(!$items->deleteReservation($ID)){
+        $_SESSION['InventoryMessage'] = "ERROR DELETING RESERVATION!";
+    }
+    else{
+         $_SESSION['InventoryMessageSuccess'] = " SUCCESSFULLY DELETED!";
     }
 
+   header("Location: ../../Reservation.php");
+    exit();
+
 } else {
-    echo "<script>
-            alert('Error in Request');
-            window.location.href = '../../Reservation.php';
-          </script>";
+    header("Location: ../Reservation.php?error=FailedtoAddItem");
+    exit();
 }
