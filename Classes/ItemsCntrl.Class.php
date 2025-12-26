@@ -10,13 +10,14 @@ class ItemsCntrl extends Items {
     private $model;
     private $id;
 
-    public function __construct($name = "", $quantity = "", $price = "", $size = "", $model = "", $id = "") {
+    public function __construct($id = "", $name = "", $quantity = "", $price = "", $size = "", $model = "") {
+        $this->id = $id;
         $this->name = $name;
         $this->quantity = $quantity;
         $this->price = $price;
         $this->size = $size;
         $this->model = $model;
-        $this->id = $id;
+        
     }
 
     // Add Item
@@ -27,11 +28,12 @@ class ItemsCntrl extends Items {
         }
 
         return $this->insertItem(
+            $this->id,
             $this->name,
             $this->quantity,
             $this->price,
             $this->size,
-            $this->model
+            $this->model,
         );
     }
 

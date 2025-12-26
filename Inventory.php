@@ -17,7 +17,8 @@
         include __DIR__ . "/Classes/ItemsView.Class.php";
 
         $itemsView = new ItemsView();
-        $materials = $itemsView->viewInventory();
+        $USER_ID = $_SESSION['USER_ID'];
+        $materials = $itemsView->viewInventory($USER_ID);
     ?>
 
     <!--Main Body for Inventory Page, 2 Columns-->
@@ -102,7 +103,7 @@
                         <!-- Size/Weight -->
                         <div class="space-y-2">
                         <label class="block text-lg font-medium text-gray-700">Size/Weight</label>
-                        <input type="text" value="1m" class="w-full p-3 text-lg border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400" 
+                        <input type="text" value="Small" class="w-full p-3 text-lg border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400" 
                          name="materialSizeWeight"/>
                         </div>
 

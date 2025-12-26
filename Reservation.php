@@ -16,8 +16,9 @@
         include __DIR__ . "/Classes/ItemsView.Class.php";
 
         $itemsView = new ItemsView();
-        $materials = $itemsView->viewReservations();
-        $inventoryMaterials = $itemsView->viewInventory();
+        $USER_ID = $_SESSION['USER_ID'];
+        $materials = $itemsView->viewReservations($USER_ID);
+        $inventoryMaterials = $itemsView->viewInventory($USER_ID);
     ?>
 
     <!--Main Body for Reservation Page, 2 Columns-->

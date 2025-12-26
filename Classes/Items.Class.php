@@ -4,11 +4,11 @@ include_once __DIR__ . '/Dbh.Class.php';
 class Items extends Dbh {
 
     // Get all items from inventory table
-    protected function getInventory() {
-        $query = "SELECT * FROM inventory";
+    protected function getInventory($userID) {
+        $query = "SELECT * FROM inventory WHERE USER_ID = ?";
         $stmt = $this->connection()->prepare($query);
 
-        if (!$stmt->execute()) {
+        if (!$stmt->execute([$userID])) {
             return false;
         }
 
@@ -16,11 +16,23 @@ class Items extends Dbh {
     }
 
     // Get all items from reservation table
-    protected function getReservations() {
-        $query = "SELECT * FROM reservation";
+    protected function getReservations($userID) {
+        $query = "SELECT * FROM reservation WHERE USER_ID = ?";
         $stmt = $this->connection()->prepare($query);
 
-        if (!$stmt->execute()) {
+        if (!$stmt->execute([$userID])) {
+            return false;
+        }
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    // Get all stocks from stocks table
+    protected function getStocks($userID) {
+        $query = "SELECT * FROM stocks_log WHERE USER_ID = ?";
+        $stmt = $this->connection()->prepare($query);
+
+        if (!$stmt->execute([$userID])) {
             return false;
         }
 
@@ -28,16 +40,16 @@ class Items extends Dbh {
     }
 
     // Insert new item to inventory
-    protected function insertItem($materialName, $quantity, $price, $size, $model) {
+    protected function insertItem($userID, $materialName, $quantity, $price, $size, $model) {
 
         $query = "
-            INSERT INTO inventory (MATERIAL_NAME, QUANTITY, PRICE, SIZE, MODEL)
-            VALUES (?, ?, ?, ?, ?)
+            INSERT INTO inventory (USER_ID, MATERIAL_NAME, QUANTITY, PRICE, SIZE, MODEL)
+            VALUES (?, ?, ?, ?, ?, ?)
         ";
 
         $stmt = $this->connection()->prepare($query);
 
-        if (!$stmt->execute([$materialName, $quantity, $price, $size, $model])) {
+        if (!$stmt->execute([$userID, $materialName, $quantity, $price, $size, $model])) {
             return false;
         }
 

@@ -11,9 +11,10 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['addBtn'])) {
     $price = filter_var(trim($_POST['materialPrice']), FILTER_SANITIZE_NUMBER_INT);
     $size = trim($_POST['materialSizeWeight']);
     $model = trim($_POST['materialModel']);
+    $USERID = $_SESSION['USER_ID'];
 
     // Controller
-    $items = new ItemsCntrl($name, $quantity, $price, $size, $model);
+    $items = new ItemsCntrl($USERID, $name, $quantity, $price, $size, $model);
 
     // Execute registration
     if(!$items->addItem()){

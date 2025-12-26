@@ -11,6 +11,13 @@
     <?php
         include __DIR__ . "/Inclusions/Head.php";
         include __DIR__ . "/Inclusions/navbar.php";
+        include __DIR__ . "/Inclusions/Methods.php";
+        include __DIR__ . "/Classes/Dbh.Class.php";
+        include __DIR__ . "/Classes/ItemsView.Class.php";
+
+        $itemsView = new ItemsView();
+        $USER_ID = $_SESSION['USER_ID'];
+        $Stocks = $itemsView->viewStocks($USER_ID);
     ?>
 
     <!--Main Body for Sales Page, 2 Columns-->
@@ -61,44 +68,42 @@
 
                 <table id="stocksTable" class="table-auto border-separate border h-fit max-h-full">
                     <thead>
-                        <tr class="text-xl">
-                            <th class="w-md ">Material Code</th>
-                            <th class="w-md ">Material Name</th>
-                            <th class="w-md ">Quantity</th>
-                            <th class="w-lg ">Total Price</th>
-                            <th class="w-lg ">Transaction Type</th>
-                            <th class="w-md ">Remarks</th>
-                            <th class="w-md ">Time and Date</th>
+                        <tr class="text-lg">
+                            <th class="w-md ">LOG ID</th>
+                            <th class="w-md ">MATERIAL NAME</th>
+                            <th class="w-md ">SOURCE TABLE</th>
+                            <th class="w-md ">SOURCE ID</th>
+                            <th class="w-md ">QUANTITY</th>
+                            <th class="w-lg ">TRANSACTION TYPE</th>
+                            <th class="w-md ">TIME AND DATE</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <?php if ($getStocks->num_rows > 0): ?>
-                            <?php while ($row = $getStocks->fetch_assoc()): ?>
+                        <?php if (count($Stocks) > 0): ?>
+                            <?php foreach ($Stocks as $stock): ?>
                                 <tr class="odd:bg-blue-50 even:bg-blue-100 hover:bg-blue-200 transition">
-                                    <!-- MATERIAL CODE -->
-                                    <td class="px-4 py-2 text-end"><?= htmlspecialchars($row['MATERIAL_ID']) ?></td>
+                                    <!-- STOCKS ID -->
+                                    <td class="px-4 py-2 text-end"><?= htmlspecialchars($stock['STOCKS_ID']) ?></td>
 
                                     <!-- MATERIAL NAME -->
-                                    <td class="px-4 py-2"><?= htmlspecialchars($row['MATERIAL_NAME']) ?></td>
+                                    <td class="px-4 py-2"><?= htmlspecialchars($stock['MATERIAL_NAME']) ?></td>
+
+                                    <!-- SOURCE TABLE -->
+                                    <td class="px-4 py-2"><?= htmlspecialchars($stock['SOURCE_TABLE']) ?></td>
+
+                                    <!-- SOURCE ID -->
+                                    <td class="px-4 py-2"><?= htmlspecialchars($stock['SOURCE_ID']) ?></td>
 
                                     <!-- QUANTITY -->
-                                    <td class="px-4 py-2 text-end"><?= number_format($row['QUANTITY']) ?></td>
-
-                                    <!-- TOTAL PRICE -->
-                                    <td class="px-4 py-2 text-end">P<?= htmlspecialchars($row['TOTAL_PRICE']) ?></td>
+                                    <td class="px-4 py-2 text-end"><?= number_format($stock['QUANTITY']) ?></td>
 
                                     <!-- TRANSACTION TYPE -->
-                                    <td class="px-4 py-2"><?= htmlspecialchars($row['TRANSACTION_TYPE']) ?></td>
-
-                                    <!-- REMARKS -->
-                                    <td class="px-4 py-2">
-                                        <?= !empty($row['REMARKS']) ? htmlspecialchars($row['REMARKS']) : '—'; ?>
-                                    </td>
+                                    <td class="px-4 py-2"><?= htmlspecialchars($stock['TRANSACTION_TYPE']) ?></td>
 
                                     <!-- TIME AND DATE -->
-                                    <td class="px-4 py-2"><?= date("F j, Y - g:i A", strtotime($row['TIME_AND_DATE'])) ?></td>
+                                    <td class="px-4 py-2"><?= date("F j, Y - g:i A", strtotime($stock['TIME_AND_DATE'])) ?></td>
                                 </tr>
-                            <?php endwhile; ?>
+                            <?php endforeach; ?>
                         <?php else: ?>
                             <tr>
                                 <td colspan="7" class="text-center py-5 text-gray-500">No stock records found.</td>
