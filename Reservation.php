@@ -19,6 +19,8 @@
         $USER_ID = $_SESSION['USER_ID'];
         $materials = $itemsView->viewReservations($USER_ID);
         $inventoryMaterials = $itemsView->viewInventory($USER_ID);
+        $pendingCount = $itemsView->viewPendingCount($USER_ID);
+        $reservedCount = $itemsView->viewReservedCount($USER_ID);
     ?>
 
     <!--Main Body for Reservation Page, 2 Columns-->
@@ -48,20 +50,20 @@
                 <!--Reservation Status-->
                 <div class="w-1/4 h-30 bg-blue-200 rounded-sm shadow-sm flex">
                     <div class="w-70 flex justify-center items-center">
-                        <p class="text-2xl">Pending <br> Reservations</p>
+                        <p class="text-2xl">Pendings</p>
                     </div>
                     <div class="flex justify-center items-center w-1/2">
-                        <p class="text-4xl font-bold">0</p>
+                        <p class="text-4xl font-bold"><?php echo $pendingCount ?></p>
                     </div>
                 </div>
 
                 <!--Reservation Status-->
                 <div class="w-1/4 h-30 bg-blue-200 rounded-sm shadow-sm flex">
                     <div class="w-70 flex justify-center items-center">
-                        <p class="text-2xl">Duplicate <br> Requests</p>
+                        <p class="text-2xl">Reserved</p>
                     </div>
                     <div class="flex justify-center items-center w-1/2">
-                        <p class="text-4xl font-bold">0</p>
+                        <p class="text-4xl font-bold"><?php echo $reservedCount ?></p>
                     </div>
                 </div>
 
@@ -151,6 +153,7 @@
                             <th class="w-lg ">PURPOSE</th>
                             <th class="w-md ">RESERVATION DATE</th>
                             <th class="w-md ">CLAIMING DATE</th>
+                            <th class="w-md ">STATUS</th>
                             <th class="w-md ">ACTION</th>
                         </tr>
                     </thead>
@@ -164,6 +167,7 @@
                                 <td><?= htmlspecialchars($row['PURPOSE']) ?></td>
                                 <td><?= htmlspecialchars(date('F j, Y', strtotime($row['RESERVATION_DATE']))) ?></td>
                                 <td><?= htmlspecialchars(date('F j, Y', strtotime($row['CLAIMING_DATE']))) ?></td>
+                                <td><?= htmlspecialchars($row['STATUS']) ?></td>
                                 <td>
                                     <div class="flex gap-5">
                                         <div class="cursor-pointer" onclick="document.getElementById('updateModal<?= $row['RESERVATION_ID'] ?>').showModal()">
@@ -254,15 +258,19 @@
                                         <textarea name="remarks" rows="3" class="w-full p-3 text-lg border border-gray-300 rounded-md resize-none"><?= htmlspecialchars($row['PURPOSE']) ?></textarea>
                                     </div>
                                     
-                                    <!-- Hidden Material ID -->
+                                    <!-- Hidden Reservation ID -->
                                     <input type="hidden" name="reservationId" value="<?= htmlspecialchars($row['RESERVATION_ID'])?>">
 
                                     <!-- Action Buttons -->
                                     <div class="flex justify-end gap-3 pt-4 border-t border-gray-200">
-                                        <button type="button" onclick="document.getElementById('updateModal<?= $row['RESERVATION_ID'] ?>').close()" 
-                                            class="px-4 py-2 bg-gray-200 text-gray-700 font-semibold rounded hover:bg-gray-300">Cancel</button>
-                                        <button type="submit" name="updateBtn" 
-                                            class="px-4 py-2 bg-blue-500 text-white font-semibold rounded hover:bg-blue-600">Save</button>
+                                        <button type="button" onclick="document.getElementById('updateModal<?= $row['RESERVATION_ID'] ?>').close()"
+                                            class="px-4 py-2 bg-gray-200 text-gray-700 font-semibold rounded hover:bg-gray-300">Close</button>
+                                        <button type="button" name="cancelBtn"
+                                            class="px-4 py-2 bg-red-500 text-white font-semibold rounded hover:bg-gray-300">Cancel</button>
+                                        <button type="submit" name="reservedBtn" 
+                                            class="px-4 py-2 bg-yellow-500 text-white font-semibold rounded hover:bg-blue-600">Reserved</button>
+                                        <button type="submit" name="claimedBtn"
+                                            class="px-4 py-2 bg-green-500 text-white font-semibold rounded hover:bg-blue-600">Claimed</button>
                                     </div>
                                 </form>
                             </dialog>

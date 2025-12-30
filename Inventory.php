@@ -19,6 +19,8 @@
         $itemsView = new ItemsView();
         $USER_ID = $_SESSION['USER_ID'];
         $materials = $itemsView->viewInventory($USER_ID);
+        $lowstockCount = $itemsView->viewLowStockCount($USER_ID);
+        $outofstockCount = $itemsView->viewOutOfStockCount($USER_ID)
     ?>
 
     <!--Main Body for Inventory Page, 2 Columns-->
@@ -48,20 +50,20 @@
                 <!--Inventory Status-->
                 <div class="w-1/4 h-30 bg-blue-200 rounded-sm shadow-sm flex">
                     <div class="w-70 flex justify-center items-center">
-                        <p class="text-2xl">High Price <br> Products</p>
+                        <p class="text-2xl">Low Stock <br> Products</p>
                     </div>
                     <div class="flex justify-center items-center w-1/2">
-                        <p class="text-4xl font-bold">0</p>
+                        <p class="text-4xl font-bold"><?php echo $lowstockCount; ?></p>
                     </div>
                 </div>
 
                 <!--Inventory Status-->
                 <div class="w-1/4 h-30 bg-blue-200 rounded-sm shadow-sm flex">
                     <div class="w-70 flex justify-center items-center">
-                        <p class="text-2xl">Duplicated <br> Products</p>
+                        <p class="text-2xl">Out of Stock <br> Products</p>
                     </div>
                     <div class="flex justify-center items-center w-1/2">
-                        <p class="text-4xl font-bold">0</p>
+                        <p class="text-4xl font-bold"><?php echo $outofstockCount; ?></p>
                     </div>
                 </div>
 
@@ -219,7 +221,7 @@
                                     <!-- Quantity -->
                                     <div class="space-y-2">
                                         <label class="block text-lg font-medium text-gray-700">Quantity</label>
-                                        <input type="number" name="materialQuantity" value="<?= $row['QUANTITY'] ?>" 
+                                        <input type="number" name="materialQuantity" min="0" value="<?= $row['QUANTITY'] ?>" 
                                             class="w-full p-3 text-lg border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400" required />
                                     </div>
 

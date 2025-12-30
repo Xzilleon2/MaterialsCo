@@ -14,7 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['updateBtn'])) {
     $ID = filter_var(trim($_POST['materialId']), FILTER_SANITIZE_NUMBER_INT);
 
     // Controller
-    $items = new ItemsCntrl($name, $quantity, $price, $size, $model, $ID);
+    $items = new ItemsCntrl($ID, $name, $quantity, $price, $size, $model);
 
     // Execute registration
     if(!$items->updateItem()){
@@ -24,7 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['updateBtn'])) {
          $_SESSION['InventoryMessageSuccess'] = "UPDATE SUCCESSFUL!";
     }
 
-   header("Location: ../../Inventory.php");
+   header("Location: ../../Inventory.php?name=$name&&quantity=$quantity&&price=$price&&size=$size&&model=$model&&id=$ID");
     exit();
 
 } else {

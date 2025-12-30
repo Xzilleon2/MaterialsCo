@@ -11,6 +11,14 @@ if(!isset($_SESSION['USER_ID'])){
     <?php
         include __DIR__ . "/Inclusions/Head.php";
         include __DIR__ . "/Inclusions/navbar.php";
+        include __DIR__ . "/Classes/Dbh.Class.php";
+        include __DIR__ . "/Classes/ItemsView.Class.php";
+
+        $itemsView = new ItemsView();
+        $USER_ID = $_SESSION['USER_ID'];
+        $pendingCount = $itemsView->viewPendingCount($USER_ID);
+        $outofstockCount = $itemsView->viewOutOfStockCount($USER_ID);
+        $lowstockCount = $itemsView->viewLowStockCount($USER_ID);
     ?>
 
     <!--Main Body for Homepage Page-->
@@ -35,47 +43,36 @@ if(!isset($_SESSION['USER_ID'])){
             </div>
 
             <!--Status Cards Grid-->
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-2 mb-10">
 
-                <!--Pending-->
-                <div class="bg-blue-200 rounded-md shadow-md p-6 flex flex-col justify-between">
-                    <p class="text-2xl font-semibold">Pending Requests</p>
-                    <p class="text-5xl font-bold mt-4 text-center">0</p>
+                <!--Pendings-->
+                <div class="w-fit h-30 bg-blue-200 rounded-sm shadow-sm flex">
+                    <div class="w-70 flex justify-center items-center">
+                        <p class="text-2xl">Pendings</p>
+                    </div>
+                    <div class="flex justify-center items-center w-1/2">
+                        <p class="text-4xl font-bold"><?php echo $pendingCount ?></p>
+                    </div>
                 </div>
 
-                <!--Denied-->
-                <div class="bg-blue-200 rounded-md shadow-md p-6 flex flex-col justify-between">
-                    <p class="text-2xl font-semibold">Denied Requests</p>
-                    <p class="text-5xl font-bold mt-4 text-center">0</p>
+                <!--Low Stock-->
+                <div class="w-fit h-30 bg-blue-200 rounded-sm shadow-sm flex">
+                    <div class="w-70 flex justify-center items-center">
+                        <p class="text-2xl">Low Stock <br> Products</p>
+                    </div>
+                    <div class="flex justify-center items-center w-1/2">
+                        <p class="text-4xl font-bold"><?php echo $lowstockCount; ?></p>
+                    </div>
                 </div>
 
-                <!--Completed-->
-                <div class="bg-blue-200 rounded-md shadow-md p-6 flex flex-col justify-between">
-                    <p class="text-2xl font-semibold">Completed Requests</p>
-                    <p class="text-5xl font-bold mt-4 text-center">0</p>
-                </div>
-
-            </div>
-
-            <!--Second Row of Cards-->
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-
-                <!--Duplicated-->
-                <div class="bg-blue-200 rounded-md shadow-md p-6 flex flex-col justify-between">
-                    <p class="text-2xl font-semibold">Duplicated Requests</p>
-                    <p class="text-5xl font-bold mt-4 text-center">0</p>
-                </div>
-
-                <!--Out of Stock-->
-                <div class="bg-blue-200 rounded-md shadow-md p-6 flex flex-col justify-between">
-                    <p class="text-2xl font-semibold">Out of Stocks</p>
-                    <p class="text-5xl font-bold mt-4 text-center">0</p>
-                </div>
-
-                <!--Price Increase-->
-                <div class="bg-blue-200 rounded-md shadow-md p-6 flex flex-col justify-between">
-                    <p class="text-2xl font-semibold">Product Price Increase</p>
-                    <p class="text-5xl font-bold mt-4 text-center">0</p>
+                <!--Out of stock-->
+                <div class="w-fit h-30 bg-blue-200 rounded-sm shadow-sm flex">
+                    <div class="w-70 flex justify-center items-center">
+                        <p class="text-2xl">Out of Stock <br> Products</p>
+                    </div>
+                    <div class="flex justify-center items-center w-1/2">
+                        <p class="text-4xl font-bold"><?php echo $outofstockCount; ?></p>
+                    </div>
                 </div>
 
             </div>

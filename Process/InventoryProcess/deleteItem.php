@@ -9,7 +9,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['deleteBtn'])) {
     $ID = filter_var(trim($_POST['materialId']), FILTER_SANITIZE_NUMBER_INT);
 
     // Controller
-    $items = new ItemsCntrl($name, $quantity, $price, $size, $model, $ID);
+    $items = new ItemsCntrl($ID);
 
     // Execute registration
     if(!$items->deleteItem()){

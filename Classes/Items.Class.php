@@ -3,6 +3,88 @@ include_once __DIR__ . '/Dbh.Class.php';
 
 class Items extends Dbh {
 
+    // Count low stock products
+    protected function countLowStocks($userID){
+        
+        $lowStockLimit = 5;
+
+        $query = "
+            SELECT COUNT(*) AS low_stock_count
+            FROM inventory
+            WHERE USER_ID = ?
+            AND QUANTITY <= ?
+            AND IS_ACTIVE = 1
+        ";
+
+        $stmt = $this->connection()->prepare($query);
+
+        if (!$stmt->execute([$userID, $lowStockLimit])) {
+            return 0;
+        }
+
+        return (int) $stmt->fetch(PDO::FETCH_ASSOC)['low_stock_count'];
+    }
+
+    // Count out of stock products
+    protected function countOutOfStocks($userID){
+        
+        $StockLimit = 0;
+
+        $query = "
+            SELECT COUNT(*) AS out_of_stock_count
+            FROM inventory
+            WHERE USER_ID = ?
+            AND QUANTITY = ?
+            AND IS_ACTIVE = 1
+        ";
+
+        $stmt = $this->connection()->prepare($query);
+
+        if (!$stmt->execute([$userID, $StockLimit])) {
+            return 0;
+        }
+
+        return (int) $stmt->fetch(PDO::FETCH_ASSOC)['out_of_stock_count'];
+    }
+
+    // Count pending products
+    protected function countPending($userID){
+        
+        $query = "
+            SELECT COUNT(*) AS pending_count
+            FROM reservation
+            WHERE USER_ID = ?
+            AND STATUS = 'On Process'
+        ";
+
+        $stmt = $this->connection()->prepare($query);
+
+        if (!$stmt->execute([$userID])) {
+            return 0;
+        }
+
+        return (int) $stmt->fetch(PDO::FETCH_ASSOC)['pending_count'];
+    }
+
+    // Count reserved products
+    protected function countReserved($userID){
+
+        $query = "
+            SELECT COUNT(*) AS reserved_count
+            FROM reservation
+            WHERE USER_ID = ?
+            AND STATUS = 'Reserved'
+        ";
+
+        $stmt = $this->connection()->prepare($query);
+
+        if (!$stmt->execute([$userID])) {
+            return 0;
+        }
+
+        return (int) $stmt->fetch(PDO::FETCH_ASSOC)['reserved_count'];
+    }
+
     // Get all items from inventory table
     protected function getInventory($userID) {
         $query = "SELECT * FROM inventory WHERE USER_ID = ?";
@@ -108,6 +190,26 @@ class Items extends Dbh {
 
         return true;
     }
+
+    // Update Reservation Status
+    protected function updateReservationStatusDB($reservationID, $status) {
+
+        $query = "
+            UPDATE reservation
+            SET STATUS = ?
+            WHERE RESERVATION_ID = ?
+        ";
+
+        $stmt = $this->connection()->prepare($query);
+
+        if (!$stmt->execute([$status, $reservationID])) {
+            return false;
+        }
+
+        return true;
+
+    }
+        
 
     // Delete existing item in inventory
     protected function deleteItemDB($ID) {
