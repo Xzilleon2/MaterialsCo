@@ -43,7 +43,7 @@ if(!isset($_SESSION['USER_ID'])){
             </div>
 
             <!--Status Cards Grid-->
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-2 mb-10">
+            <div class="grid grid-cols-1 md:grid-cols-3 ms-7 mb-10">
 
                 <!--Pendings-->
                 <div class="w-fit h-30 bg-blue-200 rounded-sm shadow-sm flex">

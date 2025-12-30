@@ -80,7 +80,7 @@
                     <form method="POST" action="./Process/InventoryProcess/addItem.php" class="space-y-6">
 
                         <!-- Modal Title -->
-                        <h1 class="text-2xl font-bold text-gray-800">🛠 Manage Inventory Information</h1>
+                        <h1 class="text-2xl font-bold text-gray-800">INVENTORY FORM</h1>
 
                         <!-- Material Name -->
                         <div class="space-y-2">
@@ -173,7 +173,7 @@
 
                                     <!-- Modal Title -->
                                     <div class="text-xl text-red-600 font-semibold mb-5">
-                                        🗑 Delete Inventory Item
+                                        Delete Item
                                     </div>
 
                                     <!-- Confirmation Text -->
@@ -209,7 +209,7 @@
                                 <form method="POST" action="./Process/InventoryProcess/updateItem.php" class="space-y-6">
                                     
                                     <!-- Modal Title -->
-                                    <h1 class="text-2xl font-bold text-gray-800">✏️ Update Inventory Information</h1>
+                                    <h1 class="text-2xl font-bold text-gray-800">Update Information</h1>
 
                                     <!-- Material Name -->
                                     <div class="space-y-2">

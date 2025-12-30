@@ -83,43 +83,58 @@
                     <form method="POST" action="./Process/ReservationProcess/addItem.php" class="space-y-6">
 
                         <!-- Modal Title -->
-                        <h1 class="text-2xl font-bold text-gray-800">🛠 Make a Material Reservation</h1>
+                        <h1 class="text-2xl font-bold text-gray-800">RESERVATION FORM</h1>
 
                         <!-- Material Dropdown -->
                         <div class="space-y-2">
                             <label class="block text-lg font-medium text-gray-700">Material</label>
-                            <select name="material_id" class="w-full p-3 text-lg bg-gray-100 border border-gray-300 rounded-md" required>
-                                <option disabled selected>Select a Material</option>
+                            <select id="materialDropdown" name="material_id" class="w-full p-3 text-lg bg-gray-100 border border-gray-300 rounded-md" required>
+                                <option disabled selected value="">Select a Material</option>
                                 <?php foreach ($inventoryMaterials as $material): ?>
-                                    <option value="<?= htmlspecialchars($material['MATERIAL_ID']) ?>">
-                                        <?= htmlspecialchars($material['MATERIAL_ID']) ?> - <?= htmlspecialchars($material['MATERIAL_NAME']) ?>
-                                    </option>
+                                    <?php if ($material['QUANTITY'] > 0): ?>
+                                        <option value="<?= htmlspecialchars($material['MATERIAL_ID']) ?>" 
+                                                data-available="<?= htmlspecialchars($material['QUANTITY']) ?>">
+                                            <?= htmlspecialchars($material['MATERIAL_ID']) ?> - <?= htmlspecialchars($material['MATERIAL_NAME']) ?>
+                                        </option>
+                                    <?php endif; ?>
                                 <?php endforeach; ?>
                             </select>
                         </div>
-                        
+
+                        <!-- Additional Fields (Initially Disabled) -->
+                        <div id="additionalFields" class="space-y-2 mt-4 hidden">
                         <!-- Quantity -->
                         <div class="space-y-2">
-                            <label class="block text-lg font-medium text-gray-700">Quantity</label>
-                            <input type="number" value="1" name="quantity" class="w-full p-3 text-lg border border-gray-300 rounded-md" required />
+                            <label class="block text-lg font-medium text-gray-700">
+                                Quantity (Available: <span id="availableQty">0</span>)
+                            </label>
+                            <input 
+                                type="number" 
+                                name="quantity" 
+                                min="0" 
+                                class="w-full p-3 text-lg border border-gray-300 rounded-md" 
+                                required 
+                                id="quantityInput"
+                            />
                         </div>
 
-                        <!-- Claim Date -->
-                        <div class="space-y-2">
-                            <label class="block text-lg font-medium text-gray-700">Date to Claim</label>
-                            <input type="date" name="claimDate" class="w-full p-3 text-lg border border-gray-300 rounded-md" required />
-                        </div>
+                            <!-- Claim Date -->
+                            <div class="space-y-2">
+                                <label class="block text-lg font-medium text-gray-700">Date to Claim</label>
+                                <input type="date" name="claimDate" class="w-full p-3 text-lg border border-gray-300 rounded-md" required />
+                            </div>
 
-                        <!-- Requestor -->
-                        <div class="space-y-2">
-                            <label class="block text-lg font-semibold text-gray-700">Requestor</label>
-                            <input type="text" name="requestor" class="w-full p-3 text-lg border border-gray-300 rounded-md" required />
-                        </div>
+                            <!-- Requestor -->
+                            <div class="space-y-2">
+                                <label class="block text-lg font-semibold text-gray-700">Requestor</label>
+                                <input type="text" name="requestor" class="w-full p-3 text-lg border border-gray-300 rounded-md" required />
+                            </div>
 
-                        <!-- Remarks -->
-                        <div class="space-y-2">
-                            <label class="block text-lg font-semibold text-gray-700">Remarks (optional)</label>
-                            <textarea name="remarks" rows="3" class="w-full p-3 text-lg border border-gray-300 rounded-md resize-none"></textarea>
+                            <!-- Remarks -->
+                            <div class="space-y-2">
+                                <label class="block text-lg font-semibold text-gray-700">Remarks (optional)</label>
+                                <textarea name="remarks" rows="3" class="w-full p-3 text-lg border border-gray-300 rounded-md resize-none"></textarea>
+                            </div>
                         </div>
 
                         <!-- Action Buttons -->
@@ -188,7 +203,7 @@
 
                                     <!-- Modal Title -->
                                     <div class="text-xl text-red-600 font-semibold mb-5">
-                                        🗑 Delete Inventory Item
+                                        Delete Item
                                     </div>
 
                                     <!-- Confirmation Text -->
@@ -222,7 +237,7 @@
 
                                 <form method="POST" action="./Process/ReservationProcess/updateStatus.php" class="space-y-6">
                                     <!-- Modal Title -->
-                                    <h1 class="text-2xl font-bold text-gray-800">✏️ Update Reservation Information</h1>
+                                    <h1 class="text-2xl font-bold text-gray-800">Update Information</h1>
 
                                     <!-- Material ID -->
                                     <div class="space-y-2">
@@ -265,7 +280,7 @@
                                     <div class="flex justify-end gap-3 pt-4 border-t border-gray-200">
                                         <button type="button" onclick="document.getElementById('updateModal<?= $row['RESERVATION_ID'] ?>').close()"
                                             class="px-4 py-2 bg-gray-200 text-gray-700 font-semibold rounded hover:bg-gray-300">Close</button>
-                                        <button type="button" name="cancelBtn"
+                                        <button type="submit" name="cancelBtn"
                                             class="px-4 py-2 bg-red-500 text-white font-semibold rounded hover:bg-gray-300">Cancel</button>
                                         <button type="submit" name="reservedBtn" 
                                             class="px-4 py-2 bg-yellow-500 text-white font-semibold rounded hover:bg-blue-600">Reserved</button>
@@ -288,6 +303,7 @@
     <!--Script import for functionalities-->
     <?php 
         include __DIR__ . '/Scripts/mainScript.php';
+        include __DIR__ . '/Scripts/dropdownScript.php';
     ?>
 
 </body>

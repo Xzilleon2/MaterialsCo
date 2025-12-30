@@ -15,7 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
         $status = "Claimed";
     }
     else if(isset($_POST['cancelBtn'])){
-        $status = "Cancelled";
+        $status = "Canceled";
     }
     else{
         $_SESSION['ReservationMessage'] = "NO ACTION SELECTED!";
