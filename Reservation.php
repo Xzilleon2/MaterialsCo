@@ -137,7 +137,7 @@
                             <!-- Remarks -->
                             <div class="space-y-2">
                                 <label class="block text-lg font-semibold text-gray-700">Remarks (optional)</label>
-                                <textarea name="remarks" rows="3" class="w-full p-3 text-lg border border-gray-300 rounded-md resize-none"></textarea>
+                                <textarea name="remarks" rows="3" class="w-full p-3 text-lg border border-gray-300 rounded-md resize-none">N/A</textarea>
                             </div>
                         </div>
 
@@ -241,7 +241,7 @@
 
                                 <form method="POST" action="./Process/ReservationProcess/updateStatus.php" class="space-y-6">
                                     <!-- Modal Title -->
-                                    <h1 class="text-2xl font-bold text-gray-800">Update Information</h1>
+                                    <h1 class="text-2xl font-bold text-gray-800">Reservation Information</h1>
 
                                     <!-- Material ID -->
                                     <div class="space-y-2">
@@ -253,28 +253,28 @@
                                     <!-- Quantity -->
                                     <div class="space-y-2">
                                         <label class="block text-lg font-medium text-gray-700">Quantity</label>
-                                        <input type="number" min="1" name="quantity" value="<?= $row['QUANTITY'] ?>" 
+                                        <input disabled type="number" min="1" name="quantity" value="<?= $row['QUANTITY'] ?>" 
                                             class="w-full p-3 text-lg border border-gray-300 rounded-md" required />
                                     </div>
                                     
                                     <!-- Requestor -->
                                     <div class="space-y-2">
                                         <label class="block text-lg font-medium text-gray-700">Requestor</label>
-                                        <input type="text" name="requestor" value="<?= $row['REQUESTOR'] ?>" 
+                                        <input disabled type="text" name="requestor" value="<?= $row['REQUESTOR'] ?>" 
                                             class="w-full p-3 text-lg border border-gray-300 rounded-md" />
                                     </div>
 
                                     <!-- Claiming Date -->
                                     <div class="space-y-2">
                                         <label class="block text-lg font-medium text-gray-700">Claming Date</label>
-                                        <input type="date" name="claimingDate" value="<?= $row['CLAIMING_DATE'] ?>" 
+                                        <input disabled type="date" name="claimingDate" value="<?= $row['CLAIMING_DATE'] ?>" 
                                             class="w-full p-3 text-lg border border-gray-300 rounded-md" />
                                     </div>
 
                                     <!-- Remarks -->
                                     <div class="space-y-2">
                                         <label class="block text-lg font-medium text-gray-700">Remarks</label>
-                                        <textarea name="remarks" rows="3" class="w-full p-3 text-lg border border-gray-300 rounded-md resize-none"><?= htmlspecialchars($row['PURPOSE']) ?></textarea>
+                                        <textarea disabled name="remarks" rows="3" class="w-full p-3 text-lg border border-gray-300 rounded-md resize-none"><?= htmlspecialchars($row['PURPOSE']) ?></textarea>
                                     </div>
                                     
                                     <!-- Hidden Reservation ID -->

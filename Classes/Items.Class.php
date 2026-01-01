@@ -87,7 +87,7 @@ class Items extends Dbh {
 
     // Get all items from inventory table
     protected function getInventory($userID) {
-        $query = "SELECT * FROM inventory WHERE USER_ID = ?";
+        $query = "SELECT * FROM inventory WHERE USER_ID = ? && IS_ACTIVE = 1";
         $stmt = $this->connection()->prepare($query);
 
         if (!$stmt->execute([$userID])) {
@@ -99,7 +99,7 @@ class Items extends Dbh {
 
     // Get all items from reservation table
     protected function getReservations($userID) {
-        $query = "SELECT * FROM reservation WHERE USER_ID = ?";
+        $query = "SELECT * FROM reservation WHERE USER_ID = ? && IS_ACTIVE = 1";
         $stmt = $this->connection()->prepare($query);
 
         if (!$stmt->execute([$userID])) {
@@ -215,7 +215,8 @@ class Items extends Dbh {
     protected function deleteItemDB($ID) {
 
         $query = "
-            DELETE FROM inventory
+            UPDATE inventory
+            SET IS_ACTIVE = 0
             WHERE MATERIAL_ID = ?
         ";
 
@@ -232,7 +233,8 @@ class Items extends Dbh {
     protected function deleteReservationDB($ID) {
 
         $query = "
-            DELETE FROM reservation
+            UPDATE reservation
+            SET IS_ACTIVE = 0
             WHERE RESERVATION_ID = ?
         ";
 

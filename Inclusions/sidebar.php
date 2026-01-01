@@ -36,11 +36,6 @@
     <div class="my-3">
         <h1 class="my-3 font-bold text-gray-700">Other Services</h1>
         <div class="grid gap-2">
-
-            <div class="flex items-center gap-3 p-2 rounded-md hover:bg-gray-200 transition-all duration-200 cursor-pointer">
-                <img src="./Assets/Icons/settingsIcon.png" alt="Settings Icon" class="w-5 h-5">
-                <span>Settings</span>
-            </div>
             
             <a href="./Process/Logout.php" class="flex items-center gap-3 p-2 rounded-md hover:bg-red-100 hover:text-red-600 transition-all duration-200 cursor-pointer">
                 <img src="./Assets/Icons/logout.png" alt="Logout Icon" class="w-5 h-5">
