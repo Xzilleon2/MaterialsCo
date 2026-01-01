@@ -36,7 +36,7 @@
                 </div>
 
                 <!--SignUp form-->
-                <div id="SignUpForm" class="hidden w-md h-160 rounded-md shadow-md bg-white flex flex-col items-center text-center p-10 ">
+                <div id="SignUpForm" class="hidden w-md h-140 rounded-md shadow-md bg-white flex flex-col items-center text-center p-10 ">
                     <h1 class="text-2xl mb-7"><b>MaterialsCO</b></h1>
                     <?php 
                         flashError('LogmessageReg'); 
@@ -47,8 +47,6 @@
                         <input class="border rounded-md w-full h-10 my-2 p-3" type="text" name="signupName">
                         <label class="my-2" for=""><b>Email</b></label> <br>
                         <input class="border rounded-md w-full h-10 my-2 p-3" type="email" name="signupEmail" required>
-                        <label class="my-2" for=""><b>AGE</b></label> <br>
-                        <input class="border rounded-md w-full h-10 my-2 p-3" type="number" min="1" name="signupAge">
                         <label class="my-2" for=""><b>Password</b></label> <br>
                         <input class="border rounded-md w-full h-10 my-2 p-3" type="password" name="signupPassword">
                         <label class="my-2" for=""><b>Confirm Password</b></label> <br>

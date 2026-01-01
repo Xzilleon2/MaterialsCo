@@ -15,6 +15,10 @@
         include __DIR__ . "/Classes/Dbh.Class.php";
         include __DIR__ . "/Classes/ItemsView.Class.php";
 
+        // Scripts
+        include __DIR__ . '/Scripts/mainScript.php';
+        include __DIR__ . '/Scripts/dropdownScript.php';
+
         $itemsView = new ItemsView();
         $USER_ID = $_SESSION['USER_ID'];
         $materials = $itemsView->viewReservations($USER_ID);
@@ -299,11 +303,5 @@
         </div>
 
     </div>
-
-    <!--Script import for functionalities-->
-    <?php 
-        include __DIR__ . '/Scripts/mainScript.php';
-        include __DIR__ . '/Scripts/dropdownScript.php';
-    ?>
 
 </body>

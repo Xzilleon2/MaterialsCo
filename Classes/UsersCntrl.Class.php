@@ -11,45 +11,40 @@ class UsersCntrl extends Users {
     private $passwordRep;
 
     // Constructor
-    public function __construct($name = "", $email = "", $age = "", $password = "", $passwordRep = "") {
+    public function __construct($name = "", $email = "", $password = "", $passwordRep = "") {
         $this->name = $name;
         $this->email = $email;
-        $this->age = $age;
         $this->password = $password;
         $this->passwordRep = $passwordRep;
     }
 
     // Login
-    public function loginUser() {
+    public function loginUser($email, $password) {
 
         // Invalid Email
-        if (!filter_var($this->email, FILTER_VALIDATE_EMAIL)) {
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
             $_SESSION['Logmessage'] = "Invalid email format.";
-            header("Location: ../index.php");
-            exit();
+            return false;
         }
 
         // Empty password
-        if (empty($this->password)) {
+        if (empty($password)) {
             $_SESSION['Logmessage'] = "Password cannot be empty.";
-            header("Location: ../index.php");
-            exit();
+            return false;
         }
 
         // Look up user
-        $user = $this->getUsers($this->email);
+        $user = $this->getUsers($email);
 
         if (!$user) {
             $_SESSION['Logmessage'] = "Email not found.";
-            header("Location: ../index.php");
-            exit();
+            return false;
         }
 
         // Wrong password
-        if (!password_verify($this->password, $user['PASSWORD'])) {
+        if (!password_verify($password, $user['PASSWORD'])) {
             $_SESSION['Logmessage'] = "Incorrect password.";
-            header("Location: ../index.php");
-            exit();
+            return false;
         }
 
         // SUCCESS
@@ -59,8 +54,7 @@ class UsersCntrl extends Users {
         $_SESSION['NAME'] = $user['NAME'];
         $_SESSION['EMAIL'] = $user['EMAIL'];
 
-        header("Location: ../Homepage.php");
-        exit();
+        return true;
     }
 
     // Register
@@ -68,46 +62,34 @@ class UsersCntrl extends Users {
 
         if (empty($this->name)) {
             $_SESSION['LogmessageReg'] = "Please enter a valid name.";
-            header("Location: ../index.php");
-            exit();
+            return false;
         }
 
         if (!filter_var($this->email, FILTER_VALIDATE_EMAIL)) {
             $_SESSION['LogmessageReg'] = "Invalid email format.";
-            header("Location: ../index.php");
-            exit();
-        }
-
-        if (!filter_var($this->age, FILTER_VALIDATE_INT) || $this->age <= 0) {
-            $_SESSION['LogmessageReg'] = "Invalid age.";
-            header("Location: ../index.php");
-            exit();
+            return false;
         }
 
         if (empty($this->password)) {
             $_SESSION['LogmessageReg'] = "Password cannot be empty.";
-            header("Location: ../index.php");
-            exit();
+            return false;
         }
 
         if ($this->password !== $this->passwordRep) {
             $_SESSION['LogmessageReg'] = "Passwords do not match.";
-            header("Location: ../index.php");
-            exit();
+            return false;
         }
 
         if ($this->getUsers($this->email)) {
             $_SESSION['LogmessageReg'] = "Email already exists.";
-            header("Location: ../index.php");
-            exit();
+            return false;
         }
 
         $hash = password_hash($this->password, PASSWORD_DEFAULT);
 
-        $this->insertUser($this->name, $this->age, $this->email, $hash);
+        $this->insertUser($this->name, $this->email, $hash);
 
         $_SESSION['LogmessageRegSuccess'] = "Registration Successful!";
-        header("Location: ../index.php");
-        exit();
+        return true;
     }
 }

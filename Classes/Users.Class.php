@@ -6,29 +6,26 @@ class Users extends Dbh {
     // Get user by email (for checking duplicates)
     protected function getUsers($email) {
         $query = "SELECT * FROM user WHERE EMAIL = ?";
+
         $stmt = $this->connection()->prepare($query);
 
         if (!$stmt->execute(array($email))) {
-            $stmt = null;
-            header("Location: ../index.php?error=stmtFailed!");
-            exit();
+            return 0;
         }
 
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
     // Insert new user
-    protected function insertUser($name, $age, $email, $passwordHash) {
+    protected function insertUser($name, $email, $passwordHash) {
 
-        $query = "INSERT INTO user (NAME, AGE, EMAIL, PASSWORD) VALUES (?, ?, ?, ?)";
+        $query = "INSERT INTO user (NAME, EMAIL, PASSWORD) VALUES (?, ?, ?)";
         $stmt = $this->connection()->prepare($query);
 
-        if (!$stmt->execute(array($name, $age, $email, $passwordHash))) {
-            $stmt = null;
-            header("Location: ../index.php?error=stmtFailed!");
-            exit();
+        if (!$stmt->execute(array($name, $email, $passwordHash))) {
+            return false;
         }
 
-        $stmt = null;
+        return true;
     }
 }

@@ -11,10 +11,16 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['signIn'])) {
     $password = trim($_POST['password']);
 
     // Controller
-    $login = new UsersCntrl("",$email,"",$password,"");
+    $login = new UsersCntrl();
 
     // Run login logic
-    $login->loginUser();
+    if(!$login->loginUser($email,$password)){
+        header("Location: ../index.php");
+        exit();
+    } else {
+        header("Location: ../Homepage.php");
+        exit();
+    }
 
 } else {
     header("Location: ../index.php?error=invalidAccess");

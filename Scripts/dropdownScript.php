@@ -1,36 +1,37 @@
 <script>
-    
-    // Reservation Dropdown Functionality (ref. Reservation.php)
+document.addEventListener('DOMContentLoaded', function () {
+
     const materialDropdown = document.getElementById('materialDropdown');
     const additionalFields = document.getElementById('additionalFields');
     const availableQtySpan = document.getElementById('availableQty');
-    const quantityInput = additionalFields.querySelector('input[name="quantity"]');
+    const quantityInput = document.getElementById('quantityInput');
 
-    materialDropdown.addEventListener('change', function() {
+    // ⛔ Exit if reservation modal does NOT exist on this page
+    if (!materialDropdown || !additionalFields || !availableQtySpan || !quantityInput) {
+        return;
+    }
+
+    materialDropdown.addEventListener('change', function () {
         const selectedOption = materialDropdown.selectedOptions[0];
 
         if (selectedOption && selectedOption.value) {
-            // Show the additional fields
             additionalFields.classList.remove('hidden');
 
-            // Set the available quantity
-            const availableQty = parseInt(selectedOption.getAttribute('data-available')) || 0;
+            const availableQty = parseInt(selectedOption.dataset.available) || 0;
             availableQtySpan.textContent = availableQty;
 
-            // Set quantity input: default value = available, min = 0, max = available
             quantityInput.value = availableQty;
-            quantityInput.min = 0;
+            quantityInput.min = 1;
             quantityInput.max = availableQty;
         } else {
-            // Hide additional fields if nothing selected
             additionalFields.classList.add('hidden');
 
-            // Reset quantity input
-            quantityInput.value = 0;
+            quantityInput.value = '';
             quantityInput.min = 0;
             quantityInput.max = 0;
             availableQtySpan.textContent = 0;
         }
     });
 
+});
 </script>
