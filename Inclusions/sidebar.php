@@ -21,17 +21,17 @@
         <h1 class="my-3 font-bold">Inventory Management</h1>
         <div class="grid gap-1">
 
-            <a href="./Inventory.php" class="flex items-center gap-3 p-2 rounded-md hover:bg-blue-100 hover:text-blue-700 transition-all duration-200">
+            <a href="./Inventory.php" class="flex items-center gap-3 p-2 rounded-md hover:bg-gray-200 transition-all duration-200">
                 <i class="fa fa-cubes"></i>
                 <span>Material Inventory</span>
             </a>
 
-            <a href="./Reservation.php" class="flex items-center gap-3 p-2 rounded-md hover:bg-blue-100 hover:text-blue-700 transition-all duration-200">
+            <a href="./Reservation.php" class="flex items-center gap-3 p-2 rounded-md hover:bg-gray-200 transition-all duration-200">
                 <i class="fa fa-calendar"></i>
                 <span>Material Reservation</span>
             </a>
 
-            <a href="./Stocks.php" class="flex items-center gap-3 p-2 rounded-md hover:bg-blue-100 hover:text-blue-700 transition-all duration-200">
+            <a href="./Stocks.php" class="flex items-center gap-3 p-2 rounded-md hover:bg-gray-200 transition-all duration-200">
                 <i class="fa fa-book"></i>
                 <span>Stocks Log</span>
             </a>
