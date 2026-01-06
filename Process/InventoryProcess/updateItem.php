@@ -9,12 +9,11 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['updateBtn'])) {
     $name = filter_var(trim($_POST['materialName']), FILTER_SANITIZE_SPECIAL_CHARS);
     $quantity = filter_var(trim($_POST['materialQuantity']), FILTER_SANITIZE_NUMBER_INT);
     $price = filter_var(trim($_POST['materialPrice']), FILTER_SANITIZE_NUMBER_INT);
-    $size = trim($_POST['materialSizeWeight']);
     $model = trim($_POST['materialModel']);
     $ID = filter_var(trim($_POST['materialId']), FILTER_SANITIZE_NUMBER_INT);
 
     // Controller
-    $items = new ItemsCntrl($ID, $name, $quantity, $price, $size, $model);
+    $items = new ItemsCntrl($ID, $name, $quantity, $price, $model);
 
     // Execute registration
     if(!$items->updateItem()){

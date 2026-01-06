@@ -6,16 +6,14 @@ class ItemsCntrl extends Items {
     private $name;
     private $quantity;
     private $price;
-    private $size;
     private $model;
     private $id;
 
-    public function __construct($id = "", $name = "", $quantity = "", $price = "", $size = "", $model = "") {
+    public function __construct($id = "", $name = "", $quantity = "", $price = "", $model = "") {
         $this->id = $id;
         $this->name = $name;
         $this->quantity = $quantity;
         $this->price = $price;
-        $this->size = $size;
         $this->model = $model;
         
     }
@@ -23,7 +21,7 @@ class ItemsCntrl extends Items {
     // Add Item
     public function addItem() {
 
-        if ($this->checkEmptyFields($this->name, $this->quantity, $this->price, $this->size, $this->model)) {
+        if ($this->checkEmptyFields($this->name, $this->quantity, $this->price, $this->model)) {
             return false;
         }
 
@@ -32,7 +30,6 @@ class ItemsCntrl extends Items {
             $this->name,
             $this->quantity,
             $this->price,
-            $this->size,
             $this->model,
         );
     }
@@ -58,7 +55,7 @@ class ItemsCntrl extends Items {
     // Update Item
     public function updateItem() {
 
-        if ($this->checkEmptyFields($this->name, $this->size, $this->model)) {
+        if ($this->checkEmptyFields($this->name, $this->model)) {
             return false;
         }
 
@@ -66,7 +63,6 @@ class ItemsCntrl extends Items {
             $this->name,
             $this->quantity,
             $this->price,
-            $this->size,
             $this->model,
             $this->id
         );
@@ -111,7 +107,7 @@ class ItemsCntrl extends Items {
 
     }
 
-    private function checkEmptyFields($name, $size, $model) {
-        return empty($name) || empty($size) || empty($model);
+    private function checkEmptyFields($name, $model) {
+        return empty($name) || empty($model);
     }
 }

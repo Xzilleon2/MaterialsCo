@@ -10,7 +10,7 @@
     <!--Important import files-->
     <?php
         include __DIR__ . "/Inclusions/Head.php";
-        include __DIR__ . "/Inclusions/navbar.php";
+        //include __DIR__ . "/Inclusions/navbar.php";
         include __DIR__ . "/Inclusions/Methods.php";
         include __DIR__ . "/Classes/Dbh.Class.php";
         include __DIR__ . "/Classes/ItemsView.Class.php";
@@ -21,9 +21,9 @@
     ?>
 
     <!--Main Body for Sales Page, 2 Columns-->
-    <div id="BodyDiv" class="w-full h-full flex">
+    <div id="BodyDiv" class="w-full h-full flex bg-[171921] text-[922D34]">
 
-        <div class="w-1/6">
+        <div class="w-1/5">
             <!--Sidebar from import-->
             <?php
                 include __DIR__ . "/Inclusions/sidebar.php";
@@ -31,57 +31,37 @@
         </div>
 
         <!--Parts Stocks Log-->
-        <div class="w-full py-10 px-18 flex flex-col gap-5">
+        <div class="w-full flex flex-col gap-5">
 
-            <div class="w-full h-20 my-5 text-5xl font-bold flex justify-center items-center">
-                <h1>Monthly Sales Record</h1>
+            <!--NavBar-->
+            <div>
+                <?php include __DIR__ . "/Inclusions/navbar.php";?>
             </div>
 
-            <!--Indicators-->
-            <div class="flex justify-center gap-5">
-
-                
-                <!--Stocks Log Status-->
-                <div class="w-1/4 h-30 bg-blue-200 rounded-sm shadow-sm flex">
-                    <div class="w-70 flex justify-center items-center">
-                        <p class="text-2xl">Out of Stock <br> Products</p>
-                    </div>
-                    <div class="flex justify-center items-center w-1/2">
-                        <p class="text-4xl font-bold">0</p>
-                    </div>
-                </div>
-
-                <!--Stocks Log Status-->
-                <div class="w-1/4 h-30 bg-blue-200 rounded-sm shadow-sm flex">
-                    <div class="w-70 flex justify-center items-center">
-                        <p class="text-2xl">Product Price <br> Increase</p>
-                    </div>
-                    <div class="flex justify-center items-center w-1/2">
-                        <p class="text-4xl font-bold">0</p>
-                    </div>
-                </div>
-
+            <div class="w-full px-5 h-20 my-2 text-3xl font-bold flex items-center">
+                <h1>Monthly Sales Records</h1>
             </div>
+
 
             <!--Stocks Log Table-->
-            <div class="h-full w-full">
+            <div class="h-full w-full px-5">
 
-                <table id="stocksTable" class="table-auto border-separate border h-fit max-h-full">
+                <table id="stocksTable" class="table-auto border-separate border bg-[#202231] h-fit max-h-full">
                     <thead>
-                        <tr class="text-lg">
-                            <th class="w-md ">LOG ID</th>
-                            <th class="w-md ">MATERIAL NAME</th>
-                            <th class="w-md ">SOURCE TABLE</th>
-                            <th class="w-md ">SOURCE ID</th>
-                            <th class="w-md ">QUANTITY</th>
-                            <th class="w-lg ">TRANSACTION TYPE</th>
-                            <th class="w-md ">TIME AND DATE</th>
+                        <tr class="text-md">
+                            <th class="w-md text-[922D34]">LOG ID</th>
+                            <th class="w-md text-[922D34]">MATERIAL NAME</th>
+                            <th class="w-md text-[922D34]">SOURCE TABLE</th>
+                            <th class="w-md text-[922D34]">SOURCE ID</th>
+                            <th class="w-md text-[922D34]">QUANTITY</th>
+                            <th class="w-md text-[922D34]">TRANSACTION TYPE</th>
+                            <th class="w-md text-[922D34]">TIME AND DATE</th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php if (count($Stocks) > 0): ?>
                             <?php foreach ($Stocks as $stock): ?>
-                                <tr class="odd:bg-blue-50 even:bg-blue-100 hover:bg-blue-200 transition">
+                                <tr class="odd:bg-[#202231] even:bg-[#202333] border-0 text-[#922D34] h-10 text-sm hover:bg-[#2a2a3a] transition">
                                     <!-- STOCKS ID -->
                                     <td class="px-4 py-2 text-end"><?= htmlspecialchars($stock['STOCKS_ID']) ?></td>
 
@@ -106,7 +86,7 @@
                             <?php endforeach; ?>
                         <?php else: ?>
                             <tr>
-                                <td colspan="7" class="text-center py-5 text-gray-500">No stock records found.</td>
+                                <td colspan="7" class="text-center py-5 text-[#922D34]">No stock records found.</td>
                             </tr>
                         <?php endif; ?>
                     </tbody>

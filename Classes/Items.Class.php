@@ -122,16 +122,16 @@ class Items extends Dbh {
     }
 
     // Insert new item to inventory
-    protected function insertItem($userID, $materialName, $quantity, $price, $size, $model) {
+    protected function insertItem($userID, $materialName, $quantity, $price, $model) {
 
         $query = "
-            INSERT INTO inventory (USER_ID, MATERIAL_NAME, QUANTITY, PRICE, SIZE, MODEL)
-            VALUES (?, ?, ?, ?, ?, ?)
+            INSERT INTO inventory (USER_ID, MATERIAL_NAME, QUANTITY, PRICE, MODEL)
+            VALUES (?, ?, ?, ?, ?)
         ";
 
         $stmt = $this->connection()->prepare($query);
 
-        if (!$stmt->execute([$userID, $materialName, $quantity, $price, $size, $model])) {
+        if (!$stmt->execute([$userID, $materialName, $quantity, $price, $model])) {
             return false;
         }
 
@@ -156,17 +156,17 @@ class Items extends Dbh {
     }
 
     // Update existing item in inventory
-    protected function updateItemDB($materialName, $quantity, $price, $size, $model, $ID) {
+    protected function updateItemDB($materialName, $quantity, $price, $model, $ID) {
 
         $query = "
             UPDATE inventory
-            SET MATERIAL_NAME = ?, QUANTITY = ?, PRICE = ?, SIZE = ?, MODEL = ?
+            SET MATERIAL_NAME = ?, QUANTITY = ?, PRICE = ?, MODEL = ?
             WHERE MATERIAL_ID = ?
         ";
 
         $stmt = $this->connection()->prepare($query);
 
-        if (!$stmt->execute([$materialName, $quantity, $price, $size, $model, $ID])) {
+        if (!$stmt->execute([$materialName, $quantity, $price, $model, $ID])) {
             return false;
         }
 

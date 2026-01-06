@@ -1,31 +1,38 @@
 <!-- Sidebar Container -->
-<div class="hidden md:flex md:flex-col md:fixed md:w-1/6 md:h-screen bg-white shadow-md px-5 py-2 md:overflow-y-auto">
-
+<div class="hidden bg-[222231] text-[922D34] text-sm md:flex md:flex-col md:fixed md:w-1/6 md:h-screen shadow-md px-5 py-2 md:overflow-y-auto md:border-r md:border-[922D34]">
+    
+    <!-- Logo -->
+    <div class="my-3">
+        <p class="flex items-center gap-3 p-2 rounded-md">
+            <span class="font-bold text-xl">MaterialsCo</span>
+        </p>
+    </div>
+    
     <!-- Dashboard -->
     <div class="my-3">
         <a href="./homepage.php" class="flex items-center gap-3 p-2 rounded-md hover:bg-gray-200 transition-all duration-200">
-            <img src="./Assets/Icons/dashboard.png" alt="Dashboard Icon" class="w-6 h-6">
-            <span class="text-gray-800 font-medium">Dashboard</span>
+            <i class="fa fa-dashboard"></i>
+            <span class="font-medium">Dashboard</span>
         </a>
     </div>
 
     <!-- Inventory Management -->
     <div class="my-3">
-        <h1 class="my-3 font-bold text-gray-700">Inventory Management</h1>
+        <h1 class="my-3 font-bold">Inventory Management</h1>
         <div class="grid gap-1">
 
             <a href="./Inventory.php" class="flex items-center gap-3 p-2 rounded-md hover:bg-blue-100 hover:text-blue-700 transition-all duration-200">
-                <img src="./Assets/Icons/partsIcon.png" alt="Inventory Icon" class="w-5 h-5">
+                <i class="fa fa-cubes"></i>
                 <span>Material Inventory</span>
             </a>
 
             <a href="./Reservation.php" class="flex items-center gap-3 p-2 rounded-md hover:bg-blue-100 hover:text-blue-700 transition-all duration-200">
-                <img src="./Assets/Icons/reserveIcon.png" alt="Reservation Icon" class="w-5 h-5">
+                <i class="fa fa-calendar"></i>
                 <span>Material Reservation</span>
             </a>
 
             <a href="./Stocks.php" class="flex items-center gap-3 p-2 rounded-md hover:bg-blue-100 hover:text-blue-700 transition-all duration-200">
-                <img src="./Assets/Icons/stocksIcon.png" alt="Stocks Icon" class="w-5 h-5">
+                <i class="fa fa-book"></i>
                 <span>Stocks Log</span>
             </a>
 
@@ -34,11 +41,11 @@
 
     <!-- Other Services -->
     <div class="my-3">
-        <h1 class="my-3 font-bold text-gray-700">Other Services</h1>
+        <h1 class="my-3 font-bold">Other Services</h1>
         <div class="grid gap-2">
             
             <a href="./Process/Logout.php" class="flex items-center gap-3 p-2 rounded-md hover:bg-red-100 hover:text-red-600 transition-all duration-200 cursor-pointer">
-                <img src="./Assets/Icons/logout.png" alt="Logout Icon" class="w-5 h-5">
+                <i class="fa fa-sign-out"></i>
                 <span>Logout</span>
             </a>
 

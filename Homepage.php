@@ -10,7 +10,7 @@ if(!isset($_SESSION['USER_ID'])){
     <!--Important import files-->
     <?php
         include __DIR__ . "/Inclusions/Head.php";
-        include __DIR__ . "/Inclusions/navbar.php";
+        //include __DIR__ . "/Inclusions/navbar.php";
         include __DIR__ . "/Classes/Dbh.Class.php";
         include __DIR__ . "/Classes/ItemsView.Class.php";
 
@@ -22,7 +22,7 @@ if(!isset($_SESSION['USER_ID'])){
     ?>
 
     <!--Main Body for Homepage Page-->
-    <div id="BodyDiv" class="w-full min-h-screen flex bg-gray-50">
+    <div id="BodyDiv" class="w-full min-h-screen flex bg-[171921] text-[922D34]">
 
         <!--Sidebar-->
         <div class="w-1/6 border-r bg-white shadow-sm">
@@ -30,23 +30,28 @@ if(!isset($_SESSION['USER_ID'])){
         </div>
 
         <!--Home Content-->
-        <div class="flex-1 p-10">
+        <div class="flex-1">
+
+            <!--NavBar-->
+            <div class="mb-15">
+                <?php include __DIR__ . "/Inclusions/navbar.php";?>
+            </div>
 
             <!--User Header-->
             <div class="w-full flex flex-col items-center mb-10">
-                <h1 class="text-5xl font-bold tracking-wide text-gray-800">
+                <h1 class="text-4xl font-bold tracking-wide">
                     <?php echo $_SESSION['NAME']; ?>
                 </h1>
-                <p class="text-lg text-gray-600 mt-2">
+                <p class="text-md mt-2">
                     Welcome back! Here’s today’s activity summary.
                 </p>
             </div>
 
             <!--Status Cards Grid-->
-            <div class="grid grid-cols-1 md:grid-cols-3 ms-7 mb-10">
+            <div class="grid grid-cols-1 md:grid-cols-3 ms-7 mb-10 place-self-center gap-6">
 
                 <!--Pendings-->
-                <div class="w-fit h-30 bg-blue-200 rounded-sm shadow-sm flex">
+                <div class="w-fit h-30 bg-[202231] rounded-sm shadow-sm flex">
                     <div class="w-70 flex justify-center items-center">
                         <p class="text-2xl">Pendings</p>
                     </div>
@@ -56,7 +61,7 @@ if(!isset($_SESSION['USER_ID'])){
                 </div>
 
                 <!--Low Stock-->
-                <div class="w-fit h-30 bg-blue-200 rounded-sm shadow-sm flex">
+                <div class="w-fit h-30 bg-[202231] rounded-sm shadow-sm flex">
                     <div class="w-70 flex justify-center items-center">
                         <p class="text-2xl">Low Stock <br> Products</p>
                     </div>
@@ -66,7 +71,7 @@ if(!isset($_SESSION['USER_ID'])){
                 </div>
 
                 <!--Out of stock-->
-                <div class="w-fit h-30 bg-blue-200 rounded-sm shadow-sm flex">
+                <div class="w-fit h-30 bg-[202231] rounded-sm shadow-sm flex">
                     <div class="w-70 flex justify-center items-center">
                         <p class="text-2xl">Out of Stock <br> Products</p>
                     </div>

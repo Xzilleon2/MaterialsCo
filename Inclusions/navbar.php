@@ -1,7 +1,6 @@
-<div class="w-full h-sm py-5 px-18 shadow-md bg-blue-200 flex justify-between sticky top-0 z-3">
-    <h1 class="text-xl">MaterialsCo</h1>
+<div class="w-full h-sm py-3 px-5 shadow-md bg-[202231] text-[922D34] flex justify-end sticky top-0 z-3">
     <div class="flex">
-        <div class="flex gap-2"><img class="w=sm h-6" src="../MaterialsCo/Assets/Icons/userIcon.png" alt="UserIcon"><h1><?php echo $_SESSION['NAME'] ?></h1></div>
+        <div class="flex justify-center items-center gap-2"><i class="fa fa-user"></i><h1><?php echo $_SESSION['NAME'] ?></h1></div>
     </div>
 </div>
 
