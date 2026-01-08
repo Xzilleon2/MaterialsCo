@@ -16,6 +16,12 @@
         const sTable = document.querySelector("#stocksTable");
         if (sTable) new simpleDatatables.DataTable(sTable);
 
+        const oTable = document.querySelector("#organizationTable");
+        if (oTable) new simpleDatatables.DataTable(oTable);
+
+        const moTable = document.querySelector("#myorganizationTable");
+        if (oTable) new simpleDatatables.DataTable(moTable);
+
         //Modal Functions Scripts
         //update & Delete
         const showUpdate = document.getElementById('showUpdateModal');
@@ -30,6 +36,11 @@
         const inventoryModal = document.getElementById('inventoryEntry');
         const showReservation = document.getElementById('showReservation');
         const reservationModal = document.getElementById('reservationModal');
+        // Organization Modals
+        const showCreateOrganization = document.getElementById('showCreateOrganization');
+        const createOrganizationModal = document.getElementById('organizationCreationEntry');
+        const showLeaveOrganization = document.getElementById('showLeaveOrganization');
+        const leaveOrganizationModal = document.getElementById('organizationLeave');
 
         //update & Delete Functions
         if (showUpdate && updateModal) {
@@ -60,6 +71,19 @@
         if (showReservation && reservationModal) {
             showReservation.addEventListener('click', () => {
                 reservationModal.showModal();
+            });
+        }
+
+        // Organization Modals Functions
+        if (showCreateOrganization && createOrganizationModal) {
+            showCreateOrganization.addEventListener('click', () => {
+                createOrganizationModal.showModal();
+            });
+        }
+
+        if (showLeaveOrganization && leaveOrganizationModal) {
+            showLeaveOrganization.addEventListener('click', () => {
+                leaveOrganizationModal.showModal();
             });
         }
 
