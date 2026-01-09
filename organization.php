@@ -142,7 +142,7 @@
             </div>
 
             <!--Organization Tables-->
-            <div id="organizationTablecon" class="hidden h-full w-full px-5">
+            <div id="organizationTablecon" class="h-full w-full px-5">
 
                 <table id="organizationTable" class="table-auto bg-[#202231] border-separate border h-fit max-h-full">
                     <thead>
@@ -218,7 +218,7 @@
 
             </div>
 
-            <div id="myorganizationTablecon" class="h-full w-full px-5">
+            <div id="myorganizationTablecon" class="hidden h-full w-full px-5">
 
                 <table id="myorganizationTable" class="table-auto bg-[#202231] border-separate border h-fit max-h-full">
                     <thead>
@@ -237,10 +237,10 @@
                                 <td><?= htmlspecialchars(date('F j, Y', strtotime($row['DATE_ADDED']))) ?></td>
                                 <td>
                                     <div class="flex justify-center items-center gap-5 text-lg">
-                                        <div class="cursor-pointer text-green-200" onclick="document.getElementById('updateModal<?= $row['MATERIAL_ID'] ?>').showModal()">
+                                        <div class="cursor-pointer text-green-200" onclick="document.getElementById('updateModal2<?= $row['MATERIAL_ID'] ?>').showModal()">
                                             <i class="fa fa-pencil text-lg"></i>
                                         </div>
-                                        <div class="cursor-pointer" onclick="document.getElementById('deleteModal<?= $row['MATERIAL_ID'] ?>').showModal()">
+                                        <div class="cursor-pointer" onclick="document.getElementById('deleteModal2<?= $row['MATERIAL_ID'] ?>').showModal()">
                                             <i class="fa fa-trash text-lg text-red-500"></i>
                                         </div>
                                     </div>
@@ -248,7 +248,7 @@
                             </tr>
                             
                             <!-- Delete Modal -->
-                            <dialog id="deleteModal<?= $row['MATERIAL_ID'] ?>" 
+                            <dialog id="deleteModal2<?= $row['MATERIAL_ID'] ?>" 
                                 class="fixed w-sm h-xl p-5 top-1/3 left-1/2 transform -translate-x-1/2 -translate-y-1/2 rounded-md bg-[#202231] text-[#922D34] shadow-md backdrop:bg-black/40 open:animate-fadeIn">
 
                                 <form method="POST" action="./Process/InventoryProcess/deleteItem.php" class="space-y-6">
@@ -270,7 +270,7 @@
                                     <!-- Action Buttons -->
                                     <div class="flex justify-end gap-3 pt-4">
                                         <button type="button" 
-                                                onclick="document.getElementById('deleteModal<?= $row['MATERIAL_ID'] ?>').close()" 
+                                                onclick="document.getElementById('deleteModal2<?= $row['MATERIAL_ID'] ?>').close()" 
                                                 class="px-4 py-2 bg-gray-300  font-semibold rounded hover:bg-gray-400">
                                             Cancel
                                         </button>
@@ -285,13 +285,13 @@
 
 
                             <!-- Update Modal -->
-                            <dialog id="updateModal<?= $row['MATERIAL_ID'] ?>" 
+                            <dialog id="updateModal2<?= $row['MATERIAL_ID'] ?>" 
                                 class="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[36rem] max-w-full p-6 rounded-lg shadow-xl bg-[#202231] text-[#922D34] backdrop:bg-black/40 open:animate-fadeIn">
 
                                 <form method="POST" action="./Process/InventoryProcess/updateItem.php" class="space-y-6">
                                     
                                     <!-- Modal Title -->
-                                    <h1 class="text-2xl font-boldmb-1">Update Information</h1>
+                                    <h1 class="text-2xl font-bold mb-1">Update Information</h1>
 
                                     <!-- Material Name -->
                                     <div class="space-y-2">
@@ -327,7 +327,7 @@
                                     <!-- Action Buttons -->
                                     <div class="flex justify-end gap-3 pt-4">
                                         <button type="button" 
-                                            onclick="document.getElementById('updateModal<?= $row['MATERIAL_ID'] ?>').close()" 
+                                            onclick="document.getElementById('updateModal2<?= $row['MATERIAL_ID'] ?>').close()" 
                                             class="px-4 py-2 bg-gray-200 font-semibold rounded hover:bg-gray-300">
                                             Cancel
                                         </button>

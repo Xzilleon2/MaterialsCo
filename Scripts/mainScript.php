@@ -20,7 +20,7 @@
         if (oTable) new simpleDatatables.DataTable(oTable);
 
         const moTable = document.querySelector("#myorganizationTable");
-        if (oTable) new simpleDatatables.DataTable(moTable);
+        if (moTable) new simpleDatatables.DataTable(moTable);
 
         //Modal Functions Scripts
         //update & Delete
@@ -36,11 +36,18 @@
         const inventoryModal = document.getElementById('inventoryEntry');
         const showReservation = document.getElementById('showReservation');
         const reservationModal = document.getElementById('reservationModal');
+
         // Organization Modals
         const showCreateOrganization = document.getElementById('showCreateOrganization');
         const createOrganizationModal = document.getElementById('organizationCreationEntry');
         const showLeaveOrganization = document.getElementById('showLeaveOrganization');
         const leaveOrganizationModal = document.getElementById('organizationLeave');
+
+        // Oragnization Tables
+        const showOrganizationcon = document.getElementById('showorganizationTable');
+        const OrganizationTablecon = document.getElementById('organizationTablecon');
+        const showMyOrganizationCon = document.getElementById('showmyorganizationTable');
+        const myOrganizationTableCon = document.getElementById('myorganizationTablecon');
 
         //update & Delete Functions
         if (showUpdate && updateModal) {
@@ -84,6 +91,31 @@
         if (showLeaveOrganization && leaveOrganizationModal) {
             showLeaveOrganization.addEventListener('click', () => {
                 leaveOrganizationModal.showModal();
+            });
+        }
+
+        // Organization Tables Functions
+        if (showOrganizationcon && OrganizationTablecon && myOrganizationTableCon) {
+            showOrganizationcon.addEventListener('click', () => {
+                // show organization table, hide my organization
+                OrganizationTablecon.classList.remove('hidden');
+                myOrganizationTableCon.classList.add('hidden');
+
+                // visual active state on buttons
+                showOrganizationcon.classList.add('text-red-100');
+                showMyOrganizationCon.classList.remove('text-red-100');
+            });
+        }
+
+        if (showMyOrganizationCon && myOrganizationTableCon && OrganizationTablecon) {
+            showMyOrganizationCon.addEventListener('click', () => {
+                // show my organization, hide organization
+                myOrganizationTableCon.classList.remove('hidden');
+                OrganizationTablecon.classList.add('hidden');
+
+                // visual active state on buttons
+                showMyOrganizationCon.classList.add('text-red-100');
+                showOrganizationcon.classList.remove('text-red-100');
             });
         }
 
