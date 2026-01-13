@@ -54,6 +54,7 @@
                             <th class="w-md text-[1F2933]">SOURCE TABLE</th>
                             <th class="w-md text-[1F2933]">SOURCE ID</th>
                             <th class="w-md text-[1F2933]">QUANTITY</th>
+                            <th class="w-md text-[1F2933]">TOTAL PRICE</th>
                             <th class="w-md text-[1F2933]">TRANSACTION TYPE</th>
                             <th class="w-md text-[1F2933]">TIME AND DATE</th>
                         </tr>
@@ -77,6 +78,9 @@
 
                                     <!-- QUANTITY -->
                                     <td class="px-4 py-2 text-end"><?= number_format($stock['QUANTITY']) ?></td>
+
+                                    <!-- TOTAL PRICE -->
+                                    <td class="px-4 py-2 text-end">P<?= number_format($stock['QUANTITY']) ?></td>
 
                                     <!-- TRANSACTION TYPE -->
                                     <td class="px-4 py-2"><?= htmlspecialchars($stock['TRANSACTION_TYPE']) ?></td>

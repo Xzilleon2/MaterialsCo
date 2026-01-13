@@ -100,8 +100,8 @@
 
                         <!-- Action Buttons -->
                         <div class="flex justify-end gap-3 pt-4">
-                        <button type="button" onclick="document.getElementById('organizationCreationEntry').close()" class="px-4 py-2 bg-white font-semibold rounded hover:bg-gray-300">Cancel</button>
-                        <button type="submit" name="addBtn" class="px-4 py-2 bg-blue-500 text-white font-semibold rounded hover:bg-blue-600">Save</button>
+                        <button type="button" onclick="document.getElementById('organizationCreationEntry').close()" class="px-4 py-2 cursor-pointer bg-white font-semibold rounded hover:bg-gray-300">Cancel</button>
+                        <button type="submit" name="addBtn" class="px-4 py-2 cursor-pointer bg-blue-500 text-white font-semibold rounded hover:bg-blue-600">Save</button>
                         </div>
                         
                     </form>
@@ -126,8 +126,8 @@
 
                         <!-- Action Buttons -->
                         <div class="flex justify-end gap-3 pt-4">
-                        <button type="button" onclick="document.getElementById('organizationLeave').close()" class="px-4 py-2 bg-white font-semibold rounded hover:bg-gray-300">Cancel</button>
-                        <button type="submit" name="addBtn" class="px-4 py-2 bg-blue-500 text-white font-semibold rounded hover:bg-blue-600">Submit</button>
+                        <button type="button" onclick="document.getElementById('organizationLeave').close()" class="px-4 py-2 cursor-pointer bg-white font-semibold rounded hover:bg-gray-300">Cancel</button>
+                        <button type="submit" name="addBtn" class="px-4 py-2 cursor-pointer bg-blue-500 text-white font-semibold rounded hover:bg-blue-600">Submit</button>
                         </div>
                         
                     </form>
@@ -200,11 +200,11 @@
                                     <div class="flex justify-end gap-3 pt-4">
                                         <button type="button" 
                                             onclick="document.getElementById('updateModal<?= $row['MATERIAL_ID'] ?>').close()" 
-                                            class="px-4 py-2 bg-gray-200 font-semibold rounded hover:bg-gray-300">
+                                            class="px-4 py-2 cursor-pointer bg-gray-200 font-semibold rounded hover:bg-gray-300">
                                             Cancel
                                         </button>
                                         <button type="submit" name="updateBtn" 
-                                            class="px-4 py-2 bg-blue-500 text-white font-semibold rounded hover:bg-blue-600">
+                                            class="px-4 py-2 cursor-pointer bg-blue-500 text-white font-semibold rounded hover:bg-blue-600">
                                             Submit
                                         </button>
                                     </div>
@@ -271,11 +271,11 @@
                                     <div class="flex justify-end gap-3 pt-4">
                                         <button type="button" 
                                                 onclick="document.getElementById('deleteModal2<?= $row['MATERIAL_ID'] ?>').close()" 
-                                                class="px-4 py-2 bg-gray-300  font-semibold rounded hover:bg-gray-400">
+                                                class="px-4 py-2 cursor-pointer bg-gray-300  font-semibold rounded hover:bg-gray-400">
                                             Cancel
                                         </button>
                                         <button type="submit" name="deleteBtn" 
-                                                class="px-4 py-2 bg-red-500 text-white font-semibold rounded hover:bg-red-600">
+                                                class="px-4 py-2 cursor-pointer bg-red-500 text-white font-semibold rounded hover:bg-red-600">
                                             Confirm
                                         </button>
                                     </div>
@@ -328,11 +328,11 @@
                                     <div class="flex justify-end gap-3 pt-4">
                                         <button type="button" 
                                             onclick="document.getElementById('updateModal2<?= $row['MATERIAL_ID'] ?>').close()" 
-                                            class="px-4 py-2 bg-gray-200 font-semibold rounded hover:bg-gray-300">
+                                            class="px-4 py-2 cursor-pointer bg-gray-200 font-semibold rounded hover:bg-gray-300">
                                             Cancel
                                         </button>
                                         <button type="submit" name="updateBtn" 
-                                            class="px-4 py-2 bg-blue-500 text-white font-semibold rounded hover:bg-blue-600">
+                                            class="px-4 py-2 cursor-pointer bg-blue-500 text-white font-semibold rounded hover:bg-blue-600">
                                             Save
                                         </button>
                                     </div>

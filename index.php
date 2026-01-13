@@ -27,7 +27,7 @@
                         <input class="border rounded-md w-full h-10 my-2 p-3" type="password" name="password">
                         <input name="signIn" class="rounded-md w-full h-10 my-2 bg-gray-200 hover:bg-gray-500 cursor-pointer border border-[C7CFBE] font-bold" type="submit" value="Sign In">
                     </form>
-                    <p class="my-2">Doesn't have an account yet? <button id="showSignUp" class="text-gray-200 hover:cursor-pointer hover:text-gray-500" >Create Now!</button></p>
+                    <p class="my-2">Doesn't have an account yet? <button id="showSignUp" class="text-gray-200 cursor-pointer hover:cursor-pointer hover:text-gray-500" >Create Now!</button></p>
                 </div>
 
                 <!--SignUp form-->
@@ -48,7 +48,7 @@
                         <input class="border rounded-md w-full h-10 my-2 p-3" type="password" name="confirmPassword">
                         <input name="signUp" class="rounded-md w-full h-10 my-2 bg-gray-200 hover:bg-gray-500 cursor-pointer font-bold" type="submit" value="Create Account">
                     </form>
-                        <p class="my-2">Already got an account? <button id="showSignIn" class="text-gray-200 hover:cursor-pointer hover:text-gray-500">Sign-In!</button></p>
+                        <p class="my-2">Already got an account? <button id="showSignIn" class="text-gray-200 cursor-pointer hover:cursor-pointer hover:text-gray-500">Sign-In!</button></p>
                 </div>
 
             </div>

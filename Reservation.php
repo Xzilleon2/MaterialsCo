@@ -150,11 +150,11 @@
                         <div class="flex justify-end gap-3 pt-4">
                             <button type="button" 
                                     onclick="document.getElementById('reservationModal').close()" 
-                                    class="px-4 py-2 bg-gray-200  font-semibold rounded hover:bg-gray-300">
+                                    class="px-4 py-2 cursor-pointer bg-gray-200  font-semibold rounded hover:bg-gray-300">
                                 Cancel
                             </button>
                             <button type="submit" name="reserveBtn" 
-                                    class="px-4 py-2 bg-blue-500 text-white font-semibold rounded hover:bg-blue-600">
+                                    class="px-4 py-2 cursor-pointer bg-blue-500 text-white font-semibold rounded hover:bg-blue-600">
                                 Save
                             </button>
                         </div>
@@ -228,11 +228,11 @@
                                     <div class="flex justify-end gap-3 pt-4">
                                         <button type="button" 
                                                 onclick="document.getElementById('deleteModal<?= $row['RESERVATION_ID'] ?>').close()" 
-                                                class="px-4 py-2 bg-gray-300 font-semibold rounded hover:bg-gray-400">
+                                                class="px-4 py-2 cursor-pointer bg-gray-300 font-semibold rounded hover:bg-gray-400">
                                             Cancel
                                         </button>
                                         <button type="submit" name="deleteBtn" 
-                                                class="px-4 py-2 bg-red-500 text-white font-semibold rounded hover:bg-red-600">
+                                                class="px-4 py-2 cursor-pointer bg-red-500 text-white font-semibold rounded hover:bg-red-600">
                                             Confirm
                                         </button>
                                     </div>
@@ -288,13 +288,13 @@
                                     <!-- Action Buttons -->
                                     <div class="flex justify-end gap-3 pt-4">
                                         <button type="button" onclick="document.getElementById('updateModal<?= $row['RESERVATION_ID'] ?>').close()"
-                                            class="px-4 py-2 bg-gray-200 font-semibold rounded hover:bg-gray-300">Close</button>
+                                            class="px-4 py-2 cursor-pointer bg-gray-200 font-semibold rounded hover:bg-gray-300">Close</button>
                                         <button type="submit" name="cancelBtn"
-                                            class="px-4 py-2 bg-red-500 font-semibold rounded hover:bg-gray-300">Cancel</button>
+                                            class="px-4 py-2 cursor-pointer bg-red-500 font-semibold rounded hover:bg-gray-300">Cancel</button>
                                         <button type="submit" name="reservedBtn" 
-                                            class="px-4 py-2 bg-yellow-500  font-semibold rounded hover:bg-blue-600">Reserved</button>
+                                            class="px-4 py-2 cursor-pointer bg-yellow-500  font-semibold rounded hover:bg-blue-600">Reserved</button>
                                         <button type="submit" name="claimedBtn"
-                                            class="px-4 py-2 bg-green-500 font-semibold rounded hover:bg-blue-600">Claimed</button>
+                                            class="px-4 py-2 cursor-pointer bg-green-500 font-semibold rounded hover:bg-blue-600">Claimed</button>
                                     </div>
                                 </form>
                             </dialog>
