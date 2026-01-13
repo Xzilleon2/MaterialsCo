@@ -1,5 +1,5 @@
 <!-- Sidebar Container -->
-<div class="hidden bg-[222231] text-[922D34] text-sm md:flex md:flex-col md:fixed md:w-1/6 md:h-screen shadow-md px-5 py-2 md:overflow-y-auto md:border-r md:border-[922D34]">
+<div class="hidden bg-[C7CFBE] text-[1F2933] text-sm md:flex md:flex-col md:fixed md:w-1/6 md:h-screen shadow-md px-5 py-2 md:overflow-y-auto md:border-r md:border-[1F2933]">
     
     <!-- Logo -->
     <div class="my-3">
@@ -11,7 +11,7 @@
     <!-- Dashboard -->
     <div class="my-3">
         <div class="grid gap-1">
-            <a href="./homepage.php" class="flex items-center gap-3 p-2 rounded-md hover:bg-gray-200 transition-all duration-200">
+            <a href="./Homepage.php" class="flex items-center gap-3 p-2 rounded-md hover:bg-gray-200 transition-all duration-200">
                 <i class="fa fa-dashboard"></i>
                 <span class="font-medium">Dashboard</span>
             </a>

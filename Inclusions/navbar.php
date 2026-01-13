@@ -1,4 +1,4 @@
-<div class="w-full py-3 px-5 shadow-md bg-[#202231] text-[#922D34] flex justify-end items-center sticky top-0 z-10">
+<div class="w-full py-3 px-5 shadow-md bg-[C7CFBE] text-[1F2933] flex justify-end items-center sticky top-0 z-10">
     <button id="sidebarToggle" class="md:hidden mr-auto text-white px-3 py-1 focus:outline-none">
         <i class="fa fa-bars"></i>
     </button>

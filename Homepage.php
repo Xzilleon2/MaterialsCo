@@ -22,7 +22,7 @@ if(!isset($_SESSION['USER_ID'])){
     ?>
 
     <!--Main Body for Homepage Page-->
-    <div id="BodyDiv" class="w-full min-h-screen flex bg-[#171921] text-[#922D34]">
+    <div id="BodyDiv" class="w-full min-h-screen flex bg-[D0DACA] text-[1F2933]">
 
         <!--Sidebar-->
         <div class="md:w-1/6 border-r bg-white shadow-sm">
@@ -48,35 +48,35 @@ if(!isset($_SESSION['USER_ID'])){
             </div>
 
             <!--Status Cards Grid-->
-            <div class="grid grid-cols-1 md:grid-cols-3 mx-4 md:mx-7 mb-10 place-self-center gap-10">
+            <div class="flex w-full px-5 justify-center gap-5 place-self-center mb-10">
 
                 <!--Pendings-->
-                <div class="bg-[#202231] rounded-sm shadow-sm flex items-center justify-between p-4">
+                <div class="w-1/5 h-15 bg-[D0DACA] border border-[1F2933] shadow-sm flex items-center justify-between p-4">
                     <div class="flex items-center">
-                        <p class="text-md md:text-xl">Pendings</p>
+                        <p class="text-sm md:text-sm">Pendings</p>
                     </div>
                     <div class="flex items-center">
-                        <p class="text-xl md:text-2xl font-bold"><?php echo $pendingCount ?></p>
+                        <p class="text-md md:text-md font-bold"><?php echo $pendingCount ?></p>
                     </div>
                 </div>
 
                 <!--Low Stock-->
-                <div class="bg-[#202231] rounded-sm shadow-sm flex items-center justify-between p-4">
+                <div class="w-1/5 h-15 bg-[D0DACA] border border-[1F2933] shadow-sm flex items-center justify-between p-4">
                     <div class="flex items-center">
-                        <p class="text-md md:text-xl">Low Stock <br class="hidden md:block"> Products</p>
+                        <p class="text-sm md:text-sm">Low Stock <br class="hidden md:block"> Products</p>
                     </div>
                     <div class="flex items-center">
-                        <p class="text-xl md:text-2xl font-bold"><?php echo $lowstockCount; ?></p>
+                        <p class="text-md md:text-md font-bold"><?php echo $lowstockCount; ?></p>
                     </div>
                 </div>
 
                 <!--Out of stock-->
-                <div class="bg-[#202231] gap-4 rounded-sm shadow-sm flex items-center justify-between p-4">
+                <div class="w-1/5 h-15 bg-[D0DACA] border border-[1F2933] shadow-sm flex items-center justify-between p-4">
                     <div class="flex items-center">
-                        <p class="text-md md:text-xl">Out of Stock <br class="hidden md:block"> Products</p>
+                        <p class="text-sm md:text-sm">Out of Stock <br class="hidden md:block"> Products</p>
                     </div>
                     <div class="flex items-center">
-                        <p class="text-xl md:text-2xl font-bold"><?php echo $outofstockCount; ?></p>
+                        <p class="text-md md:text-md font-bold"><?php echo $outofstockCount; ?></p>
                     </div>
                 </div>
 

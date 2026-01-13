@@ -28,7 +28,7 @@
     ?>
 
     <!--Main Body for Reservation Page, 2 Columns-->
-    <div id="BodyDiv" class="w-full h-full flex bg-[171921] text-[922D34]">
+    <div id="BodyDiv" class="w-full h-full flex bg-[D0DACA] text-[1F2933]">
 
         <div class="w-1/5">
             <!--Sidebar from import-->
@@ -57,7 +57,7 @@
 
                 
                 <!--Reservation Status-->
-                <div class="w-1/5 h-15 bg-[202231] shadow-sm flex">
+                <div class="w-1/5 h-15 bg-[C7CFBE] border border-[1F2933] text-[1F2933] shadow-sm flex">
                     <div class="w-70 flex justify-center items-center">
                         <p class="text-sm">Pendings</p>
                     </div>
@@ -67,7 +67,7 @@
                 </div>
 
                 <!--Reservation Status-->
-                <div class="w-1/5 h-15 bg-[202231] shadow-sm flex">
+                <div class="w-1/5 h-15 bg-[C7CFBE] border border-[1F2933] text-[1F2933] shadow-sm flex">
                     <div class="w-70 flex justify-center items-center">
                         <p class="text-sm">Reserved</p>
                     </div>
@@ -78,7 +78,7 @@
 
                 <!-- Reservation Box -->
                 <div id="showReservation" 
-                    class="w-1/5 h-15 bg-[202231] shadow-sm flex justify-center items-center cursor-pointer">
+                    class="w-1/5 h-15 bg-[C7CFBE] border border-[1F2933] text-[1F2933] shadow-sm flex justify-center items-center cursor-pointer">
                     <div class="flex justify-center items-center gap-3">
                         <i class="fa fa-plus-circle text-xl"></i>
                         <p class="text-sm text-center">Make a <br>Reservation</p>
@@ -87,7 +87,7 @@
 
                 <!-- Reservation Entry Modal -->
                 <dialog id="reservationModal" 
-                        class="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[36rem] max-w-full p-6 rounded-lg shadow-xl bg-[#202231] text-[#922D34] backdrop:bg-black/40 open:animate-fadeIn">
+                        class="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[36rem] max-w-full p-6 rounded-lg shadow-xl bg-[C7CFBE] text-[1F2933] backdrop:bg-black/40 open:animate-fadeIn">
 
                     <form method="POST" action="./Process/ReservationProcess/addItem.php" class="space-y-6">
 
@@ -167,23 +167,23 @@
             <!--Reservation Table-->
             <div class="h-full w-full px-5">
 
-                <table id="inventoryTable" class="table-auto border-separate border bg-[#202231] h-fit max-h-full">
+                <table id="inventoryTable" class="table-auto border-separate border bg-[C7CFBE] h-fit max-h-full">
                     <thead>
                         <tr class="text-md">
-                            <th class="w-md text-[922D34]">RESERVATION ID</th>
-                            <th class="w-md text-[922D34]">MATERIAL ID</th>
-                            <th class="w-md text-[922D34]">QUANTITY</th>
-                            <th class="w-lg text-[922D34]">REQUESTOR</th>
-                            <th class="w-lg text-[922D34]">PURPOSE</th>
-                            <th class="w-md text-[922D34]">RESERVATION DATE</th>
-                            <th class="w-md text-[922D34]">CLAIMING DATE</th>
-                            <th class="w-md text-[922D34]">STATUS</th>
-                            <th class="w-md text-[922D34]">ACTION</th>
+                            <th class="w-md text-[1F2933]">RESERVATION ID</th>
+                            <th class="w-md text-[1F2933]">MATERIAL ID</th>
+                            <th class="w-md text-[1F2933]">QUANTITY</th>
+                            <th class="w-lg text-[1F2933]">REQUESTOR</th>
+                            <th class="w-lg text-[1F2933]">PURPOSE</th>
+                            <th class="w-md text-[1F2933]">RESERVATION DATE</th>
+                            <th class="w-md text-[1F2933]">CLAIMING DATE</th>
+                            <th class="w-md text-[1F2933]">STATUS</th>
+                            <th class="w-md text-[1F2933]">ACTION</th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php foreach ($materials as $row): ?>
-                            <tr class="odd:bg-[#202231] even:bg-[#202333] border-0 text-[#922D34] h-10 text-sm">
+                            <tr class="odd:bg-[C7CFBE] even:bg-[bdc3b2] border-0 text-[1F2933] h-10 text-sm">
                                 <td class="text-end"><?= htmlspecialchars($row['RESERVATION_ID']) ?></td>
                                 <td><?= htmlspecialchars($row['MATERIAL_ID']) ?></td>
                                 <td class="text-end"><?= htmlspecialchars($row['QUANTITY']) ?></td>
@@ -195,10 +195,10 @@
                                 <td>
                                     <div class="flex justify-center items-center text-lg gap-5">
                                         <div class="cursor-pointer" onclick="document.getElementById('updateModal<?= $row['RESERVATION_ID'] ?>').showModal()">
-                                            <i class="fa fa-pencil text-lg text-green-200"></i>
+                                            <i class="fa fa-pencil text-lg text-[1F2933]"></i>
                                         </div>
                                         <div class="cursor-pointer" onclick="document.getElementById('deleteModal<?= $row['RESERVATION_ID'] ?>').showModal()">
-                                            <i class="fa fa-trash text-lg text-red-500"></i>
+                                            <i class="fa fa-trash text-lg text-[1F2933]"></i>
                                         </div>
                                     </div>
                                 </td>
@@ -206,7 +206,7 @@
                             
                             <!-- Delete Modal -->
                             <dialog id="deleteModal<?= $row['RESERVATION_ID'] ?>" 
-                                class="fixed w-sm h-xl p-5 top-1/3 left-1/2 transform -translate-x-1/2 -translate-y-1/2 rounded-md shadow-md bg-[#202231] text-[#922D34] backdrop:bg-black/40 open:animate-fadeIn">
+                                class="fixed w-sm h-xl p-5 top-1/3 left-1/2 transform -translate-x-1/2 -translate-y-1/2 rounded-md shadow-md bg-[C7CFBE] text-[1F2933] backdrop:bg-black/40 open:animate-fadeIn">
 
                                 <form method="POST" action="./Process/ReservationProcess/deleteItem.php" class="space-y-6">
 
@@ -242,7 +242,7 @@
 
                             <!-- Update Modal -->
                             <dialog id="updateModal<?= $row['RESERVATION_ID'] ?>" 
-                                class="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[36rem] max-w-full p-6 rounded-lg shadow-xl bg-[#202231] text-[#922D34] backdrop:bg-black/40 open:animate-fadeIn">
+                                class="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[36rem] max-w-full p-6 rounded-lg shadow-xl bg-[C7CFBE] text-[1F2933] backdrop:bg-black/40 open:animate-fadeIn">
 
                                 <form method="POST" action="./Process/ReservationProcess/updateStatus.php" class="space-y-6">
                                     <!-- Modal Title -->

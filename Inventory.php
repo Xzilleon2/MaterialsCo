@@ -27,7 +27,7 @@
     ?>
 
     <!--Main Body for Inventory Page, 2 Columns-->
-    <div id="BodyDiv" class="w-full h-full flex bg-[171921] text-[922D34]">
+    <div id="BodyDiv" class="w-full h-full flex bg-[D0DACA] text-[1F2933]">
 
         <div class="w-1/5">
             <!--Sidebar from import-->
@@ -56,7 +56,7 @@
 
                 
                 <!--Inventory Status-->
-                <div class="w-1/5 h-15 bg-[202231] shadow-sm flex">
+                <div class="w-1/5 h-15 bg-[C7CFBE] border border-[1F2933] text-[1F2933] shadow-sm flex">
                     <div class="w-70 flex justify-center items-center">
                         <p class="text-sm">Low Stock <br> Products</p>
                     </div>
@@ -66,7 +66,7 @@
                 </div>
 
                 <!--Inventory Status-->
-                <div class="w-1/5 h-15 bg-[202231] shadow-sm flex">
+                <div class="w-1/5 h-15 bg-[C7CFBE] border border-[1F2933] text-[1F2933] shadow-sm flex">
                     <div class="w-70 flex justify-center items-center">
                         <p class="text-sm">Out of Stock <br> Products</p>
                     </div>
@@ -76,7 +76,7 @@
                 </div>
 
                 <!--Inventory Status-->
-                <div id="showInventory" class="w-1/5 h-15 bg-[202231] shadow-sm flex">
+                <div id="showInventory" class="w-1/5 h-15 bg-[C7CFBE] border border-[1F2933] text-[1F2933] shadow-sm flex">
                     <div class="w-70 flex justify-center items-center gap-3 hover:cursor-pointer">
                         <i class="fa fa-plus-circle text-xl"></i>
                         <p class="text-sm">Record an Item</p>
@@ -84,7 +84,7 @@
                 </div>
 
                 <!-- Inventory Entry Modal -->
-                <dialog id="inventoryEntry" class="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[36rem] max-w-full p-6 rounded-lg shadow-xl bg-[202231] text-[922D34] backdrop:bg-black/40 open:animate-fadeIn">
+                <dialog id="inventoryEntry" class="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[36rem] max-w-full p-6 rounded-lg shadow-xl bg-[C7CFBE] text-[1F2933] backdrop:bg-black/40 open:animate-fadeIn">
                     <form method="POST" action="./Process/InventoryProcess/addItem.php" class="space-y-6">
 
                         <!-- Modal Title -->
@@ -131,21 +131,21 @@
             <!--Inventory Table-->
             <div class="h-full w-full px-5">
 
-                <table id="inventoryTable" class="table-auto bg-[#202231] border-separate border h-fit max-h-full">
+                <table id="inventoryTable" class="table-auto bg-[C7CFBE] border-separate border h-fit max-h-full">
                     <thead>
                         <tr class="text-md">
-                            <th class="w-md  text-[922D34]">CODE</th>
-                            <th class="w-md  text-[922D34]">NAME</th>
-                            <th class="w-md  text-[922D34]">QUANTITY</th>
-                            <th class="w-lg  text-[922D34]">ITEM PRICE</th>
-                            <th class="w-md  text-[922D34]">MODEL</th>
-                            <th class="w-md  text-[922D34]">DATE ADDED</th>
-                            <th class="w-md  text-[922D34]">ACTION</th>
+                            <th class="w-md  text-[1F2933]">CODE</th>
+                            <th class="w-md  text-[1F2933]">NAME</th>
+                            <th class="w-md  text-[1F2933]">QUANTITY</th>
+                            <th class="w-lg  text-[1F2933]">ITEM PRICE</th>
+                            <th class="w-md  text-[1F2933]">MODEL</th>
+                            <th class="w-md  text-[1F2933]">DATE ADDED</th>
+                            <th class="w-md  text-[1F2933]">ACTION</th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php foreach ($materials as $row): ?>
-                            <tr class="odd:bg-[#202231] even:bg-[#202333] text-[#922D34] border border-0 h-10 text-sm">
+                            <tr class="odd:bg-[C7CFBE] even:bg-[bdc3b2] text-[1F2933] border border-0 h-10 text-sm">
                                 <td class="text-end"><?= htmlspecialchars($row['MATERIAL_ID']) ?></td>
                                 <td><?= htmlspecialchars($row['MATERIAL_NAME']) ?></td>
                                 <td class="text-end"><?= htmlspecialchars($row['QUANTITY']) ?></td>
@@ -154,11 +154,11 @@
                                 <td><?= htmlspecialchars(date('F j, Y', strtotime($row['DATE_ADDED']))) ?></td>
                                 <td>
                                     <div class="flex justify-center items-center gap-5 text-lg">
-                                        <div class="cursor-pointer text-green-200" onclick="document.getElementById('updateModal<?= $row['MATERIAL_ID'] ?>').showModal()">
+                                        <div class="cursor-pointer text-[1F2933]" onclick="document.getElementById('updateModal<?= $row['MATERIAL_ID'] ?>').showModal()">
                                             <i class="fa fa-pencil text-lg"></i>
                                         </div>
                                         <div class="cursor-pointer" onclick="document.getElementById('deleteModal<?= $row['MATERIAL_ID'] ?>').showModal()">
-                                            <i class="fa fa-trash text-lg text-red-500"></i>
+                                            <i class="fa fa-trash text-lg text-[1F2933]"></i>
                                         </div>
                                     </div>
                                 </td>
@@ -166,7 +166,7 @@
                             
                             <!-- Delete Modal -->
                             <dialog id="deleteModal<?= $row['MATERIAL_ID'] ?>" 
-                                class="fixed w-sm h-xl p-5 top-1/3 left-1/2 transform -translate-x-1/2 -translate-y-1/2 rounded-md bg-[#202231] text-[#922D34] shadow-md backdrop:bg-black/40 open:animate-fadeIn">
+                                class="fixed w-sm h-xl p-5 top-1/3 left-1/2 transform -translate-x-1/2 -translate-y-1/2 rounded-md bg-[C7CFBE] text-[1F2933] shadow-md backdrop:bg-black/40 open:animate-fadeIn">
 
                                 <form method="POST" action="./Process/InventoryProcess/deleteItem.php" class="space-y-6">
 
@@ -203,7 +203,7 @@
 
                             <!-- Update Modal -->
                             <dialog id="updateModal<?= $row['MATERIAL_ID'] ?>" 
-                                class="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[36rem] max-w-full p-6 rounded-lg shadow-xl bg-[#202231] text-[#922D34] backdrop:bg-black/40 open:animate-fadeIn">
+                                class="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[36rem] max-w-full p-6 rounded-lg shadow-xl bg-[C7CFBE] text-[1F2933] backdrop:bg-black/40 open:animate-fadeIn">
 
                                 <form method="POST" action="./Process/InventoryProcess/updateItem.php" class="space-y-6">
                                     

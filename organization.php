@@ -27,7 +27,7 @@
     ?>
 
     <!--Main Body for Organization Page, 2 Columns-->
-    <div id="BodyDiv" class="w-full h-full flex bg-[171921] text-[922D34]">
+    <div id="BodyDiv" class="w-full h-full flex bg-[D0DACA] text-[1F2933]">
 
         <div class="w-1/5">
             <!--Sidebar from import-->
@@ -56,7 +56,7 @@
             <div class="flex px-5 justify-start gap-5">
 
                 <!--Create Organization Modal-->
-                <div id="showCreateOrganization" class="w-1/5 h-15 bg-[202231] shadow-sm flex">
+                <div id="showCreateOrganization" class="w-1/5 h-15 bg-[D0DACA] border border-[1F2933] shadow-sm flex">
                     <div class="w-70 flex justify-center items-center gap-3 hover:cursor-pointer">
                         <i class="fa fa-plus-circle text-xl"></i>
                         <p class="text-sm">Create an Organization</p>
@@ -64,7 +64,7 @@
                 </div>
 
                 <!--Leave Organization Modal-->
-                <div id="showLeaveOrganization" class="w-1/5 h-15 bg-[202231] shadow-sm flex">
+                <div id="showLeaveOrganization" class="w-1/5 h-15 bg-[D0DACA] border border-[1F2933] shadow-sm flex">
                     <div class="w-70 flex justify-center items-center gap-3 hover:cursor-pointer">
                         <i class="fa fa-minus-circle text-xl"></i>
                         <p class="text-sm">Leave Organization</p>
@@ -72,7 +72,7 @@
                 </div>
 
                 <!-- Organization Creation Modal -->
-                <dialog id="organizationCreationEntry" class="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[36rem] max-w-full p-6 rounded-lg shadow-xl bg-[202231] text-[922D34] backdrop:bg-black/40 open:animate-fadeIn">
+                <dialog id="organizationCreationEntry" class="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[36rem] max-w-full p-6 rounded-lg shadow-xl bg-[C7CFBE] text-[1F2933] backdrop:bg-black/40 open:animate-fadeIn">
                     <form method="POST" action="./Process/InventoryProcess/addItem.php" class="space-y-6">
 
                         <!-- Modal Title -->
@@ -108,7 +108,7 @@
                 </dialog>
 
                 <!-- Organization Leave Modal -->
-                <dialog id="organizationLeave" class="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[36rem] max-w-full p-6 rounded-lg shadow-xl bg-[202231] text-[922D34] backdrop:bg-black/40 open:animate-fadeIn">
+                <dialog id="organizationLeave" class="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[36rem] max-w-full p-6 rounded-lg shadow-xl bg-[C7CFBE] text-[1F2933] backdrop:bg-black/40 open:animate-fadeIn">
                     <form method="POST" action="./Process/InventoryProcess/addItem.php" class="space-y-6">
 
                         <!-- Modal Title -->
@@ -144,26 +144,26 @@
             <!--Organization Tables-->
             <div id="organizationTablecon" class="h-full w-full px-5">
 
-                <table id="organizationTable" class="table-auto bg-[#202231] border-separate border h-fit max-h-full">
+                <table id="organizationTable" class="table-auto bg-[C7CFBE] border-separate border h-fit max-h-full">
                     <thead>
                         <tr class="text-md">
-                            <th class="w-md  text-[922D34]">NAME</th>
-                            <th class="w-md  text-[922D34]">ADDRESS</th>
-                            <th class="w-md  text-[922D34]">TYPE</th>
-                            <th class="w-md  text-[922D34]">DATE CREATED</th>
-                            <th class="w-md  text-[922D34]">ACTION</th>
+                            <th class="w-md  text-[1F2933]">NAME</th>
+                            <th class="w-md  text-[1F2933]">ADDRESS</th>
+                            <th class="w-md  text-[1F2933]">TYPE</th>
+                            <th class="w-md  text-[1F2933]">DATE CREATED</th>
+                            <th class="w-md  text-[1F2933]">ACTION</th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php foreach ($materials as $row): ?>
-                            <tr class="odd:bg-[#202231] even:bg-[#202333] text-[#922D34] border border-0 h-10 text-sm">
+                            <tr class="odd:bg-[C7CFBE] even:bg-[bdc3b2] text-[1F2933] border border-0 h-10 text-sm">
                                 <td><?= htmlspecialchars($row['MATERIAL_NAME']) ?></td>
                                 <td><?= htmlspecialchars($row['MODEL']) ?></td>
                                 <td><?= htmlspecialchars($row['MODEL']) ?></td>
                                 <td><?= htmlspecialchars(date('F j, Y', strtotime($row['DATE_ADDED']))) ?></td>
                                 <td>
                                     <div class="flex justify-center items-center gap-5 text-lg">
-                                        <div class="cursor-pointer text-green-200" onclick="document.getElementById('updateModal<?= $row['MATERIAL_ID'] ?>').showModal()">
+                                        <div class="cursor-pointer text-[1F2933]" onclick="document.getElementById('updateModal<?= $row['MATERIAL_ID'] ?>').showModal()">
                                             <i class="fa fa-pencil text-lg"></i>
                                         </div>
                                     </div>
@@ -172,7 +172,7 @@
 
                             <!-- Update Modal -->
                             <dialog id="updateModal<?= $row['MATERIAL_ID'] ?>" 
-                                class="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[36rem] max-w-full p-6 rounded-lg shadow-xl bg-[#202231] text-[#922D34] backdrop:bg-black/40 open:animate-fadeIn">
+                                class="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[36rem] max-w-full p-6 rounded-lg shadow-xl bg-[C7CFBE] text-[1F2933] backdrop:bg-black/40 open:animate-fadeIn">
 
                                 <form method="POST" action="./Process/InventoryProcess/updateItem.php" class="space-y-6">
                                     
@@ -220,28 +220,28 @@
 
             <div id="myorganizationTablecon" class="hidden h-full w-full px-5">
 
-                <table id="myorganizationTable" class="table-auto bg-[#202231] border-separate border h-fit max-h-full">
+                <table id="myorganizationTable" class="table-auto bg-[C7CFBE] border-separate border h-fit max-h-full">
                     <thead>
                         <tr class="text-md">
-                            <th class="w-md  text-[922D34]">NAME</th>
-                            <th class="w-md  text-[922D34]">REMARKS</th>
-                            <th class="w-md  text-[922D34]">APPLICATION DATE</th>
-                            <th class="w-md  text-[922D34]">ACTION</th>
+                            <th class="w-md  text-[1F2933]">NAME</th>
+                            <th class="w-md  text-[1F2933]">REMARKS</th>
+                            <th class="w-md  text-[1F2933]">APPLICATION DATE</th>
+                            <th class="w-md  text-[1F2933]">ACTION</th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php foreach ($materials as $row): ?>
-                            <tr class="odd:bg-[#202231] even:bg-[#202333] text-[#922D34] border border-0 h-10 text-sm">
+                            <tr class="odd:bg-[C7CFBE] even:bg-[bdc3b2] text-[1F2933] border border-0 h-10 text-sm">
                                 <td><?= htmlspecialchars($row['MATERIAL_NAME']) ?></td>
                                 <td><?= htmlspecialchars($row['MODEL']) ?></td>
                                 <td><?= htmlspecialchars(date('F j, Y', strtotime($row['DATE_ADDED']))) ?></td>
                                 <td>
                                     <div class="flex justify-center items-center gap-5 text-lg">
-                                        <div class="cursor-pointer text-green-200" onclick="document.getElementById('updateModal2<?= $row['MATERIAL_ID'] ?>').showModal()">
+                                        <div class="cursor-pointer text-[1F2933]" onclick="document.getElementById('updateModal2<?= $row['MATERIAL_ID'] ?>').showModal()">
                                             <i class="fa fa-pencil text-lg"></i>
                                         </div>
                                         <div class="cursor-pointer" onclick="document.getElementById('deleteModal2<?= $row['MATERIAL_ID'] ?>').showModal()">
-                                            <i class="fa fa-trash text-lg text-red-500"></i>
+                                            <i class="fa fa-trash text-lg text-[1F2933]"></i>
                                         </div>
                                     </div>
                                 </td>
@@ -249,7 +249,7 @@
                             
                             <!-- Delete Modal -->
                             <dialog id="deleteModal2<?= $row['MATERIAL_ID'] ?>" 
-                                class="fixed w-sm h-xl p-5 top-1/3 left-1/2 transform -translate-x-1/2 -translate-y-1/2 rounded-md bg-[#202231] text-[#922D34] shadow-md backdrop:bg-black/40 open:animate-fadeIn">
+                                class="fixed w-sm h-xl p-5 top-1/3 left-1/2 transform -translate-x-1/2 -translate-y-1/2 rounded-md bg-[C7CFBE] text-[1F2933] shadow-md backdrop:bg-black/40 open:animate-fadeIn">
 
                                 <form method="POST" action="./Process/InventoryProcess/deleteItem.php" class="space-y-6">
 
@@ -286,7 +286,7 @@
 
                             <!-- Update Modal -->
                             <dialog id="updateModal2<?= $row['MATERIAL_ID'] ?>" 
-                                class="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[36rem] max-w-full p-6 rounded-lg shadow-xl bg-[#202231] text-[#922D34] backdrop:bg-black/40 open:animate-fadeIn">
+                                class="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[36rem] max-w-full p-6 rounded-lg shadow-xl bg-[C7CFBE] text-[1F2933] backdrop:bg-black/40 open:animate-fadeIn">
 
                                 <form method="POST" action="./Process/InventoryProcess/updateItem.php" class="space-y-6">
                                     

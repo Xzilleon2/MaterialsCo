@@ -21,7 +21,7 @@
     ?>
 
     <!--Main Body for Sales Page, 2 Columns-->
-    <div id="BodyDiv" class="w-full h-full flex bg-[171921] text-[922D34]">
+    <div id="BodyDiv" class="w-full h-full flex bg-[D0DACA] text-[1F2933]">
 
         <div class="w-1/5">
             <!--Sidebar from import-->
@@ -46,22 +46,23 @@
             <!--Stocks Log Table-->
             <div class="h-full w-full px-5">
 
-                <table id="stocksTable" class="table-auto border-separate border bg-[#202231] h-fit max-h-full">
+                <table id="stocksTable" class="table-auto border-separate border bg-[C7CFBE] h-fit max-h-full">
                     <thead>
                         <tr class="text-md">
-                            <th class="w-md text-[922D34]">LOG ID</th>
-                            <th class="w-md text-[922D34]">MATERIAL NAME</th>
-                            <th class="w-md text-[922D34]">SOURCE TABLE</th>
-                            <th class="w-md text-[922D34]">SOURCE ID</th>
-                            <th class="w-md text-[922D34]">QUANTITY</th>
-                            <th class="w-md text-[922D34]">TRANSACTION TYPE</th>
-                            <th class="w-md text-[922D34]">TIME AND DATE</th>
+                            <th class="w-md text-[1F2933]">LOG ID</th>
+                            <th class="w-md text-[1F2933]">MATERIAL NAME</th>
+                            <th class="w-md text-[1F2933]">SOURCE TABLE</th>
+                            <th class="w-md text-[1F2933]">SOURCE ID</th>
+                            <th class="w-md text-[1F2933]">QUANTITY</th>
+                            <th class="w-md text-[1F2933]">TRANSACTION TYPE</th>
+                            <th class="w-md text-[1F2933]">TIME AND DATE</th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php if (count($Stocks) > 0): ?>
                             <?php foreach ($Stocks as $stock): ?>
-                                <tr class="odd:bg-[#202231] even:bg-[#202333] border-0 text-[#922D34] h-10 text-sm hover:bg-[#2a2a3a] transition">
+                                <tr class="odd:bg-[C7CFBE] even:bg-[bdc3b2] border-0 text-[1F2933] h-10 text-sm transition">
+
                                     <!-- STOCKS ID -->
                                     <td class="px-4 py-2 text-end"><?= htmlspecialchars($stock['STOCKS_ID']) ?></td>
 
@@ -86,7 +87,7 @@
                             <?php endforeach; ?>
                         <?php else: ?>
                             <tr>
-                                <td colspan="7" class="text-center py-5 text-[#922D34]">No stock records found.</td>
+                                <td colspan="7" class="text-center py-5 text-[1F2933]">No stock records found.</td>
                             </tr>
                         <?php endif; ?>
                     </tbody>
