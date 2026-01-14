@@ -6,40 +6,32 @@ class ItemsCntrl extends Items {
     private $name;
     private $quantity;
     private $price;
-    private $model;
+    private $description;
     private $id;
 
-    public function __construct($id = "", $name = "", $quantity = "", $price = "", $model = "") {
+    public function __construct($id = "", $name = "", $quantity = "", $price = "", $description = "") {
         $this->id = $id;
         $this->name = $name;
         $this->quantity = $quantity;
         $this->price = $price;
-        $this->model = $model;
+        $this->description = $description;
         
     }
 
     // Add Item
     public function addItem() {
 
-        if ($this->checkEmptyFields($this->name, $this->quantity, $this->price, $this->model)) {
-            return false;
-        }
-
         return $this->insertItem(
             $this->id,
             $this->name,
             $this->quantity,
             $this->price,
-            $this->model,
+            $this->description,
         );
     }
 
     // Add Reservation
     public function addReservation($materialID, $userID, $quantity, $requestor, $claimDate, $remarks) {
-
-        if ($this->checkEmptyFields($materialID, $claimDate, $remarks)) {
-            return false;
-        }
 
         // Implementation for adding reservation
         return $this->insertReservation(
@@ -55,15 +47,11 @@ class ItemsCntrl extends Items {
     // Update Item
     public function updateItem() {
 
-        if ($this->checkEmptyFields($this->name, $this->model)) {
-            return false;
-        }
-
         return $this->updateItemDB(
             $this->name,
             $this->quantity,
             $this->price,
-            $this->model,
+            $this->description,
             $this->id
         );
     }
@@ -105,9 +93,5 @@ class ItemsCntrl extends Items {
             $ID
         );
 
-    }
-
-    private function checkEmptyFields($name, $model) {
-        return empty($name) || empty($model);
     }
 }

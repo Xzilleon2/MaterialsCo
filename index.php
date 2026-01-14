@@ -6,6 +6,7 @@
     <?php
         include __DIR__ ."/Inclusions/Head.php";
         include __DIR__ ."/Inclusions/Methods.php";
+        include __DIR__ ."/Inclusions/navbarIndex.php";
     ?>
 
     <!--Main Body for Sign in Page, 2 Columns-->

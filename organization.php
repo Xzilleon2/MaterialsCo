@@ -14,20 +14,19 @@
         //include __DIR__ . "/Inclusions/navbar.php";
         include __DIR__ . "/Inclusions/Methods.php";
         include __DIR__ . "/Classes/Dbh.Class.php";
-        include __DIR__ . "/Classes/ItemsView.Class.php";
+        include __DIR__ . "/Classes/OrganizationCntrl.Class.php";
+        include __DIR__ . "/Classes/OrganizationView.Class.php";
 
         // Scripts
         include __DIR__ . '/Scripts/mainScript.php';
 
-        $itemsView = new ItemsView();
+        $organizationView = new OrganizationView();
         $USER_ID = $_SESSION['USER_ID'];
-        $materials = $itemsView->viewInventory($USER_ID);
-        $lowstockCount = $itemsView->viewLowStockCount($USER_ID);
-        $outofstockCount = $itemsView->viewOutOfStockCount($USER_ID)
+        $organizations = $organizationView->viewOrganizations();
     ?>
 
     <!--Main Body for Organization Page, 2 Columns-->
-    <div id="BodyDiv" class="w-full h-full flex bg-[D0DACA] text-[1F2933]">
+    <div id="BodyDiv" class="w-full min-h-screen flex bg-[D0DACA] text-[1F2933] ">
 
         <div class="w-1/5">
             <!--Sidebar from import-->
@@ -36,7 +35,7 @@
             ?>
         </div>
 
-        <!--Parts Distribution-->
+        <!--Parts Organization-->
         <div class="w-full flex flex-col gap-5">
 
             <!--NavBar-->
@@ -72,8 +71,8 @@
                 </div>
 
                 <!-- Organization Creation Modal -->
-                <dialog id="organizationCreationEntry" class="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[36rem] max-w-full p-6 rounded-lg shadow-xl bg-[C7CFBE] text-[1F2933] backdrop:bg-black/40 open:animate-fadeIn">
-                    <form method="POST" action="./Process/InventoryProcess/addItem.php" class="space-y-6">
+                <dialog id="organizationCreationEntry" class="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[36rem] max-w-1/3 p-6 border shadow-xl bg-[C7CFBE] text-[1F2933] backdrop:bg-black/40 open:animate-fadeIn">
+                    <form method="POST" action="./Process/OrganizationProcess/addOrganization.php" class="space-y-6">
 
                         <!-- Modal Title -->
                         <h1 class="text-2xl font-bold">Organization FORM</h1>
@@ -88,7 +87,7 @@
                         <div class="space-y-2">
                         <label class="block text-md font-medium ">Address</label>
                         <input required type="text" placeholder="N/A" class="w-full p-3 text-md border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400" 
-                         name="organizationaddress"/>
+                         name="organizationAddress"/>
                         </div>
 
                         <!-- Type -->
@@ -108,7 +107,7 @@
                 </dialog>
 
                 <!-- Organization Leave Modal -->
-                <dialog id="organizationLeave" class="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[36rem] max-w-full p-6 rounded-lg shadow-xl bg-[C7CFBE] text-[1F2933] backdrop:bg-black/40 open:animate-fadeIn">
+                <dialog id="organizationLeave" class="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[36rem] max-w-1/3 p-6 shadow-xl bg-[C7CFBE] border text-[1F2933] backdrop:bg-black/40 open:animate-fadeIn">
                     <form method="POST" action="./Process/InventoryProcess/addItem.php" class="space-y-6">
 
                         <!-- Modal Title -->
@@ -137,8 +136,8 @@
 
             <!-- Tables Toggle-->
             <div class="flex gap-3 text-sm px-5 mt-5 -mb-5">
-                <button id="showorganizationTable" class="cursor-pointer text-red-100 hover:text-red-100"><p>Organizations</p></button>
-                <button id="showmyorganizationTable" class="cursor-pointer hover:text-red-100"><p>My Organization</p></button>
+                <button id="showorganizationTable" class="cursor-pointer text-white hover:text-white"><p>Organizations</p></button>
+                <button id="showmyorganizationTable" class="cursor-pointer hover:text-white"><p>My Organization</p></button>
             </div>
 
             <!--Organization Tables-->
@@ -155,15 +154,15 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <?php foreach ($materials as $row): ?>
+                        <?php foreach ($organizations as $row): ?>
                             <tr class="odd:bg-[C7CFBE] even:bg-[bdc3b2] text-[1F2933] border border-0 h-10 text-sm">
-                                <td><?= htmlspecialchars($row['MATERIAL_NAME']) ?></td>
-                                <td><?= htmlspecialchars($row['MODEL']) ?></td>
-                                <td><?= htmlspecialchars($row['MODEL']) ?></td>
-                                <td><?= htmlspecialchars(date('F j, Y', strtotime($row['DATE_ADDED']))) ?></td>
+                                <td><?= htmlspecialchars($row['NAME']) ?></td>
+                                <td><?= htmlspecialchars($row['ADDRESS']) ?></td>
+                                <td><?= htmlspecialchars($row['TYPE']) ?></td>
+                                <td><?= htmlspecialchars(date('F j, Y', strtotime($row['CREATED_AT']))) ?></td>
                                 <td>
                                     <div class="flex justify-center items-center gap-5 text-lg">
-                                        <div class="cursor-pointer text-[1F2933]" onclick="document.getElementById('updateModal<?= $row['MATERIAL_ID'] ?>').showModal()">
+                                        <div class="cursor-pointer text-[1F2933]" onclick="document.getElementById('updateModal<?= $row['ORGANIZATION_ID'] ?>').showModal()">
                                             <i class="fa fa-pencil text-lg"></i>
                                         </div>
                                     </div>
@@ -171,7 +170,7 @@
                             </tr>
 
                             <!-- Update Modal -->
-                            <dialog id="updateModal<?= $row['MATERIAL_ID'] ?>" 
+                            <dialog id="updateModal<?= $row['ORGANIZATION_ID'] ?>" 
                                 class="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[36rem] max-w-full p-6 rounded-lg shadow-xl bg-[C7CFBE] text-[1F2933] backdrop:bg-black/40 open:animate-fadeIn">
 
                                 <form method="POST" action="./Process/InventoryProcess/updateItem.php" class="space-y-6">
@@ -182,24 +181,24 @@
                                     <!-- Name -->
                                     <div class="space-y-3">
                                         <label class="block text-md font-medium ">Name</label>
-                                        <input type="text" name="mName" value="<?= htmlspecialchars($row['MATERIAL_NAME'])?>" 
+                                        <input type="text" name="mName" value="<?= htmlspecialchars($row['NAME'])?>" 
                                             class="w-full p-3 text-md border border-gray-300 rounded-md" />
                                     </div>
 
                                     <!-- Remarks -->
                                     <div class="space-y-3">
                                         <label class="block text-md font-medium ">Remarks</label>
-                                        <input type="text" name="remarks" value="<?= htmlspecialchars($row['MODEL']) ?>" 
+                                        <input type="text" name="remarks" value="<?= htmlspecialchars($row['ADDRESS']) ?>" 
                                             class="w-full p-3 text-md border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400" />
                                     </div>
 
                                     <!-- Hidden Material ID -->
-                                    <input type="hidden" name="materialId" value="<?= htmlspecialchars($row['MATERIAL_ID'])?>">
+                                    <input type="hidden" name="materialId" value="<?= htmlspecialchars($row['ORGANIZATION_ID'])?>">
 
                                     <!-- Action Buttons -->
                                     <div class="flex justify-end gap-3 pt-4">
                                         <button type="button" 
-                                            onclick="document.getElementById('updateModal<?= $row['MATERIAL_ID'] ?>').close()" 
+                                            onclick="document.getElementById('updateModal<?= $row['ORGANIZATION_ID'] ?>').close()" 
                                             class="px-4 py-2 cursor-pointer bg-gray-200 font-semibold rounded hover:bg-gray-300">
                                             Cancel
                                         </button>
@@ -218,13 +217,14 @@
 
             </div>
 
+            <!--My Organization Tables-->
             <div id="myorganizationTablecon" class="hidden h-full w-full px-5">
 
                 <table id="myorganizationTable" class="table-auto bg-[C7CFBE] border-separate border h-fit max-h-full">
                     <thead>
                         <tr class="text-md">
                             <th class="w-md  text-[1F2933]">NAME</th>
-                            <th class="w-md  text-[1F2933]">REMARKS</th>
+                            <th class="w-md  text-[1F2933]">DESCRIPTION</th>
                             <th class="w-md  text-[1F2933]">APPLICATION DATE</th>
                             <th class="w-md  text-[1F2933]">ACTION</th>
                         </tr>
@@ -233,7 +233,7 @@
                         <?php foreach ($materials as $row): ?>
                             <tr class="odd:bg-[C7CFBE] even:bg-[bdc3b2] text-[1F2933] border border-0 h-10 text-sm">
                                 <td><?= htmlspecialchars($row['MATERIAL_NAME']) ?></td>
-                                <td><?= htmlspecialchars($row['MODEL']) ?></td>
+                                <td><?= htmlspecialchars($row['DESCRIPTION']) ?></td>
                                 <td><?= htmlspecialchars(date('F j, Y', strtotime($row['DATE_ADDED']))) ?></td>
                                 <td>
                                     <div class="flex justify-center items-center gap-5 text-lg">

@@ -11,7 +11,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['reserveBtn'])) {
     $quantity = filter_var(trim($_POST['quantity']), FILTER_SANITIZE_NUMBER_INT);
     $claimDate = $_POST['claimDate'];
     $requestor = filter_var(trim($_POST['requestor']), FILTER_SANITIZE_SPECIAL_CHARS);
-    $remarks = filter_var(trim($_POST['remarks']), FILTER_SANITIZE_SPECIAL_CHARS);
+    $remarks = filter_var(trim($_POST['purpose']), FILTER_SANITIZE_SPECIAL_CHARS);
 
     // Controller
     $items = new ItemsCntrl();

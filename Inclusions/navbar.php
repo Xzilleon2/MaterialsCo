@@ -6,36 +6,3 @@
         <div class="flex justify-center items-center gap-2"><i class="fa fa-user"></i><h1 class="ml-1"><?php echo $_SESSION['NAME'] ?></h1></div>
     </div>
 </div>
-
-<script>
-    //Functionality for Panels of Signup and Signin 
-    const showNotif = document.getElementById('showNotif');
-    const notifPanel = document.getElementById('notifPanel');
-
-    if (showNotif && notifPanel) {
-        showNotif.addEventListener('click', () => {
-            notifPanel.classList.toggle('hidden');
-        });
-    }
-
-    // Sidebar expand/collapse on mobile
-    const sidebarToggle = document.getElementById('sidebarToggle');
-    const sidebar = document.getElementById('MainSidebar');
-
-    if (sidebarToggle && sidebar) {
-        sidebarToggle.addEventListener('click', () => {
-            // Toggle width classes
-            sidebar.classList.toggle('w-14');
-            sidebar.classList.toggle('w-64');
-
-            // Toggle text visibility for spans that are hidden on mobile
-            const hiddenSpans = sidebar.querySelectorAll('span.hidden');
-            if (sidebar.classList.contains('w-64')) {
-                hiddenSpans.forEach(s => s.classList.remove('hidden'));
-            } else {
-                hiddenSpans.forEach(s => s.classList.add('hidden'));
-            }
-        });
-    }
-
-</script>

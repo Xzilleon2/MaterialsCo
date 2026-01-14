@@ -4,23 +4,27 @@
     //Tables Scripts
     document.addEventListener('DOMContentLoaded', function () {
         
+        const tableOptions = {
+            perPage: 5
+        };
+
         const rTable = document.querySelector("#reservationTable");
-        if (rTable) new simpleDatatables.DataTable(rTable);
+        if (rTable) new simpleDatatables.DataTable(rTable, tableOptions);
 
         const dTable = document.querySelector("#distributionTable");
-        if (dTable) new simpleDatatables.DataTable(dTable);
+        if (dTable) new simpleDatatables.DataTable(dTable, tableOptions);
 
         const iTable = document.querySelector("#inventoryTable");
-        if (iTable) new simpleDatatables.DataTable(iTable);
+        if (iTable) new simpleDatatables.DataTable(iTable, tableOptions);
 
         const sTable = document.querySelector("#stocksTable");
-        if (sTable) new simpleDatatables.DataTable(sTable);
+        if (sTable) new simpleDatatables.DataTable(sTable, tableOptions);
 
         const oTable = document.querySelector("#organizationTable");
-        if (oTable) new simpleDatatables.DataTable(oTable);
+        if (oTable) new simpleDatatables.DataTable(oTable, tableOptions);
 
         const moTable = document.querySelector("#myorganizationTable");
-        if (moTable) new simpleDatatables.DataTable(moTable);
+        if (moTable) new simpleDatatables.DataTable(moTable, tableOptions);
 
         //Modal Functions Scripts
         //update & Delete
@@ -102,8 +106,8 @@
                 myOrganizationTableCon.classList.add('hidden');
 
                 // visual active state on buttons
-                showOrganizationcon.classList.add('text-red-100');
-                showMyOrganizationCon.classList.remove('text-red-100');
+                showOrganizationcon.classList.add('text-white');
+                showMyOrganizationCon.classList.remove('text-white');
             });
         }
 
@@ -114,8 +118,8 @@
                 OrganizationTablecon.classList.add('hidden');
 
                 // visual active state on buttons
-                showMyOrganizationCon.classList.add('text-red-100');
-                showOrganizationcon.classList.remove('text-red-100');
+                showMyOrganizationCon.classList.add('text-white');
+                showOrganizationcon.classList.remove('text-white');
             });
         }
 

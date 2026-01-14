@@ -21,7 +21,7 @@
     ?>
 
     <!--Main Body for Sales Page, 2 Columns-->
-    <div id="BodyDiv" class="w-full h-full flex bg-[D0DACA] text-[1F2933]">
+    <div id="BodyDiv" class="w-full min-h-screen flex bg-[D0DACA] text-[1F2933]">
 
         <div class="w-1/5">
             <!--Sidebar from import-->

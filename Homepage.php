@@ -52,30 +52,30 @@ if(!isset($_SESSION['USER_ID'])){
 
                 <!--Pendings-->
                 <div class="w-1/5 h-15 bg-[D0DACA] border border-[1F2933] shadow-sm flex items-center justify-between p-4">
-                    <div class="flex items-center">
+                    <div class="w-70 flex justify-center items-center">
                         <p class="text-sm md:text-sm">Pendings</p>
                     </div>
-                    <div class="flex items-center">
+                    <div class="flex justify-center items-center w-1/2">
                         <p class="text-md md:text-md font-bold"><?php echo $pendingCount ?></p>
                     </div>
                 </div>
 
                 <!--Low Stock-->
                 <div class="w-1/5 h-15 bg-[D0DACA] border border-[1F2933] shadow-sm flex items-center justify-between p-4">
-                    <div class="flex items-center">
+                    <div class="w-70 flex justify-center items-center">
                         <p class="text-sm md:text-sm">Low Stock <br class="hidden md:block"> Products</p>
                     </div>
-                    <div class="flex items-center">
+                    <div class="flex justify-center items-center w-1/2">
                         <p class="text-md md:text-md font-bold"><?php echo $lowstockCount; ?></p>
                     </div>
                 </div>
 
                 <!--Out of stock-->
                 <div class="w-1/5 h-15 bg-[D0DACA] border border-[1F2933] shadow-sm flex items-center justify-between p-4">
-                    <div class="flex items-center">
+                    <div class="w-70 flex justify-center items-center">
                         <p class="text-sm md:text-sm">Out of Stock <br class="hidden md:block"> Products</p>
                     </div>
-                    <div class="flex items-center">
+                    <div class="flex justify-center items-center w-1/2">
                         <p class="text-md md:text-md font-bold"><?php echo $outofstockCount; ?></p>
                     </div>
                 </div>

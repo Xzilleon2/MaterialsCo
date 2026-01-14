@@ -27,7 +27,7 @@
     ?>
 
     <!--Main Body for Inventory Page, 2 Columns-->
-    <div id="BodyDiv" class="w-full h-full flex bg-[D0DACA] text-[1F2933]">
+    <div id="BodyDiv" class="w-full min-h-screen flex bg-[D0DACA] text-[1F2933] ">
 
         <div class="w-1/5">
             <!--Sidebar from import-->
@@ -84,7 +84,7 @@
                 </div>
 
                 <!-- Inventory Entry Modal -->
-                <dialog id="inventoryEntry" class="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[36rem] max-w-full p-6 rounded-lg shadow-xl bg-[C7CFBE] text-[1F2933] backdrop:bg-black/40 open:animate-fadeIn">
+                <dialog id="inventoryEntry" class="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[36rem] max-w-1/3 p-6 border shadow-xl bg-[C7CFBE] text-[1F2933] backdrop:bg-black/40 open:animate-fadeIn">
                     <form method="POST" action="./Process/InventoryProcess/addItem.php" class="space-y-6">
 
                         <!-- Modal Title -->
@@ -99,22 +99,21 @@
                         <!-- Quantity -->
                         <div class="space-y-2">
                         <label class="block text-md font-medium ">Quantity</label>
-                        <input required type="number" value="1" min="1" class="w-full p-3 text-md border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400" 
+                        <input required type="number" value="1" min="1" class="w-full p-3 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400" 
                          name="materialQuantity"/>
                         </div>
 
                         <!-- Price -->
                         <div class="space-y-2">
                         <label class="block text-md font-medium ">Price</label>
-                        <input required type="number" value="100" class="w-full p-3 text-md border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+                        <input required type="number" value="100" class="w-full p-3 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
                          name="materialPrice" />
                         </div>
 
-                        <!-- Model -->
+                        <!-- Description -->
                         <div class="space-y-2">
-                        <label class="block text-md font-medium">Model (Optional)</label>
-                        <input required type="text" value="N/A" class="w-full p-3 text-md border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400" 
-                         name="materialModel"/>
+                        <label class="block text-md font-medium">Description (Optional)</label>
+                        <textarea name="description" rows="3" class="w-full p-3 text-sm border border-gray-300 rounded-md resize-none">N/A</textarea>
                         </div>
 
                         <!-- Action Buttons -->
@@ -138,7 +137,7 @@
                             <th class="w-md  text-[1F2933]">NAME</th>
                             <th class="w-md  text-[1F2933]">QUANTITY</th>
                             <th class="w-lg  text-[1F2933]">ITEM PRICE</th>
-                            <th class="w-md  text-[1F2933]">REMARKS</th>
+                            <th class="w-md  text-[1F2933]">DESCRIPTION</th>
                             <th class="w-md  text-[1F2933]">DATE ADDED</th>
                             <th class="w-md  text-[1F2933]">ACTION</th>
                         </tr>
@@ -150,7 +149,7 @@
                                 <td><?= htmlspecialchars($row['MATERIAL_NAME']) ?></td>
                                 <td class="text-end"><?= htmlspecialchars($row['QUANTITY']) ?></td>
                                 <td class="text-end">P<?= htmlspecialchars($row['PRICE']) ?></td>
-                                <td><?= htmlspecialchars($row['MODEL']) ?></td>
+                                <td><?= htmlspecialchars($row['DESCRIPTION']) ?></td>
                                 <td><?= htmlspecialchars(date('F j, Y', strtotime($row['DATE_ADDED']))) ?></td>
                                 <td>
                                     <div class="flex justify-center items-center gap-5 text-lg">
@@ -166,7 +165,7 @@
                             
                             <!-- Delete Modal -->
                             <dialog id="deleteModal<?= $row['MATERIAL_ID'] ?>" 
-                                class="fixed w-sm h-xl p-5 top-1/3 left-1/2 transform -translate-x-1/2 -translate-y-1/2 rounded-md bg-[C7CFBE] text-[1F2933] shadow-md backdrop:bg-black/40 open:animate-fadeIn">
+                                class="fixed w-sm h-xl p-5 top-1/3 left-1/2 transform -translate-x-1/2 -translate-y-1/2 border bg-[C7CFBE] text-[1F2933] shadow-md backdrop:bg-black/40 open:animate-fadeIn">
 
                                 <form method="POST" action="./Process/InventoryProcess/deleteItem.php" class="space-y-6">
 
@@ -203,7 +202,7 @@
 
                             <!-- Update Modal -->
                             <dialog id="updateModal<?= $row['MATERIAL_ID'] ?>" 
-                                class="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[36rem] max-w-full p-6 rounded-lg shadow-xl bg-[C7CFBE] text-[1F2933] backdrop:bg-black/40 open:animate-fadeIn">
+                                class="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[36rem] max-w-full p-6 border shadow-xl bg-[C7CFBE] text-[1F2933] backdrop:bg-black/40 open:animate-fadeIn">
 
                                 <form method="POST" action="./Process/InventoryProcess/updateItem.php" class="space-y-6">
                                     
@@ -231,11 +230,10 @@
                                             class="w-full p-3 text-md border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400" />
                                     </div>
 
-                                    <!-- Model -->
+                                    <!-- Description -->
                                     <div class="space-y-2">
-                                        <label class="block text-md font-medium ">Model</label>
-                                        <input type="text" name="materialModel" value="<?= htmlspecialchars($row['MODEL']) ?>" 
-                                            class="w-full p-3 text-md border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400" />
+                                        <label class="block text-md font-medium ">Description</label>
+                                        <textarea name="description" rows="3" class="w-full p-3 text-sm border border-gray-300 rounded-md resize-none"><?= htmlspecialchars($row['DESCRIPTION']) ?></textarea>
                                     </div>
 
                                     <!-- Hidden Material ID -->

@@ -122,16 +122,16 @@ class Items extends Dbh {
     }
 
     // Insert new item to inventory
-    protected function insertItem($userID, $materialName, $quantity, $price, $model) {
+    protected function insertItem($userID, $materialName, $quantity, $price, $description) {
 
         $query = "
-            INSERT INTO inventory (USER_ID, MATERIAL_NAME, QUANTITY, PRICE, MODEL)
+            INSERT INTO inventory (USER_ID, MATERIAL_NAME, QUANTITY, PRICE, DESCRIPTION)
             VALUES (?, ?, ?, ?, ?)
         ";
 
         $stmt = $this->connection()->prepare($query);
 
-        if (!$stmt->execute([$userID, $materialName, $quantity, $price, $model])) {
+        if (!$stmt->execute([$userID, $materialName, $quantity, $price, $description])) {
             return false;
         }
 
@@ -156,17 +156,17 @@ class Items extends Dbh {
     }
 
     // Update existing item in inventory
-    protected function updateItemDB($materialName, $quantity, $price, $model, $ID) {
+    protected function updateItemDB($materialName, $quantity, $price, $description, $ID) {
 
         $query = "
             UPDATE inventory
-            SET MATERIAL_NAME = ?, QUANTITY = ?, PRICE = ?, MODEL = ?
+            SET MATERIAL_NAME = ?, QUANTITY = ?, PRICE = ?, DESCRIPTION = ?
             WHERE MATERIAL_ID = ?
         ";
 
         $stmt = $this->connection()->prepare($query);
 
-        if (!$stmt->execute([$materialName, $quantity, $price, $model, $ID])) {
+        if (!$stmt->execute([$materialName, $quantity, $price, $description, $ID])) {
             return false;
         }
 

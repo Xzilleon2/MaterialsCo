@@ -28,7 +28,7 @@
     ?>
 
     <!--Main Body for Reservation Page, 2 Columns-->
-    <div id="BodyDiv" class="w-full h-full flex bg-[D0DACA] text-[1F2933]">
+    <div id="BodyDiv" class="w-full min-h-screen flex bg-[D0DACA] text-[1F2933] ">
 
         <div class="w-1/5">
             <!--Sidebar from import-->
@@ -86,8 +86,7 @@
                 </div>
 
                 <!-- Reservation Entry Modal -->
-                <dialog id="reservationModal" 
-                        class="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[36rem] max-w-full p-6 rounded-lg shadow-xl bg-[C7CFBE] text-[1F2933] backdrop:bg-black/40 open:animate-fadeIn">
+                <dialog id="reservationModal" class="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[36rem] max-w-1/3 p-6 border shadow-xl bg-[C7CFBE] text-[1F2933] backdrop:bg-black/40 open:animate-fadeIn">
 
                     <form method="POST" action="./Process/ReservationProcess/addItem.php" class="space-y-6">
 
@@ -139,10 +138,10 @@
                                 <input type="text" name="requestor" class="w-full p-3 text-md border border-gray-300 rounded-md" required />
                             </div>
 
-                            <!-- Remarks -->
+                            <!-- Purpose -->
                             <div class="space-y-2">
-                                <label class="block text-md font-semibold ">Remarks (optional)</label>
-                                <textarea name="remarks" rows="3" class="w-full p-3 text-md border border-gray-300 rounded-md resize-none">N/A</textarea>
+                                <label class="block text-md font-semibold ">Purpose (optional)</label>
+                                <textarea name="purpose" rows="3" class="w-full p-3 text-md border border-gray-300 rounded-md resize-none">N/A</textarea>
                             </div>
                         </div>
 
@@ -206,7 +205,7 @@
                             
                             <!-- Delete Modal -->
                             <dialog id="deleteModal<?= $row['RESERVATION_ID'] ?>" 
-                                class="fixed w-sm h-xl p-5 top-1/3 left-1/2 transform -translate-x-1/2 -translate-y-1/2 rounded-md shadow-md bg-[C7CFBE] text-[1F2933] backdrop:bg-black/40 open:animate-fadeIn">
+                                class="fixed w-sm h-xl p-5 top-1/3 left-1/2 transform -translate-x-1/2 -translate-y-1/2 border shadow-md bg-[C7CFBE] text-[1F2933] backdrop:bg-black/40 open:animate-fadeIn">
 
                                 <form method="POST" action="./Process/ReservationProcess/deleteItem.php" class="space-y-6">
 
@@ -242,7 +241,7 @@
 
                             <!-- Update Modal -->
                             <dialog id="updateModal<?= $row['RESERVATION_ID'] ?>" 
-                                class="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[36rem] max-w-full p-6 rounded-lg shadow-xl bg-[C7CFBE] text-[1F2933] backdrop:bg-black/40 open:animate-fadeIn">
+                                class="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[36rem] max-w-full p-6 border shadow-xl bg-[C7CFBE] text-[1F2933] backdrop:bg-black/40 open:animate-fadeIn">
 
                                 <form method="POST" action="./Process/ReservationProcess/updateStatus.php" class="space-y-6">
                                     <!-- Modal Title -->
@@ -276,10 +275,10 @@
                                             class="w-full p-3 text-md border border-gray-300 rounded-md" />
                                     </div>
 
-                                    <!-- Remarks -->
+                                    <!-- Purpose -->
                                     <div class="space-y-2">
-                                        <label class="block text-md font-medium ">Remarks</label>
-                                        <textarea disabled name="remarks" rows="3" class="w-full p-3 text-md border border-gray-300 rounded-md resize-none"><?= htmlspecialchars($row['PURPOSE']) ?></textarea>
+                                        <label class="block text-md font-medium ">Purpose</label>
+                                        <textarea disabled name="purpose" rows="3" class="w-full p-3 text-md border border-gray-300 rounded-md resize-none"><?= htmlspecialchars($row['PURPOSE']) ?></textarea>
                                     </div>
                                     
                                     <!-- Hidden Reservation ID -->
