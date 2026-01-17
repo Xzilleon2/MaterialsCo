@@ -23,6 +23,7 @@
         $organizationView = new OrganizationView();
         $USER_ID = $_SESSION['USER_ID'];
         $organizations = $organizationView->viewOrganizations();
+        $members = $organizationView->viewMembers();
     ?>
 
     <!--Main Body for Organization Page, 2 Columns-->
@@ -108,7 +109,7 @@
 
                 <!-- Organization Leave Modal -->
                 <dialog id="organizationLeave" class="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[36rem] max-w-1/3 p-6 shadow-xl bg-[C7CFBE] border text-[1F2933] backdrop:bg-black/40 open:animate-fadeIn">
-                    <form method="POST" action="./Process/InventoryProcess/addItem.php" class="space-y-6">
+                    <form method="POST" action="./Process/OrganizationProcess/leaveOrganization.php" class="space-y-6">
 
                         <!-- Modal Title -->
                         <h1 class="text-2xl font-bold">LEAVE FORM</h1>
@@ -173,27 +174,20 @@
                             <dialog id="updateModal<?= $row['ORGANIZATION_ID'] ?>" 
                                 class="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[36rem] max-w-full p-6 rounded-lg shadow-xl bg-[C7CFBE] text-[1F2933] backdrop:bg-black/40 open:animate-fadeIn">
 
-                                <form method="POST" action="./Process/InventoryProcess/updateItem.php" class="space-y-6">
+                                <form method="POST" action="./Process/OrganizationProcess/enterOrganization.php" class="space-y-6">
                                     
                                     <!-- Modal Title -->
                                     <h1 class="text-2xl font-bold mb-1">APPLICATION FORM</h1>
 
-                                    <!-- Name -->
-                                    <div class="space-y-3">
-                                        <label class="block text-md font-medium ">Name</label>
-                                        <input type="text" name="mName" value="<?= htmlspecialchars($row['NAME'])?>" 
-                                            class="w-full p-3 text-md border border-gray-300 rounded-md" />
-                                    </div>
-
                                     <!-- Remarks -->
                                     <div class="space-y-3">
                                         <label class="block text-md font-medium ">Remarks</label>
-                                        <input type="text" name="remarks" value="<?= htmlspecialchars($row['ADDRESS']) ?>" 
+                                        <input type="text" name="remarks" placeholder="Enter your reason here"
                                             class="w-full p-3 text-md border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400" />
                                     </div>
 
-                                    <!-- Hidden Material ID -->
-                                    <input type="hidden" name="materialId" value="<?= htmlspecialchars($row['ORGANIZATION_ID'])?>">
+                                    <!-- Hidden Organization ID -->
+                                    <input type="hidden" name="organizationId" value="<?= htmlspecialchars($row['ORGANIZATION_ID'])?>">
 
                                     <!-- Action Buttons -->
                                     <div class="flex justify-end gap-3 pt-4">
@@ -224,110 +218,83 @@
                     <thead>
                         <tr class="text-md">
                             <th class="w-md  text-[1F2933]">NAME</th>
-                            <th class="w-md  text-[1F2933]">DESCRIPTION</th>
-                            <th class="w-md  text-[1F2933]">APPLICATION DATE</th>
+                            <th class="w-md  text-[1F2933]">REMARKS</th>
+                            <th class="w-md  text-[1F2933]">DATE JOINED</th>
+                            <th class="w-md  text-[1F2933]">ACTIVE</th>
                             <th class="w-md  text-[1F2933]">ACTION</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <?php foreach ($materials as $row): ?>
+                        <?php foreach ($members as $row): ?>
                             <tr class="odd:bg-[C7CFBE] even:bg-[bdc3b2] text-[1F2933] border border-0 h-10 text-sm">
-                                <td><?= htmlspecialchars($row['MATERIAL_NAME']) ?></td>
-                                <td><?= htmlspecialchars($row['DESCRIPTION']) ?></td>
-                                <td><?= htmlspecialchars(date('F j, Y', strtotime($row['DATE_ADDED']))) ?></td>
+                                <td><?= htmlspecialchars($row['NAME']) ?></td>
+                                <td><?= htmlspecialchars($row['REMARKS']) ?></td>
+                                <td><?= htmlspecialchars(date('F j, Y', strtotime($row['DATE_JOINED']))) ?></td>
+                                <td><?= htmlspecialchars($row['IS_ACTIVE'] == 0 ? 'No' : 'Yes') ?></td>
                                 <td>
                                     <div class="flex justify-center items-center gap-5 text-lg">
-                                        <div class="cursor-pointer text-[1F2933]" onclick="document.getElementById('updateModal2<?= $row['MATERIAL_ID'] ?>').showModal()">
+                                        <div class="cursor-pointer text-[1F2933]" onclick="document.getElementById('updateModal2<?= $row['MEMBER_ID'] ?>').showModal()">
                                             <i class="fa fa-pencil text-lg"></i>
-                                        </div>
-                                        <div class="cursor-pointer" onclick="document.getElementById('deleteModal2<?= $row['MATERIAL_ID'] ?>').showModal()">
-                                            <i class="fa fa-trash text-lg text-[1F2933]"></i>
                                         </div>
                                     </div>
                                 </td>
                             </tr>
-                            
-                            <!-- Delete Modal -->
-                            <dialog id="deleteModal2<?= $row['MATERIAL_ID'] ?>" 
-                                class="fixed w-sm h-xl p-5 top-1/3 left-1/2 transform -translate-x-1/2 -translate-y-1/2 rounded-md bg-[C7CFBE] text-[1F2933] shadow-md backdrop:bg-black/40 open:animate-fadeIn">
-
-                                <form method="POST" action="./Process/InventoryProcess/deleteItem.php" class="space-y-6">
-
-                                    <!-- Modal Title -->
-                                    <div class="text-xl font-semibold mb-5">
-                                        Delete Item
-                                    </div>
-
-                                    <!-- Confirmation Text -->
-                                    <p class="mb-5 ">
-                                        Are you sure you want to delete <strong><?= htmlspecialchars($row['MATERIAL_NAME']) ?></strong> from inventory?
-                                        This action cannot be undone.
-                                    </p>
-
-                                    <!-- Hidden Material ID -->
-                                    <input type="hidden" name="materialId" value="<?= htmlspecialchars($row['MATERIAL_ID'])?>">
-
-                                    <!-- Action Buttons -->
-                                    <div class="flex justify-end gap-3 pt-4">
-                                        <button type="button" 
-                                                onclick="document.getElementById('deleteModal2<?= $row['MATERIAL_ID'] ?>').close()" 
-                                                class="px-4 py-2 cursor-pointer bg-gray-300  font-semibold rounded hover:bg-gray-400">
-                                            Cancel
-                                        </button>
-                                        <button type="submit" name="deleteBtn" 
-                                                class="px-4 py-2 cursor-pointer bg-red-500 text-white font-semibold rounded hover:bg-red-600">
-                                            Confirm
-                                        </button>
-                                    </div>
-
-                                </form>
-                            </dialog>
-
 
                             <!-- Update Modal -->
-                            <dialog id="updateModal2<?= $row['MATERIAL_ID'] ?>" 
+                            <dialog id="updateModal2<?= $row['MEMBER_ID'] ?>" 
                                 class="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[36rem] max-w-full p-6 rounded-lg shadow-xl bg-[C7CFBE] text-[1F2933] backdrop:bg-black/40 open:animate-fadeIn">
 
-                                <form method="POST" action="./Process/InventoryProcess/updateItem.php" class="space-y-6">
+                                <form method="POST" action="./Process/OrganizationProcess/updateStatus.php" class="space-y-6">
                                     
                                     <!-- Modal Title -->
-                                    <h1 class="text-2xl font-bold mb-1">Update Information</h1>
+                                    <h1 class="text-2xl font-bold mb-1">Update Application</h1>
 
-                                    <!-- Material Name -->
+                                    <!-- Name -->
                                     <div class="space-y-2">
-                                        <label class="block text-md font-medium ">Material</label>
-                                        <input type="text" name="materialName" value="<?= htmlspecialchars($row['MATERIAL_NAME'])?>" 
-                                            class="w-full p-3 text-md border border-gray-300 rounded-md" />
+                                        <label class="block text-md font-medium">Name</label>
+                                        <input
+                                            disabled
+                                            type="text"
+                                            name="name"
+                                            value="<?= htmlspecialchars($row['NAME']) ?>"
+                                            class="w-full p-3 text-md border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+                                        />
                                     </div>
 
-                                    <!-- Quantity -->
-                                    <div class="space-y-2">
-                                        <label class="block text-md font-medium ">Quantity</label>
-                                        <input type="number" name="materialQuantity" min="0" value="<?= $row['QUANTITY'] ?>" 
-                                            class="w-full p-3 text-md border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400" required />
+                                    <!-- Status -->
+                                    <div class="space-y-2 mt-4">
+                                        <label class="block text-md font-medium">Status</label>
+
+                                        <div class="flex items-center gap-6">
+                                            <label class="flex items-center gap-2">
+                                                <input
+                                                    type="radio"
+                                                    name="is_active"
+                                                    value="1"
+                                                    <?= $row['IS_ACTIVE'] == 1 ? 'checked' : '' ?>
+                                                >
+                                                Active
+                                            </label>
+
+                                            <label class="flex items-center gap-2">
+                                                <input
+                                                    type="radio"
+                                                    name="is_active"
+                                                    value="0"
+                                                    <?= $row['IS_ACTIVE'] == 0 ? 'checked' : '' ?>
+                                                >
+                                                Not Active
+                                            </label>
+                                        </div>
                                     </div>
 
-                                    <!-- Price -->
-                                    <div class="space-y-2">
-                                        <label class="block text-md font-medium t">Price</label>
-                                        <input type="number" name="materialPrice" value="<?= $row['PRICE'] ?>" 
-                                            class="w-full p-3 text-md border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400" />
-                                    </div>
-
-                                    <!-- Model -->
-                                    <div class="space-y-2">
-                                        <label class="block text-md font-medium ">Model</label>
-                                        <input type="text" name="materialModel" value="<?= htmlspecialchars($row['MODEL']) ?>" 
-                                            class="w-full p-3 text-md border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400" />
-                                    </div>
-
-                                    <!-- Hidden Material ID -->
-                                    <input type="hidden" name="materialId" value="<?= htmlspecialchars($row['MATERIAL_ID'])?>">
+                                    <!-- Hidden Member ID -->
+                                    <input type="hidden" name="memberId" value="<?= htmlspecialchars($row['MEMBER_ID'])?>">
 
                                     <!-- Action Buttons -->
                                     <div class="flex justify-end gap-3 pt-4">
                                         <button type="button" 
-                                            onclick="document.getElementById('updateModal2<?= $row['MATERIAL_ID'] ?>').close()" 
+                                            onclick="document.getElementById('updateModal2<?= $row['MEMBER_ID'] ?>').close()" 
                                             class="px-4 py-2 cursor-pointer bg-gray-200 font-semibold rounded hover:bg-gray-300">
                                             Cancel
                                         </button>

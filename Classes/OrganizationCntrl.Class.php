@@ -27,4 +27,28 @@ class OrganizationCntrl extends Organization {
         );
     }
 
+    // Enter Organization
+    public function enterOrganization($userId, $organizationId, $remarks) {
+        return $this->insertMember(
+            $userId,
+            $organizationId,
+            $remarks
+        );
+    }
+
+    // Leave Organization
+    public function leaveOrganization($userId, $remarks) {
+        return $this->updateMember(
+            $userId,
+            $remarks
+        );
+    }
+
+    // Update Member Status
+    public function updateMemberStatus($memberId, $status) {
+        return $this->updateStatus(
+            $memberId,
+            $status
+        );
+    }
 }

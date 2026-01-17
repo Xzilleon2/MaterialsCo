@@ -7,5 +7,10 @@ class OrganizationView extends Organization{
     public function viewOrganizations(){
         return $this->getOrganizations();
     }
+
+    //View all Members
+    public function viewMembers(){
+        return $this->getMembers();
+    }
     
 }
