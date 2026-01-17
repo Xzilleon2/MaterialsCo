@@ -17,8 +17,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <!-- Favicon -->
-    <link rel="icon" type="image/ico" href="./Assets/Icons/favicon.ico">
-    <link rel="shortcut icon" type="image/ico" href="./Assets/Icons/favicon.ico">
+    <link rel="icon" href="/MaterialsCo/Assets/Icons/favicon.ico" type="image/x-icon">
 
     <title>MaterialsCo</title>
 </head>
