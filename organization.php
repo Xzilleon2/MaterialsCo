@@ -137,8 +137,8 @@
 
             <!-- Tables Toggle-->
             <div class="flex gap-3 text-sm px-5 mt-5 -mb-5">
-                <button id="showorganizationTable" class="cursor-pointer text-white hover:text-white"><p>Organizations</p></button>
-                <button id="showmyorganizationTable" class="cursor-pointer hover:text-white"><p>My Organization</p></button>
+                <button id="showorganizationTable" class="cursor-pointer px-3 py-1 text-white hover:text-white border "><p>Organizations</p></button>
+                <button id="showmyorganizationTable" class="cursor-pointer px-3 py-1 hover:text-white border"><p>My Organization</p></button>
             </div>
 
             <!--Organization Tables-->
