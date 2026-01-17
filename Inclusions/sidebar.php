@@ -3,8 +3,9 @@
     
     <!-- Logo -->
     <div class="my-3">
-        <p class="flex items-center gap-3 p-2 rounded-md">
-            <span class="font-bold text-xl">MaterialsCo</span>
+        <p class="flex justify-center items-center rounded-md">
+            <img class="h-25 " src="./Assets/Icons/MaterialsCo_Logo.png" alt="Logo">
+            <h1 class="text-center text-lg font-bold">MaterialsCo</h1>
         </p>
     </div>
     

@@ -2,6 +2,7 @@
     session_start();
 ?>
 <body>
+
     <!--Important import files-->
     <?php
         include __DIR__ ."/Inclusions/Head.php";
