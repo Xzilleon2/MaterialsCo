@@ -7,29 +7,23 @@ class Dbh {
     private $user = "root";
     private $pass = "";
     private $db = "materialcodb";
+    private $conn;
 
     // Methods for connection
     protected function connection(){
 
-        try{
-            // Setting up DB credentials
-            $dsn = 'mysql:host='. $this->host . ';dbname=' . $this->db;
-
-            // Setup PDO
-            $pdo = new PDO($dsn, $this->user, $this->pass);
-
-            // Setting fetch data to be ASSOC
-            $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
-
-            // Return PDO
-            return $pdo;
-
-        }catch(PDOException $e){
-
-            // Display Error in connection
-            echo "Error:" . $e->getMessage() . "<br>";
-            die();
-
+        // Only create PDO once
+        if (!$this->conn) {
+            try {
+                $dsn = 'mysql:host='. $this->host . ';dbname=' . $this->db;
+                $this->conn = new PDO($dsn, $this->user, $this->pass);
+                $this->conn->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
+                $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); // good practice
+            } catch(PDOException $e) {
+                echo "Error:" . $e->getMessage() . "<br>";
+                die();
+            }
         }
+        return $this->conn;
     }
 }

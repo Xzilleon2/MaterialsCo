@@ -80,7 +80,7 @@
                                     <td class="px-4 py-2 text-end"><?= number_format($stock['QUANTITY']) ?></td>
 
                                     <!-- TOTAL PRICE -->
-                                    <td class="px-4 py-2 text-end">P<?= number_format($stock['QUANTITY']) ?></td>
+                                    <td class="px-4 py-2 text-end">P<?= number_format($stock['TOTAL_PRICE']) ?></td>
 
                                     <!-- TRANSACTION TYPE -->
                                     <td class="px-4 py-2"><?= htmlspecialchars($stock['TRANSACTION_TYPE']) ?></td>

@@ -9,13 +9,13 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
     $reservationID = filter_var(trim($_POST['reservationId']), FILTER_SANITIZE_NUMBER_INT);
 
     if(isset($_POST['reservedBtn'])){
-        $status = "Reserved";
+        $status = "RESERVED";
     }
     else if(isset($_POST['claimedBtn'])){
-        $status = "Claimed";
+        $status = "CLAIMED";
     }
     else if(isset($_POST['cancelBtn'])){
-        $status = "Canceled";
+        $status = "CANCELLED";
     }
     else{
         $_SESSION['ReservationMessage'] = "NO ACTION SELECTED!";

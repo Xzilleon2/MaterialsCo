@@ -111,7 +111,23 @@ class Items extends Dbh {
 
     // Get all stocks from stocks table
     protected function getStocks($userID) {
-        $query = "SELECT * FROM stocks_log WHERE USER_ID = ?";
+        $query = "
+                SELECT
+                    s.STOCKS_ID,
+                    s.MATERIAL_NAME,
+                    s.USER_ID,
+                    s.SOURCE_TABLE,
+                    s.SOURCE_ID,
+                    s.QUANTITY,
+                    s.TRANSACTION_TYPE,
+                    s.TIME_AND_DATE,
+                    (s.QUANTITY * i.PRICE) AS TOTAL_PRICE
+                FROM stocks_log s
+                LEFT JOIN inventory i
+                    ON s.MATERIAL_NAME = i.MATERIAL_NAME
+                    AND i.IS_ACTIVE = 1
+                WHERE s.USER_ID = ?
+                ";
         $stmt = $this->connection()->prepare($query);
 
         if (!$stmt->execute([$userID])) {
@@ -135,6 +151,12 @@ class Items extends Dbh {
             return false;
         }
 
+        $sourceID = $this->connection()->lastInsertId();
+        $type = "INSERTED ITEM";
+
+        // Log stock addition
+        $this->logStockChange($materialName, $userID, 'inventory', $sourceID, $quantity, $type);
+
         return true;
     }
 
@@ -151,6 +173,23 @@ class Items extends Dbh {
         if (!$stmt->execute([$materialID, $userID, $quantity, $requestor, $remarks, $claimDate])) {
             return false;
         }
+
+        $sourceID = $this->connection()->lastInsertId();
+
+        // Fetch the material name from inventory
+        $stmt2 = $this->connection()->prepare("SELECT MATERIAL_NAME FROM inventory WHERE MATERIAL_ID = ?");
+
+        if(!$stmt2->execute([$materialID])){
+            return false;
+        }
+    
+        $materialName = $stmt2->fetch(PDO::FETCH_ASSOC)['MATERIAL_NAME'] ?? 'Unknown';
+
+        $type = "RESERVED ITEM";
+        
+
+        // Log stock reservation
+        $this->logStockChange($materialName, $userID, 'reservation', $sourceID, $quantity, $type);
 
         return true;
     }
@@ -194,21 +233,33 @@ class Items extends Dbh {
     // Update Reservation Status
     protected function updateReservationStatusDB($reservationID, $status) {
 
+        // Update reservation status
         $query = "
             UPDATE reservation
             SET STATUS = ?
             WHERE RESERVATION_ID = ?
         ";
-
         $stmt = $this->connection()->prepare($query);
 
         if (!$stmt->execute([$status, $reservationID])) {
             return false;
         }
 
-        return true;
+        // Fetch the stock log record for this reservation
+        $stockRecord = $this->fetchStockData($reservationID);
 
+        if ($stockRecord) {
+            $materialName = $stockRecord['MATERIAL_NAME'];
+            $quantity     = $stockRecord['QUANTITY'];
+            $transaction  = $stockRecord['TRANSACTION_TYPE'];
+
+            // Example: update the transaction type to reflect new status
+            $this->logStockChange($materialName, $stockRecord['USER_ID'], 'reservation', $reservationID, $quantity, "STATUS UPDATED TO $status");
+        }
+
+        return true;
     }
+
         
 
     // Delete existing item in inventory
@@ -246,4 +297,42 @@ class Items extends Dbh {
 
         return true;
     }
+
+    // Private function to log stock changes
+    private function logStockChange($materialName, $userID, $sourceTable, $sourceID, $quantity, $transactionType) {
+
+        $query = "
+            INSERT INTO stocks_log (MATERIAL_NAME, USER_ID, SOURCE_TABLE, SOURCE_ID, QUANTITY, TRANSACTION_TYPE)
+            VALUES (?, ?, ?, ?, ?, ?)
+        ";
+
+        $stmt = $this->connection()->prepare($query);
+
+        if (!$stmt->execute([$materialName, $userID, $sourceTable, $sourceID, $quantity, $transactionType])) {
+            return false;
+        }
+
+        return true;
+    }
+
+    // Private function to fetch stock data by reservation ID
+    private function fetchStockData($reservationID) {
+
+        $query = "
+            SELECT * FROM stocks_log
+            WHERE SOURCE_ID = ? AND SOURCE_TABLE = 'reservation'
+        ";
+
+        $stmt = $this->connection()->prepare($query);
+
+        if (!$stmt->execute([$reservationID])) {
+            return false; // query failed
+        }
+
+        // Fetch the first matching record
+        $stockData = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        return $stockData ?: null; // return null if no record found
+    }
+
 }
