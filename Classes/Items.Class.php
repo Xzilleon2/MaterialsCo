@@ -185,7 +185,7 @@ class Items extends Dbh {
     
         $materialName = $stmt2->fetch(PDO::FETCH_ASSOC)['MATERIAL_NAME'] ?? 'Unknown';
 
-        $type = "RESERVED ITEM";
+        $type = "ON PROCESS ITEM";
         
 
         // Log stock reservation
