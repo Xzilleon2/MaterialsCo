@@ -3,6 +3,11 @@ include_once __DIR__ . '/Dbh.Class.php';
 
 class Items extends Dbh {
 
+    /*
+      PROTECTED FUNCTIONS FOR ITEMS MANAGEMENT
+      Exclusive to subclass for this class
+    */
+
     // Count low stock products
     protected function countLowStocks($userID){
         
@@ -239,26 +244,53 @@ class Items extends Dbh {
             SET STATUS = ?
             WHERE RESERVATION_ID = ?
         ";
-        $stmt = $this->connection()->prepare($query);
 
+        $stmt = $this->connection()->prepare($query);
         if (!$stmt->execute([$status, $reservationID])) {
             return false;
         }
 
-        // Fetch the stock log record for this reservation
-        $stockRecord = $this->fetchStockData($reservationID);
-
-        if ($stockRecord) {
-            $materialName = $stockRecord['MATERIAL_NAME'];
-            $quantity     = $stockRecord['QUANTITY'];
-            $transaction  = $stockRecord['TRANSACTION_TYPE'];
-
-            // Example: update the transaction type to reflect new status
-            $this->logStockChange($materialName, $stockRecord['USER_ID'], 'reservation', $reservationID, $quantity, "STATUS UPDATED TO $status");
+        // Only adjust inventory for these statuses
+        if (!in_array($status, ['RESERVED', 'CANCELLED'])) {
+            return true;
         }
+
+        // Fetch stock log data
+        $stockRecord = $this->fetchStockData($reservationID);
+        if (!$stockRecord) {
+            return false;
+        }
+
+        $quantity   = (int)$stockRecord['QUANTITY'];
+        $materialID = $this->getMaterialIDReservation($reservationID);
+
+        if (!$materialID) {
+            return false;
+        }
+
+        // RESERVED → subtract stock
+        if ($status === 'RESERVED') {
+            $this->updateQuantity(-$quantity, $materialID);
+        }
+
+        // CANCELLED → restore stock
+        if ($status === 'CANCELLED') {
+            $this->updateQuantity($quantity, $materialID);
+        }
+
+        // Log the stock change
+        $this->logStockChange(
+            $stockRecord['MATERIAL_NAME'],
+            $stockRecord['USER_ID'],
+            'reservation',
+            $reservationID,
+            $quantity,
+            "STATUS UPDATED TO $status"
+        );
 
         return true;
     }
+
 
         
 
@@ -298,6 +330,11 @@ class Items extends Dbh {
         return true;
     }
 
+    /*
+      PRIVATE FUNCTIONS FOR STOCK LOGGING
+      Exclusive to this class
+    */
+
     // Private function to log stock changes
     private function logStockChange($materialName, $userID, $sourceTable, $sourceID, $quantity, $transactionType) {
 
@@ -333,6 +370,36 @@ class Items extends Dbh {
         $stockData = $stmt->fetch(PDO::FETCH_ASSOC);
 
         return $stockData ?: null; // return null if no record found
+    }
+
+    // Private function to update quantity in inventory after logging
+    // $delta can be positive (add) or negative (subtract)
+    private function updateQuantity($delta, $materialID){
+        $query = "
+            UPDATE inventory
+            SET QUANTITY = QUANTITY + ?
+            WHERE MATERIAL_ID = ?
+        ";
+
+        $stmt = $this->connection()->prepare($query);
+        return $stmt->execute([$delta, $materialID]);
+    }
+
+
+    private function getMaterialIDReservation($reservationID){
+        $query = "
+            SELECT MATERIAL_ID
+            FROM reservation
+            WHERE RESERVATION_ID = ?
+        ";
+
+        $stmt = $this->connection()->prepare($query);
+
+        if (!$stmt->execute([$reservationID])) {
+            return false;
+        }
+
+        return (int) $stmt->fetch(PDO::FETCH_ASSOC)['MATERIAL_ID'];
     }
 
 }
