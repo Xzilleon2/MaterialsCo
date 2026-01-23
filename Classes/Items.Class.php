@@ -212,22 +212,42 @@ class Items extends Dbh {
     // Insert new item to inventory
     protected function insertItem($userID, $materialName, $quantity, $price, $description) {
 
-        $query = "
-            INSERT INTO inventory (USER_ID, MATERIAL_NAME, QUANTITY, PRICE, DESCRIPTION)
-            VALUES (?, ?, ?, ?, ?)
-        ";
+        $orgID = $this->getOrganizationID($userID);
 
-        $stmt = $this->connection()->prepare($query);
+        // Check if user belongs to an organization
+        if($orgID){
 
-        if (!$stmt->execute([$userID, $materialName, $quantity, $price, $description])) {
-            return false;
+            $query = "
+                INSERT INTO inventory (USER_ID, ORGANIZATION_ID, MATERIAL_NAME, QUANTITY, PRICE, DESCRIPTION)
+                VALUES (?, ?, ?, ?, ?, ?)
+            ";
+
+            $stmt = $this->connection()->prepare($query);
+
+            if (!$stmt->execute([$userID, $orgID, $materialName, $quantity, $price, $description])) {
+                return false;
+            }
+
+        }else{
+            $orgID = null;
+
+            $query = "
+                INSERT INTO inventory (USER_ID, ORGANIZATION_ID, MATERIAL_NAME, QUANTITY, PRICE, DESCRIPTION)
+                VALUES (?, ?, ?, ?, ?, ?)
+            ";
+
+            $stmt = $this->connection()->prepare($query);
+
+            if (!$stmt->execute([$userID, $orgID, $materialName, $quantity, $price, $description])) {
+                return false;
+            }
         }
 
         $sourceID = $this->connection()->lastInsertId();
         $type = "INSERTED ITEM";
 
         // Log stock addition
-        $this->logStockChange($materialName, $userID, 'inventory', $sourceID, $quantity, $type);
+        $this->logStockChange($orgID, $materialName, $userID, 'inventory', $sourceID, $quantity, $type);
 
         return true;
     }
@@ -235,15 +255,35 @@ class Items extends Dbh {
     // Insert new reservation
     protected function insertReservation($materialID, $userID, $quantity, $requestor, $remarks, $claimDate) {
 
-        $query = "
-            INSERT INTO reservation (MATERIAL_ID, USER_ID, QUANTITY, REQUESTOR, PURPOSE, CLAIMING_DATE)
-            VALUES (?, ?, ?, ?, ?, ?)
-        ";
+            $orgID = $this->getOrganizationID($userID);
 
-        $stmt = $this->connection()->prepare($query);
+        // Check if user belongs to an organization
+        if($orgID){
 
-        if (!$stmt->execute([$materialID, $userID, $quantity, $requestor, $remarks, $claimDate])) {
-            return false;
+            $query = "
+                INSERT INTO reservation (MATERIAL_ID, USER_ID, ORGANIZATION_ID, QUANTITY, REQUESTOR, PURPOSE, CLAIMING_DATE)
+                VALUES (?, ?, ?, ?, ?, ?, ?)
+            ";
+
+            $stmt = $this->connection()->prepare($query);
+
+            if (!$stmt->execute([$materialID, $userID, $orgID, $quantity, $requestor, $remarks, $claimDate])) {
+                return false;
+            }
+
+        }else{
+            $orgID = null;
+
+            $query = "
+                INSERT INTO reservation (MATERIAL_ID, USER_ID, ORGANIZATION_ID, QUANTITY, REQUESTOR, PURPOSE, CLAIMING_DATE)
+                VALUES (?, ?, ?, ?, ?, ?, ?)
+            ";
+
+            $stmt = $this->connection()->prepare($query);
+
+            if (!$stmt->execute([$materialID, $userID, $orgID, $quantity, $requestor, $remarks, $claimDate])) {
+                return false;
+            }
         }
 
         $sourceID = $this->connection()->lastInsertId();
@@ -261,7 +301,7 @@ class Items extends Dbh {
         
 
         // Log stock reservation
-        $this->logStockChange($materialName, $userID, 'reservation', $sourceID, $quantity, $type);
+        $this->logStockChange($orgID, $materialName, $userID, 'reservation', $sourceID, $quantity, $type);
 
         return true;
     }
@@ -347,6 +387,7 @@ class Items extends Dbh {
 
         // Log the stock change
         $this->logStockChange(
+            $stockRecord['ORGANIZATION_ID'],
             $stockRecord['MATERIAL_NAME'],
             $stockRecord['USER_ID'],
             'reservation',
@@ -403,16 +444,16 @@ class Items extends Dbh {
     */
 
     // Private function to log stock changes
-    private function logStockChange($materialName, $userID, $sourceTable, $sourceID, $quantity, $transactionType) {
+    private function logStockChange($orgID, $materialName, $userID, $sourceTable, $sourceID, $quantity, $transactionType) {
 
         $query = "
-            INSERT INTO stocks_log (MATERIAL_NAME, USER_ID, SOURCE_TABLE, SOURCE_ID, QUANTITY, TRANSACTION_TYPE)
-            VALUES (?, ?, ?, ?, ?, ?)
+            INSERT INTO stocks_log (ORGANIZATION_ID, MATERIAL_NAME, USER_ID, SOURCE_TABLE, SOURCE_ID, QUANTITY, TRANSACTION_TYPE)
+            VALUES (?, ?, ?, ?, ?, ?, ?)
         ";
 
         $stmt = $this->connection()->prepare($query);
 
-        if (!$stmt->execute([$materialName, $userID, $sourceTable, $sourceID, $quantity, $transactionType])) {
+        if (!$stmt->execute([$orgID, $materialName, $userID, $sourceTable, $sourceID, $quantity, $transactionType])) {
             return false;
         }
 
