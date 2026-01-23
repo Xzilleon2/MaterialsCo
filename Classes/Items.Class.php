@@ -324,24 +324,6 @@ class Items extends Dbh {
         return true;
     }
 
-    // Update existing reservation
-    protected function updateReservationDB($reservationID, $quantity, $requestor, $purpose, $claimingDate) {
-
-        $query = "
-            UPDATE reservation
-            SET QUANTITY = ?, REQUESTOR = ?, PURPOSE = ?, CLAIMING_DATE = ?
-            WHERE RESERVATION_ID = ?
-        ";
-
-        $stmt = $this->connection()->prepare($query);
-
-        if (!$stmt->execute([$quantity, $requestor, $purpose, $claimingDate, $reservationID])) {
-            return false;
-        }
-
-        return true;
-    }
-
     // Update Reservation Status
     protected function updateReservationStatusDB($reservationID, $status) {
 
