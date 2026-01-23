@@ -92,11 +92,28 @@ class Items extends Dbh {
 
     // Get all items from inventory table
     protected function getInventory($userID) {
-        $query = "SELECT * FROM inventory WHERE USER_ID = ? && IS_ACTIVE = 1";
-        $stmt = $this->connection()->prepare($query);
+        $orgID = $this->getOrganizationID($userID);
 
-        if (!$stmt->execute([$userID])) {
-            return false;
+        // Check if user belongs to an organization
+        if($orgID){
+
+            $query = "SELECT * FROM inventory WHERE ORGANIZATION_ID = ? AND IS_ACTIVE = 1";
+
+            $stmt = $this->connection()->prepare($query);
+
+            if (!$stmt->execute([$orgID])) {
+                return false;
+            }
+
+        }else{
+
+            $query = "SELECT * FROM inventory WHERE USER_ID = ? AND IS_ACTIVE = 1";
+
+            $stmt = $this->connection()->prepare($query);
+
+            if (!$stmt->execute([$userID])) {
+                return false;
+            }
         }
 
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -104,11 +121,28 @@ class Items extends Dbh {
 
     // Get all items from reservation table
     protected function getReservations($userID) {
-        $query = "SELECT * FROM reservation WHERE USER_ID = ? && IS_ACTIVE = 1";
-        $stmt = $this->connection()->prepare($query);
 
-        if (!$stmt->execute([$userID])) {
-            return false;
+        $orgID = $this->getOrganizationID($userID);
+
+        // Check if user belongs to an organization
+        if($orgID){
+
+            $query = "SELECT * FROM reservation WHERE ORGANIZATION_ID = ? AND IS_ACTIVE = 1";
+
+            $stmt = $this->connection()->prepare($query);
+
+            if (!$stmt->execute([$orgID])) {
+                return false;
+            }
+
+        }else{
+
+            $query = "SELECT * FROM reservation WHERE USER_ID = ? AND IS_ACTIVE = 1";
+            $stmt = $this->connection()->prepare($query);
+
+            if (!$stmt->execute([$userID])) {
+                return false;
+            }
         }
 
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -116,27 +150,60 @@ class Items extends Dbh {
 
     // Get all stocks from stocks table
     protected function getStocks($userID) {
-        $query = "
-                SELECT
-                    s.STOCKS_ID,
-                    s.MATERIAL_NAME,
-                    s.USER_ID,
-                    s.SOURCE_TABLE,
-                    s.SOURCE_ID,
-                    s.QUANTITY,
-                    s.TRANSACTION_TYPE,
-                    s.TIME_AND_DATE,
-                    (s.QUANTITY * i.PRICE) AS TOTAL_PRICE
-                FROM stocks_log s
-                LEFT JOIN inventory i
-                    ON s.MATERIAL_NAME = i.MATERIAL_NAME
-                    AND i.IS_ACTIVE = 1
-                WHERE s.USER_ID = ?
-                ";
-        $stmt = $this->connection()->prepare($query);
 
-        if (!$stmt->execute([$userID])) {
-            return false;
+        $orgID = $this->getOrganizationID($userID);
+
+        // Check if user belongs to an organization
+        if($orgID){
+
+            $query = "
+                    SELECT
+                        s.STOCKS_ID,
+                        s.ORGANIZATION_ID,
+                        s.MATERIAL_NAME,
+                        s.USER_ID,
+                        s.SOURCE_TABLE,
+                        s.SOURCE_ID,
+                        s.QUANTITY,
+                        s.TRANSACTION_TYPE,
+                        s.TIME_AND_DATE,
+                        (s.QUANTITY * i.PRICE) AS TOTAL_PRICE
+                    FROM stocks_log s
+                    LEFT JOIN inventory i
+                        ON s.MATERIAL_NAME = i.MATERIAL_NAME
+                        AND i.IS_ACTIVE = 1
+                    WHERE s.ORGANIZATION_ID = ?
+                    ";
+            $stmt = $this->connection()->prepare($query);
+
+            if (!$stmt->execute([$orgID])) {
+                return false;
+            }
+
+        }else{
+
+            $query = "
+                    SELECT
+                        s.STOCKS_ID,
+                        s.MATERIAL_NAME,
+                        s.USER_ID,
+                        s.SOURCE_TABLE,
+                        s.SOURCE_ID,
+                        s.QUANTITY,
+                        s.TRANSACTION_TYPE,
+                        s.TIME_AND_DATE,
+                        (s.QUANTITY * i.PRICE) AS TOTAL_PRICE
+                    FROM stocks_log s
+                    LEFT JOIN inventory i
+                        ON s.MATERIAL_NAME = i.MATERIAL_NAME
+                        AND i.IS_ACTIVE = 1
+                    WHERE s.USER_ID = ?
+                    ";
+            $stmt = $this->connection()->prepare($query);
+
+            if (!$stmt->execute([$userID])) {
+                return false;
+            }
         }
 
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -385,7 +452,7 @@ class Items extends Dbh {
         return $stmt->execute([$delta, $materialID]);
     }
 
-
+    // Private function to get material ID from reservation ID
     private function getMaterialIDReservation($reservationID){
         $query = "
             SELECT MATERIAL_ID
@@ -401,5 +468,25 @@ class Items extends Dbh {
 
         return (int) $stmt->fetch(PDO::FETCH_ASSOC)['MATERIAL_ID'];
     }
+
+    // Private function to get organization ID from user ID
+    private function getOrganizationID($userID){
+        $query = "
+            SELECT o.ORGANIZATION_ID
+            FROM organizations o
+            LEFT JOIN members m ON o.ORGANIZATION_ID = m.ORGANIZATION_ID
+            WHERE o.USER_ID = ? OR m.USER_ID = ?
+            LIMIT 1
+        ";
+
+        $stmt = $this->connection()->prepare($query);
+        if (!$stmt->execute([$userID, $userID])) {
+            return null;
+        }
+
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $row['ORGANIZATION_ID'] ?? null;
+    }
+
 
 }
